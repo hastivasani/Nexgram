@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
-import react, { reactCompilerPreset } from '@vitejs/plugin-react'
-import babel from '@rolldown/plugin-babel'
+import react from '@vitejs/plugin-react'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 
 export default defineConfig(({ command }) => ({
@@ -25,14 +24,12 @@ export default defineConfig(({ command }) => ({
   plugins: [
     ...(command === 'serve' ? [basicSsl()] : []),
     react(),
-    babel({ presets: [reactCompilerPreset()] }),
   ],
   build: {
     chunkSizeWarningLimit: 1500,
     target: 'es2020',
   },
   optimizeDeps: {
-    include: ['deepar', 'three', '@tensorflow-models/body-pix'],
     exclude: ['@mediapipe/face_detection', '@mediapipe/camera_utils'],
   },
 }))
