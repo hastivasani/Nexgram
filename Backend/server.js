@@ -368,11 +368,13 @@ app.post("/api/migrate-data", async (req, res) => {
     const { users = [], products = [] } = req.body;
     let uCount = 0, pCount = 0;
     for (const u of users) {
-      await User.findOneAndUpdate({ _id: u._id }, { $set: u }, { upsert: true });
+      const { _id, ...rest } = u;
+      await User.replaceOne({ _id }, { _id, ...rest }, { upsert: true });
       uCount++;
     }
     for (const p of products) {
-      await Product.findOneAndUpdate({ _id: p._id }, { $set: p }, { upsert: true });
+      const { _id, ...rest } = p;
+      await Product.replaceOne({ _id }, { _id, ...rest }, { upsert: true });
       pCount++;
     }
     res.json({ message: "Migration done!", users: uCount, products: pCount });
