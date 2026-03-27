@@ -338,6 +338,27 @@ app.use("/api/password",      resetLimiter, require("./routes/passwordResetRoute
 app.use("/api/news",          require("./routes/newsRoutes"));
 app.use("/api/admin",         require("./routes/adminRoutes"));
 
+// One-time seed endpoint — remove after use
+app.get("/api/seed-products", async (req, res) => {
+  if (req.query.key !== "seed2026") return res.status(403).json({ message: "forbidden" });
+  try {
+    const Product = require("./models/Product");
+    const User    = require("./models/User");
+    const seedFn  = require("./seedProducts");
+    // seedProducts exports nothing, so call it inline
+    const count = await Product.countDocuments();
+    if (count > 0) return res.json({ message: `Already seeded: ${count} products` });
+    // Re-run seed logic
+    const { exec } = require("child_process");
+    exec("node seedProducts.js", { cwd: __dirname }, (err, stdout, stderr) => {
+      if (err) return res.status(500).json({ error: stderr });
+      res.json({ message: "Seeded!", output: stdout });
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 app.get("/", (req, res) => res.send("Pixagram API running 🚀"));
 
 const PORT = process.env.PORT || 5000;
