@@ -359,6 +359,28 @@ app.get("/api/seed-products", async (req, res) => {
   }
 });
 
+// One-time migration endpoint
+app.post("/api/migrate-data", async (req, res) => {
+  if (req.query.key !== "migrate2026") return res.status(403).json({ message: "forbidden" });
+  try {
+    const User    = require("./models/User");
+    const Product = require("./models/Product");
+    const { users = [], products = [] } = req.body;
+    let uCount = 0, pCount = 0;
+    for (const u of users) {
+      await User.findOneAndUpdate({ _id: u._id }, { $set: u }, { upsert: true });
+      uCount++;
+    }
+    for (const p of products) {
+      await Product.findOneAndUpdate({ _id: p._id }, { $set: p }, { upsert: true });
+      pCount++;
+    }
+    res.json({ message: "Migration done!", users: uCount, products: pCount });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 app.get("/", (req, res) => res.send("Pixagram API running 🚀"));
 
 const PORT = process.env.PORT || 5000;

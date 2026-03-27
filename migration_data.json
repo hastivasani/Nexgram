@@ -1,0 +1,1445 @@
+{
+  "users": [
+    {
+      "_id": "69c227d058cdfddb1645243a",
+      "username": "hasti vasani",
+      "email": "hastivasani723@gmail.com",
+      "password": "$2b$10$AfotIHIdI6w8vSg/SXsjoux8WI/Y6kkS40ZIvdSDLB95uhhSK9d/6",
+      "fullName": "Hasti Vasani",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dehnev1w4/image/upload/v1774351253/pixagram/avatars/ga58npcaceuoxnfvadcy.jpg",
+      "website": "",
+      "gender": "Prefer not to say",
+      "followers": [
+        "69c263ec7007b291ba856167",
+        "69c2651f7007b291ba856223",
+        "69c274d6c7132da885c9be86",
+        "69c27f98201ef83c72c0fb5c",
+        "69c27fd4201ef83c72c0fba6",
+        "69c27d90b301673287a5a4f6",
+        "69c3b162822d9f2488b4aec2",
+        "69c27fb4201ef83c72c0fb75",
+        "69c6088ff3595fa9525d9073",
+        "69c4d961a1811385c97d1162",
+        "69c23813cd6a49249023715a",
+        "69c61706e34b0d8a73dc0bd1"
+      ],
+      "following": [
+        "69c263ec7007b291ba856167",
+        "69c2651f7007b291ba856223",
+        "69c274d6c7132da885c9be86",
+        "69c27fd4201ef83c72c0fba6",
+        "69c27fb4201ef83c72c0fb75",
+        "69c3b162822d9f2488b4aec2",
+        "69c6088ff3595fa9525d9073",
+        "69c4d961a1811385c97d1162",
+        "69c27f98201ef83c72c0fb5c",
+        "69c27d90b301673287a5a4f6",
+        "69c23813cd6a49249023715a",
+        "69c61706e34b0d8a73dc0bd1"
+      ],
+      "createdAt": "2026-03-24T05:57:36.296Z",
+      "updatedAt": "2026-03-27T13:05:42.239Z",
+      "__v": 0,
+      "name": "",
+      "followRequests": [],
+      "loginActivity": [
+        {
+          "ip": "::ffff:192.168.29.58",
+          "device": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Sa",
+          "success": true,
+          "_id": "69c60bb5b85cf673b71a88a8",
+          "loginAt": "2026-03-27T04:46:45.298Z"
+        },
+        {
+          "ip": "::1",
+          "device": "Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chro",
+          "success": true,
+          "_id": "69c6809a7e187401e1a0a059",
+          "loginAt": "2026-03-27T13:05:30.608Z"
+        }
+      ],
+      "streak": {
+        "current": 1,
+        "lastLogin": "2026-03-27T04:46:45.462Z",
+        "longest": 1
+      },
+      "xpLevel": {
+        "level": 1,
+        "nextLevelXp": 100,
+        "total": 10
+      },
+      "isAdmin": true
+    },
+    {
+      "_id": "69c23813cd6a49249023715a",
+      "username": "meera",
+      "email": "abc@gmail.com",
+      "password": "$2b$10$AY3IXXJBWKHphytJu3vUpOu9IXi6NvT2.edRTsM9DyyEZNc8iQjbO",
+      "name": "mayra",
+      "bio": "“매일 매일 행복해요” 🌸\r\nfull stack developer",
+      "avatar": "https://res.cloudinary.com/dehnev1w4/image/upload/v1774410470/pixagram/avatars/hldvgror0qduplblsdsj.jpg",
+      "website": "",
+      "gender": "",
+      "followers": [
+        "69c263ec7007b291ba856167",
+        "69c27d90b301673287a5a4f6",
+        "69c274d6c7132da885c9be86",
+        "69c27f98201ef83c72c0fb5c",
+        "69c27fd4201ef83c72c0fba6",
+        "69c227d058cdfddb1645243a",
+        "69c3b162822d9f2488b4aec2",
+        "69c27fb4201ef83c72c0fb75",
+        "69c6088ff3595fa9525d9073",
+        "69c4d961a1811385c97d1162",
+        "69c61706e34b0d8a73dc0bd1"
+      ],
+      "following": [
+        "69c263ec7007b291ba856167",
+        "69c2651f7007b291ba856223",
+        "69c27f98201ef83c72c0fb5c",
+        "69c27fd4201ef83c72c0fba6",
+        "69c274d6c7132da885c9be86",
+        "69c27d90b301673287a5a4f6",
+        "69c27fb4201ef83c72c0fb75",
+        "69c3b162822d9f2488b4aec2",
+        "69c4d961a1811385c97d1162",
+        "69c6088ff3595fa9525d9073",
+        "69c227d058cdfddb1645243a",
+        "69c61706e34b0d8a73dc0bd1"
+      ],
+      "createdAt": "2026-03-24T07:06:59.949Z",
+      "updatedAt": "2026-03-27T07:24:41.460Z",
+      "__v": 6,
+      "followRequests": [],
+      "blockedUsers": [],
+      "isPrivate": false,
+      "loginActivity": [
+        {
+          "ip": "::ffff:192.168.29.58",
+          "device": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome",
+          "success": false,
+          "_id": "69c609cd2b6f9430d76b9051",
+          "loginAt": "2026-03-27T04:38:37.813Z"
+        },
+        {
+          "ip": "::ffff:192.168.29.58",
+          "device": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome",
+          "success": false,
+          "_id": "69c60a0a2b6f9430d76b9055",
+          "loginAt": "2026-03-27T04:39:38.131Z"
+        },
+        {
+          "ip": "::ffff:192.168.29.58",
+          "device": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Sa",
+          "success": true,
+          "_id": "69c60d0cb85cf673b71a8df0",
+          "loginAt": "2026-03-27T04:52:28.890Z"
+        },
+        {
+          "ip": "::ffff:192.168.29.58",
+          "device": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Sa",
+          "success": true,
+          "_id": "69c6309c47a2ddee6e0e20b6",
+          "loginAt": "2026-03-27T07:24:12.612Z"
+        }
+      ],
+      "streak": {
+        "current": 1,
+        "lastLogin": "2026-03-27T04:52:28.982Z",
+        "longest": 1
+      },
+      "xpLevel": {
+        "level": 1,
+        "nextLevelXp": 100,
+        "total": 10
+      },
+      "badges": [],
+      "bioLinks": [],
+      "closeFriends": [],
+      "contentWarning": false,
+      "creatorAnalytics": {
+        "monthlyGrowth": 0,
+        "totalComments": 0,
+        "totalFollowers": 0,
+        "totalLikes": 0,
+        "totalViews": 0,
+        "weeklyGrowth": 0
+      },
+      "gamingStats": {
+        "achievements": [],
+        "dailyChallenge": {
+          "completed": false,
+          "date": "",
+          "game": "",
+          "progress": 0,
+          "reward": 0,
+          "target": 0
+        },
+        "gamesPlayed": 0,
+        "level": 1,
+        "rank": "Bronze",
+        "wins": 0,
+        "xp": 0
+      },
+      "isCreator": false,
+      "isVerified": false,
+      "mediaSettings": {
+        "autoplayVideos": true,
+        "hdUploads": true
+      },
+      "notificationSettings": {
+        "comments": true,
+        "dailyChallenge": true,
+        "followRequests": true,
+        "groupMessages": true,
+        "liveAlerts": true,
+        "messages": true,
+        "postLikes": true,
+        "streakReminder": true
+      },
+      "profileColor": "#a855f7",
+      "profileMusic": "",
+      "profileMusicName": "",
+      "profileTheme": "default",
+      "referralCode": "",
+      "referralCount": 0,
+      "sensitiveContent": false,
+      "socialLinks": [],
+      "subscriptionPrice": 0,
+      "theme": "dark",
+      "twoFactorEnabled": false,
+      "twoFactorSecret": "",
+      "walletBalance": 0,
+      "wordFilter": []
+    },
+    {
+      "_id": "69c263ec7007b291ba856167",
+      "username": "hst",
+      "email": "advisor2@vehicleservice.com",
+      "password": "$2b$10$SblylC9cLWnI.M2Hxrgaje5glFxShb5Khb5NlcZDiFzHh1J.Sk61.",
+      "name": "hst",
+      "bio": "",
+      "avatar": "",
+      "website": "",
+      "gender": "",
+      "followers": [
+        "69c23813cd6a49249023715a",
+        "69c274d6c7132da885c9be86",
+        "69c227d058cdfddb1645243a",
+        "69c3b162822d9f2488b4aec2",
+        "69c27fb4201ef83c72c0fb75",
+        "69c6088ff3595fa9525d9073",
+        "69c4d961a1811385c97d1162",
+        "69c27fd4201ef83c72c0fba6",
+        "69c27f98201ef83c72c0fb5c",
+        "69c27d90b301673287a5a4f6"
+      ],
+      "following": [
+        "69c23813cd6a49249023715a",
+        "69c227d058cdfddb1645243a",
+        "69c2651f7007b291ba856223",
+        "69c274d6c7132da885c9be86",
+        "69c6088ff3595fa9525d9073",
+        "69c3b162822d9f2488b4aec2",
+        "69c27fb4201ef83c72c0fb75",
+        "69c4d961a1811385c97d1162",
+        "69c27fd4201ef83c72c0fba6",
+        "69c27f98201ef83c72c0fb5c",
+        "69c27d90b301673287a5a4f6"
+      ],
+      "createdAt": "2026-03-24T10:14:04.566Z",
+      "updatedAt": "2026-03-27T05:35:05.949Z",
+      "__v": 0,
+      "followRequests": [
+        "69c61706e34b0d8a73dc0bd1"
+      ],
+      "loginActivity": [
+        {
+          "ip": "::ffff:192.168.29.58",
+          "device": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Sa",
+          "success": true,
+          "_id": "69c60b30b85cf673b71a856b",
+          "loginAt": "2026-03-27T04:44:32.187Z"
+        }
+      ],
+      "streak": {
+        "current": 1,
+        "lastLogin": "2026-03-27T04:44:32.696Z",
+        "longest": 1
+      },
+      "xpLevel": {
+        "level": 1,
+        "nextLevelXp": 100,
+        "total": 10
+      }
+    },
+    {
+      "_id": "69c2651f7007b291ba856223",
+      "username": "aesh_vaviya",
+      "email": "vaviyaaeshvi@gmail.com",
+      "password": "$2b$10$gQSdOEhEKTImMyVpz4n45eI/bZ8X.zXGg37cgzVBSAcg7KzfpBfti",
+      "name": "Aeshvi Vaviya",
+      "bio": "",
+      "avatar": "",
+      "website": "",
+      "gender": "",
+      "followers": [
+        "69c23813cd6a49249023715a",
+        "69c263ec7007b291ba856167",
+        "69c274d6c7132da885c9be86",
+        "69c227d058cdfddb1645243a"
+      ],
+      "following": [
+        "69c227d058cdfddb1645243a"
+      ],
+      "createdAt": "2026-03-24T10:19:11.873Z",
+      "updatedAt": "2026-03-27T05:35:07.011Z",
+      "__v": 0,
+      "followRequests": [
+        "69c27d90b301673287a5a4f6",
+        "69c27f98201ef83c72c0fb5c",
+        "69c27fd4201ef83c72c0fba6",
+        "69c6088ff3595fa9525d9073",
+        "69c27fb4201ef83c72c0fb75",
+        "69c3b162822d9f2488b4aec2",
+        "69c61706e34b0d8a73dc0bd1"
+      ]
+    },
+    {
+      "_id": "69c274d6c7132da885c9be86",
+      "username": "kuldip",
+      "email": "kuldip@admin.com",
+      "password": "$2b$10$Fw0YV7NOZHzd0rUe7no9AO60OTYEZ7SMaLzvZwSFR2x19bBP58kx6",
+      "name": "VASANI KULDIP",
+      "bio": "",
+      "avatar": "",
+      "website": "",
+      "gender": "",
+      "followers": [
+        "69c227d058cdfddb1645243a",
+        "69c27d90b301673287a5a4f6",
+        "69c23813cd6a49249023715a",
+        "69c263ec7007b291ba856167"
+      ],
+      "following": [
+        "69c227d058cdfddb1645243a",
+        "69c2651f7007b291ba856223",
+        "69c263ec7007b291ba856167",
+        "69c23813cd6a49249023715a",
+        "69c27d90b301673287a5a4f6"
+      ],
+      "createdAt": "2026-03-24T11:26:14.691Z",
+      "updatedAt": "2026-03-27T05:35:08.215Z",
+      "__v": 0,
+      "followRequests": [
+        "69c27f98201ef83c72c0fb5c",
+        "69c27fd4201ef83c72c0fba6",
+        "69c6088ff3595fa9525d9073",
+        "69c27fb4201ef83c72c0fb75",
+        "69c3b162822d9f2488b4aec2",
+        "69c61706e34b0d8a73dc0bd1"
+      ]
+    },
+    {
+      "_id": "69c27d90b301673287a5a4f6",
+      "username": "jenilsmitbhai",
+      "email": "hasti@gmail.com",
+      "password": "$2b$10$U.P0OVypDp8K51lrBt9e5uznilceMx4oVVNIg60/CoV/J.tAosDC.",
+      "name": "bharat vasani",
+      "bio": "",
+      "avatar": "",
+      "website": "",
+      "gender": "",
+      "followers": [
+        "69c23813cd6a49249023715a",
+        "69c263ec7007b291ba856167",
+        "69c227d058cdfddb1645243a",
+        "69c3b162822d9f2488b4aec2",
+        "69c27fb4201ef83c72c0fb75",
+        "69c6088ff3595fa9525d9073",
+        "69c4d961a1811385c97d1162",
+        "69c27fd4201ef83c72c0fba6",
+        "69c27f98201ef83c72c0fb5c",
+        "69c274d6c7132da885c9be86"
+      ],
+      "following": [
+        "69c23813cd6a49249023715a",
+        "69c274d6c7132da885c9be86",
+        "69c227d058cdfddb1645243a",
+        "69c263ec7007b291ba856167",
+        "69c3b162822d9f2488b4aec2",
+        "69c6088ff3595fa9525d9073",
+        "69c27fb4201ef83c72c0fb75",
+        "69c4d961a1811385c97d1162",
+        "69c27fd4201ef83c72c0fba6",
+        "69c27f98201ef83c72c0fb5c"
+      ],
+      "followRequests": [
+        "69c61706e34b0d8a73dc0bd1"
+      ],
+      "createdAt": "2026-03-24T12:03:28.876Z",
+      "updatedAt": "2026-03-27T05:35:11.095Z",
+      "__v": 0,
+      "loginActivity": [
+        {
+          "ip": "::ffff:192.168.29.58",
+          "device": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Sa",
+          "success": true,
+          "_id": "69c60c5eb85cf673b71a8ae7",
+          "loginAt": "2026-03-27T04:49:34.483Z"
+        }
+      ],
+      "streak": {
+        "current": 1,
+        "lastLogin": "2026-03-27T04:49:34.666Z",
+        "longest": 1
+      },
+      "xpLevel": {
+        "level": 1,
+        "nextLevelXp": 100,
+        "total": 10
+      }
+    },
+    {
+      "_id": "69c27f98201ef83c72c0fb5c",
+      "username": "sangita",
+      "email": "fenil@gmail.com",
+      "password": "$2b$10$Ye1LX0GgsOMdUwQEc3x..OxCBGMQYObxfmm3.5gcsrOzgU4djG8lS",
+      "name": "sangita",
+      "bio": "",
+      "avatar": "",
+      "website": "",
+      "gender": "",
+      "followers": [
+        "69c27fd4201ef83c72c0fba6",
+        "69c23813cd6a49249023715a",
+        "69c263ec7007b291ba856167",
+        "69c227d058cdfddb1645243a",
+        "69c27d90b301673287a5a4f6"
+      ],
+      "following": [
+        "69c27fd4201ef83c72c0fba6",
+        "69c23813cd6a49249023715a",
+        "69c227d058cdfddb1645243a",
+        "69c27fb4201ef83c72c0fb75",
+        "69c263ec7007b291ba856167",
+        "69c27d90b301673287a5a4f6"
+      ],
+      "followRequests": [
+        "69c6088ff3595fa9525d9073",
+        "69c27fb4201ef83c72c0fb75",
+        "69c3b162822d9f2488b4aec2",
+        "69c61706e34b0d8a73dc0bd1"
+      ],
+      "createdAt": "2026-03-24T12:12:08.287Z",
+      "updatedAt": "2026-03-27T05:35:11.648Z",
+      "__v": 0
+    },
+    {
+      "_id": "69c27fb4201ef83c72c0fb75",
+      "username": "kajal",
+      "email": "dixita@gmail.com",
+      "password": "$2b$10$jizULCXxIKHe7BgTIP8YqeRRFU03Pi3S4ffHfdlr0wpLHiqwe3xD6",
+      "name": "kajaj",
+      "bio": "",
+      "avatar": "",
+      "website": "",
+      "gender": "",
+      "followers": [
+        "69c6088ff3595fa9525d9073",
+        "69c227d058cdfddb1645243a",
+        "69c23813cd6a49249023715a",
+        "69c27f98201ef83c72c0fb5c",
+        "69c27fd4201ef83c72c0fba6",
+        "69c263ec7007b291ba856167",
+        "69c3b162822d9f2488b4aec2",
+        "69c27d90b301673287a5a4f6"
+      ],
+      "following": [
+        "69c3b162822d9f2488b4aec2",
+        "69c263ec7007b291ba856167",
+        "69c227d058cdfddb1645243a",
+        "69c27d90b301673287a5a4f6",
+        "69c23813cd6a49249023715a"
+      ],
+      "followRequests": [
+        "69c61706e34b0d8a73dc0bd1"
+      ],
+      "createdAt": "2026-03-24T12:12:36.286Z",
+      "updatedAt": "2026-03-27T05:35:12.219Z",
+      "__v": 0,
+      "loginActivity": [
+        {
+          "ip": "::ffff:192.168.29.58",
+          "device": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome",
+          "success": true,
+          "_id": "69c60a352b6f9430d76b908c",
+          "loginAt": "2026-03-27T04:40:21.761Z"
+        }
+      ],
+      "streak": {
+        "current": 1,
+        "lastLogin": "2026-03-27T04:40:22.036Z",
+        "longest": 1
+      },
+      "xpLevel": {
+        "level": 1,
+        "nextLevelXp": 100,
+        "total": 10
+      }
+    },
+    {
+      "_id": "69c27fd4201ef83c72c0fba6",
+      "username": "aarav",
+      "email": "aarav@gmail.com",
+      "password": "$2b$10$8bCdN1DzCIoB3Nem2ggEwOxSEK4XTKQ1TglvrW5mJFHl5Qj0UeYHS",
+      "name": "aarav",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dehnev1w4/image/upload/v1774421020/pixagram/avatars/tskqbpxcygr06zuutcfd.jpg",
+      "website": "",
+      "gender": "Prefer not to say",
+      "followers": [
+        "69c27f98201ef83c72c0fb5c",
+        "69c23813cd6a49249023715a",
+        "69c227d058cdfddb1645243a",
+        "69c3b162822d9f2488b4aec2",
+        "69c6088ff3595fa9525d9073",
+        "69c263ec7007b291ba856167",
+        "69c27d90b301673287a5a4f6"
+      ],
+      "following": [
+        "69c27f98201ef83c72c0fb5c",
+        "69c23813cd6a49249023715a",
+        "69c227d058cdfddb1645243a",
+        "69c3b162822d9f2488b4aec2",
+        "69c4d961a1811385c97d1162",
+        "69c6088ff3595fa9525d9073",
+        "69c27fb4201ef83c72c0fb75",
+        "69c263ec7007b291ba856167",
+        "69c27d90b301673287a5a4f6"
+      ],
+      "followRequests": [
+        "69c27fb4201ef83c72c0fb75",
+        "69c61706e34b0d8a73dc0bd1"
+      ],
+      "createdAt": "2026-03-24T12:13:08.695Z",
+      "updatedAt": "2026-03-27T05:35:12.771Z",
+      "__v": 0,
+      "gamingStats": {
+        "gamesPlayed": 2,
+        "rank": "Bronze",
+        "wins": 1,
+        "xp": 60
+      },
+      "streak": {
+        "current": 1,
+        "lastLogin": "2026-03-27T04:36:23.367Z",
+        "longest": 1
+      },
+      "xpLevel": {
+        "level": 1,
+        "nextLevelXp": 100,
+        "total": 10
+      }
+    },
+    {
+      "_id": "69c3b162822d9f2488b4aec2",
+      "username": "milan_963",
+      "email": "hasti5@gmail.com",
+      "password": "$2b$10$A7Ynw1NxLjgnxZ8c..Z1oeJ5YvEQ.ERhIx89DOtj3e/.0qfJ.8oHu",
+      "name": "milan ",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dehnev1w4/image/upload/v1774432609/pixagram/avatars/qjippodrkxenfnzhw0ee.jpg",
+      "website": "",
+      "gender": "",
+      "followers": [
+        "69c27fd4201ef83c72c0fba6",
+        "69c27fb4201ef83c72c0fb75",
+        "69c6088ff3595fa9525d9073",
+        "69c263ec7007b291ba856167",
+        "69c4d961a1811385c97d1162",
+        "69c227d058cdfddb1645243a",
+        "69c27d90b301673287a5a4f6",
+        "69c23813cd6a49249023715a"
+      ],
+      "following": [
+        "69c27fd4201ef83c72c0fba6",
+        "69c263ec7007b291ba856167",
+        "69c6088ff3595fa9525d9073",
+        "69c4d961a1811385c97d1162",
+        "69c27fb4201ef83c72c0fb75",
+        "69c227d058cdfddb1645243a",
+        "69c27d90b301673287a5a4f6",
+        "69c23813cd6a49249023715a"
+      ],
+      "followRequests": [
+        "69c61706e34b0d8a73dc0bd1"
+      ],
+      "isPrivate": false,
+      "blockedUsers": [],
+      "createdAt": "2026-03-25T09:56:50.495Z",
+      "updatedAt": "2026-03-27T05:35:13.490Z",
+      "__v": 0,
+      "loginActivity": [
+        {
+          "ip": "::ffff:192.168.29.58",
+          "device": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome",
+          "success": true,
+          "_id": "69c60a752b6f9430d76b91ff",
+          "loginAt": "2026-03-27T04:41:25.370Z"
+        }
+      ],
+      "streak": {
+        "current": 1,
+        "lastLogin": "2026-03-27T04:41:25.591Z",
+        "longest": 1
+      },
+      "xpLevel": {
+        "level": 1,
+        "nextLevelXp": 100,
+        "total": 10
+      }
+    },
+    {
+      "_id": "69c4d85ae9bb1e4ba16cefbe",
+      "username": "testuser123",
+      "email": "test@test.com",
+      "password": "$2b$10$PwmBe6DSkbnLhRSNjmJX2.YwBq9xj/XYlVSawAD9cd28MAw6oXYU.",
+      "name": "Test User",
+      "bio": "",
+      "avatar": "",
+      "website": "",
+      "gender": "",
+      "followers": [],
+      "following": [],
+      "followRequests": [
+        "69c4d961a1811385c97d1162",
+        "69c27fb4201ef83c72c0fb75",
+        "69c3b162822d9f2488b4aec2",
+        "69c263ec7007b291ba856167",
+        "69c227d058cdfddb1645243a",
+        "69c27d90b301673287a5a4f6",
+        "69c23813cd6a49249023715a",
+        "69c6088ff3595fa9525d9073"
+      ],
+      "isPrivate": false,
+      "blockedUsers": [],
+      "profileTheme": "default",
+      "isVerified": false,
+      "gamingStats": {
+        "gamesPlayed": 0,
+        "wins": 0,
+        "xp": 0,
+        "rank": "Bronze",
+        "achievements": []
+      },
+      "isCreator": false,
+      "subscriptionPrice": 0,
+      "walletBalance": 0,
+      "twoFactorEnabled": false,
+      "twoFactorSecret": "",
+      "notificationSettings": {
+        "postLikes": true,
+        "comments": true,
+        "followRequests": true,
+        "messages": true,
+        "liveAlerts": true,
+        "groupMessages": true
+      },
+      "mediaSettings": {
+        "autoplayVideos": true,
+        "hdUploads": true
+      },
+      "theme": "dark",
+      "socialLinks": [],
+      "createdAt": "2026-03-26T06:55:22.058Z",
+      "updatedAt": "2026-03-27T04:53:32.271Z",
+      "__v": 0
+    },
+    {
+      "_id": "69c4d8ded9ad0479d254d5e1",
+      "username": "newuser456",
+      "email": "newuser@test.com",
+      "password": "$2b$10$iB1AHeGA5qQfB9g.yHdEUuB0/s6HpCFm35B6tRHIefMpHfDk51smS",
+      "name": "New User",
+      "bio": "",
+      "avatar": "",
+      "website": "",
+      "gender": "",
+      "followers": [],
+      "following": [],
+      "followRequests": [
+        "69c4d961a1811385c97d1162",
+        "69c3b162822d9f2488b4aec2",
+        "69c263ec7007b291ba856167",
+        "69c227d058cdfddb1645243a",
+        "69c27d90b301673287a5a4f6",
+        "69c23813cd6a49249023715a",
+        "69c6088ff3595fa9525d9073"
+      ],
+      "isPrivate": false,
+      "blockedUsers": [],
+      "profileTheme": "default",
+      "isVerified": false,
+      "gamingStats": {
+        "gamesPlayed": 0,
+        "wins": 0,
+        "xp": 0,
+        "rank": "Bronze",
+        "achievements": []
+      },
+      "isCreator": false,
+      "subscriptionPrice": 0,
+      "walletBalance": 0,
+      "twoFactorEnabled": false,
+      "twoFactorSecret": "",
+      "notificationSettings": {
+        "postLikes": true,
+        "comments": true,
+        "followRequests": true,
+        "messages": true,
+        "liveAlerts": true,
+        "groupMessages": true
+      },
+      "mediaSettings": {
+        "autoplayVideos": true,
+        "hdUploads": true
+      },
+      "theme": "dark",
+      "socialLinks": [],
+      "createdAt": "2026-03-26T06:57:34.484Z",
+      "updatedAt": "2026-03-27T04:53:33.355Z",
+      "__v": 0
+    },
+    {
+      "_id": "69c4d961a1811385c97d1162",
+      "username": "aarav_123133",
+      "email": "aaravbgvc@gmail.com",
+      "password": "$2b$10$sBT1Rzb1D.YPWekRx28JQODkHoNcWOasj0AAPDiK6zwau11nCM.Se",
+      "name": "aaravtgununtynut",
+      "bio": "",
+      "avatar": "",
+      "website": "",
+      "gender": "",
+      "followers": [
+        "69c27fd4201ef83c72c0fba6",
+        "69c263ec7007b291ba856167",
+        "69c3b162822d9f2488b4aec2",
+        "69c227d058cdfddb1645243a",
+        "69c27d90b301673287a5a4f6",
+        "69c23813cd6a49249023715a"
+      ],
+      "following": [
+        "69c263ec7007b291ba856167",
+        "69c3b162822d9f2488b4aec2",
+        "69c227d058cdfddb1645243a",
+        "69c27d90b301673287a5a4f6",
+        "69c23813cd6a49249023715a"
+      ],
+      "followRequests": [],
+      "isPrivate": false,
+      "blockedUsers": [],
+      "profileTheme": "default",
+      "isVerified": false,
+      "gamingStats": {
+        "gamesPlayed": 1,
+        "wins": 0,
+        "xp": 10,
+        "rank": "Bronze",
+        "achievements": []
+      },
+      "isCreator": false,
+      "subscriptionPrice": 0,
+      "walletBalance": 0,
+      "twoFactorEnabled": false,
+      "twoFactorSecret": "",
+      "notificationSettings": {
+        "postLikes": true,
+        "comments": true,
+        "followRequests": true,
+        "messages": true,
+        "liveAlerts": true,
+        "groupMessages": true
+      },
+      "mediaSettings": {
+        "autoplayVideos": true,
+        "hdUploads": true
+      },
+      "theme": "dark",
+      "socialLinks": [],
+      "createdAt": "2026-03-26T06:59:45.411Z",
+      "updatedAt": "2026-03-27T04:52:49.385Z",
+      "__v": 0,
+      "referralCode": "AARAV_123133Q1P3",
+      "streak": {
+        "current": 1,
+        "lastLogin": "2026-03-26T12:57:47.432Z",
+        "longest": 1
+      },
+      "xpLevel": {
+        "level": 1,
+        "nextLevelXp": 100,
+        "total": 10
+      }
+    },
+    {
+      "_id": "69c50926881363c451371abe",
+      "username": "aesh_vaviya7",
+      "email": "vaviyshvi@gmail.com",
+      "password": "$2b$10$Cst9i1JfX6jjuHX/GyPz7uX6dbOVPPi3Nou/FIkSH06u9RbzQ42Oy",
+      "name": "Aeshvi Vaviya7",
+      "bio": "",
+      "avatar": "",
+      "website": "",
+      "gender": "",
+      "followers": [],
+      "following": [],
+      "followRequests": [
+        "69c4d961a1811385c97d1162",
+        "69c263ec7007b291ba856167",
+        "69c227d058cdfddb1645243a",
+        "69c27d90b301673287a5a4f6",
+        "69c23813cd6a49249023715a",
+        "69c6088ff3595fa9525d9073"
+      ],
+      "isPrivate": false,
+      "blockedUsers": [],
+      "profileTheme": "default",
+      "isVerified": false,
+      "gamingStats": {
+        "gamesPlayed": 1,
+        "wins": 1,
+        "xp": 50,
+        "rank": "Bronze",
+        "achievements": []
+      },
+      "isCreator": false,
+      "subscriptionPrice": 0,
+      "walletBalance": 0,
+      "twoFactorEnabled": false,
+      "twoFactorSecret": "",
+      "notificationSettings": {
+        "postLikes": true,
+        "comments": true,
+        "followRequests": true,
+        "messages": true,
+        "liveAlerts": true,
+        "groupMessages": true
+      },
+      "mediaSettings": {
+        "autoplayVideos": true,
+        "hdUploads": true
+      },
+      "theme": "dark",
+      "socialLinks": [],
+      "createdAt": "2026-03-26T10:23:34.252Z",
+      "updatedAt": "2026-03-27T04:56:31.681Z",
+      "__v": 0
+    },
+    {
+      "_id": "69c6088ff3595fa9525d9073",
+      "username": "ram_patel",
+      "email": "ram@gmail.com",
+      "password": "$2b$10$CiZlnJz19Bs2gL1OSQn2w.BYXNcS3h3CFi1ZFpSRod8p19mDZZIxS",
+      "name": "ram patel",
+      "bio": "hello",
+      "avatar": "https://res.cloudinary.com/dehnev1w4/image/upload/v1774585998/pixagram/avatars/tqp8pw9y5l5vvye0wmlw.jpg",
+      "website": "",
+      "gender": "",
+      "followers": [
+        "69c27fd4201ef83c72c0fba6",
+        "69c263ec7007b291ba856167",
+        "69c3b162822d9f2488b4aec2",
+        "69c227d058cdfddb1645243a",
+        "69c27d90b301673287a5a4f6",
+        "69c23813cd6a49249023715a"
+      ],
+      "following": [
+        "69c27fd4201ef83c72c0fba6",
+        "69c27fb4201ef83c72c0fb75",
+        "69c3b162822d9f2488b4aec2",
+        "69c263ec7007b291ba856167",
+        "69c227d058cdfddb1645243a",
+        "69c27d90b301673287a5a4f6",
+        "69c23813cd6a49249023715a"
+      ],
+      "followRequests": [],
+      "closeFriends": [],
+      "isPrivate": false,
+      "blockedUsers": [],
+      "profileTheme": "default",
+      "profileColor": "#a855f7",
+      "profileMusic": "",
+      "profileMusicName": "",
+      "isVerified": false,
+      "gamingStats": {
+        "dailyChallenge": {
+          "date": "",
+          "game": "",
+          "target": 0,
+          "progress": 0,
+          "completed": false,
+          "reward": 0
+        },
+        "gamesPlayed": 0,
+        "wins": 0,
+        "xp": 0,
+        "level": 1,
+        "rank": "Bronze",
+        "achievements": []
+      },
+      "streak": {
+        "current": 1,
+        "longest": 1,
+        "lastLogin": "2026-03-27T04:33:20.034Z"
+      },
+      "xpLevel": {
+        "total": 10,
+        "level": 1,
+        "nextLevelXp": 100
+      },
+      "referralCode": "",
+      "referralCount": 0,
+      "isCreator": false,
+      "subscriptionPrice": 0,
+      "walletBalance": 0,
+      "creatorAnalytics": {
+        "totalViews": 0,
+        "totalLikes": 0,
+        "totalComments": 0,
+        "totalFollowers": 0,
+        "weeklyGrowth": 0,
+        "monthlyGrowth": 0
+      },
+      "twoFactorEnabled": false,
+      "twoFactorSecret": "",
+      "contentWarning": false,
+      "sensitiveContent": false,
+      "wordFilter": [],
+      "notificationSettings": {
+        "postLikes": true,
+        "comments": true,
+        "followRequests": true,
+        "messages": true,
+        "liveAlerts": true,
+        "groupMessages": true,
+        "streakReminder": true,
+        "dailyChallenge": true
+      },
+      "mediaSettings": {
+        "autoplayVideos": true,
+        "hdUploads": true
+      },
+      "theme": "dark",
+      "socialLinks": [],
+      "bioLinks": [],
+      "badges": [],
+      "loginActivity": [
+        {
+          "ip": "::ffff:192.168.29.58",
+          "device": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome",
+          "success": true,
+          "_id": "69c60a212b6f9430d76b9059",
+          "loginAt": "2026-03-27T04:40:01.894Z"
+        }
+      ],
+      "createdAt": "2026-03-27T04:33:19.412Z",
+      "updatedAt": "2026-03-27T05:00:47.952Z",
+      "__v": 0
+    },
+    {
+      "_id": "69c61706e34b0d8a73dc0bd1",
+      "username": "Wipro_123",
+      "email": "krish@gmail.com",
+      "password": "$2b$10$pIIMpHyTBLlDsFTGZIs9QenIAz5ZhOn93AMv2uI9MRSih5FfDj4wW",
+      "name": "Wipro",
+      "bio": "",
+      "avatar": "",
+      "website": "",
+      "gender": "",
+      "followers": [
+        "69c23813cd6a49249023715a",
+        "69c227d058cdfddb1645243a"
+      ],
+      "following": [
+        "69c23813cd6a49249023715a",
+        "69c227d058cdfddb1645243a"
+      ],
+      "followRequests": [],
+      "closeFriends": [],
+      "isPrivate": false,
+      "blockedUsers": [],
+      "profileTheme": "default",
+      "profileColor": "#a855f7",
+      "profileMusic": "",
+      "profileMusicName": "",
+      "isVerified": false,
+      "gamingStats": {
+        "dailyChallenge": {
+          "date": "",
+          "game": "",
+          "target": 0,
+          "progress": 0,
+          "completed": false,
+          "reward": 0
+        },
+        "gamesPlayed": 0,
+        "wins": 0,
+        "xp": 0,
+        "level": 1,
+        "rank": "Bronze",
+        "achievements": []
+      },
+      "streak": {
+        "current": 1,
+        "longest": 1,
+        "lastLogin": "2026-03-27T05:35:02.636Z"
+      },
+      "xpLevel": {
+        "total": 10,
+        "level": 1,
+        "nextLevelXp": 100
+      },
+      "referralCode": "",
+      "referralCount": 0,
+      "isCreator": false,
+      "subscriptionPrice": 0,
+      "walletBalance": 0,
+      "creatorAnalytics": {
+        "totalViews": 0,
+        "totalLikes": 0,
+        "totalComments": 0,
+        "totalFollowers": 0,
+        "weeklyGrowth": 0,
+        "monthlyGrowth": 0
+      },
+      "twoFactorEnabled": false,
+      "twoFactorSecret": "",
+      "contentWarning": false,
+      "sensitiveContent": false,
+      "wordFilter": [],
+      "notificationSettings": {
+        "postLikes": true,
+        "comments": true,
+        "followRequests": true,
+        "messages": true,
+        "liveAlerts": true,
+        "groupMessages": true,
+        "streakReminder": true,
+        "dailyChallenge": true
+      },
+      "mediaSettings": {
+        "autoplayVideos": true,
+        "hdUploads": true
+      },
+      "theme": "dark",
+      "socialLinks": [],
+      "bioLinks": [],
+      "badges": [],
+      "loginActivity": [],
+      "createdAt": "2026-03-27T05:35:02.437Z",
+      "updatedAt": "2026-03-27T13:05:42.227Z",
+      "__v": 0
+    }
+  ],
+  "products": [
+    {
+      "_id": "69c62e3a9927d6117f96d624",
+      "seller": "69c227d058cdfddb1645243a",
+      "name": "Wireless Bluetooth Headphones",
+      "description": "Premium sound quality with active noise cancellation. 30-hour battery life, foldable design, and comfortable over-ear cushions.",
+      "price": 49.99,
+      "comparePrice": 79.99,
+      "images": [
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop"
+      ],
+      "category": "Electronics",
+      "tags": [
+        "wireless",
+        "audio",
+        "bluetooth",
+        "headphones"
+      ],
+      "stock": 25,
+      "sold": 0,
+      "rating": 4.5,
+      "reviewCount": 128,
+      "isActive": true,
+      "isFeatured": false,
+      "shippingInfo": {
+        "weight": 0,
+        "freeShipping": false,
+        "estimatedDays": 5
+      },
+      "reviews": [],
+      "__v": 0,
+      "createdAt": "2026-03-27T07:14:02.427Z",
+      "updatedAt": "2026-03-27T07:14:02.427Z"
+    },
+    {
+      "_id": "69c62e3a9927d6117f96d625",
+      "seller": "69c227d058cdfddb1645243a",
+      "name": "Mechanical Gaming Keyboard",
+      "description": "RGB backlit mechanical keyboard with tactile switches. Anti-ghosting, programmable keys, and durable aluminum frame.",
+      "price": 69.99,
+      "comparePrice": 99.99,
+      "images": [
+        "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&h=400&fit=crop"
+      ],
+      "category": "Electronics",
+      "tags": [
+        "gaming",
+        "keyboard",
+        "mechanical",
+        "rgb"
+      ],
+      "stock": 14,
+      "sold": 1,
+      "rating": 4.7,
+      "reviewCount": 89,
+      "isActive": true,
+      "isFeatured": false,
+      "shippingInfo": {
+        "weight": 0,
+        "freeShipping": false,
+        "estimatedDays": 5
+      },
+      "reviews": [],
+      "__v": 0,
+      "createdAt": "2026-03-27T07:14:02.435Z",
+      "updatedAt": "2026-03-27T07:16:07.810Z"
+    },
+    {
+      "_id": "69c62e3a9927d6117f96d626",
+      "seller": "69c227d058cdfddb1645243a",
+      "name": "Minimalist Leather Wallet",
+      "description": "Slim RFID-blocking genuine leather wallet. Holds up to 8 cards with a cash pocket. Available in black and brown.",
+      "price": 24.99,
+      "comparePrice": 0,
+      "images": [
+        "https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&h=400&fit=crop"
+      ],
+      "category": "Fashion",
+      "tags": [
+        "wallet",
+        "leather",
+        "minimalist",
+        "rfid"
+      ],
+      "stock": 50,
+      "sold": 0,
+      "rating": 4.3,
+      "reviewCount": 214,
+      "isActive": true,
+      "isFeatured": false,
+      "shippingInfo": {
+        "weight": 0,
+        "freeShipping": false,
+        "estimatedDays": 5
+      },
+      "reviews": [],
+      "__v": 0,
+      "createdAt": "2026-03-27T07:14:02.435Z",
+      "updatedAt": "2026-03-27T07:14:02.435Z"
+    },
+    {
+      "_id": "69c62e3a9927d6117f96d627",
+      "seller": "69c227d058cdfddb1645243a",
+      "name": "Stainless Steel Water Bottle",
+      "description": "Double-wall vacuum insulated 32oz bottle. Keeps drinks cold 24hrs or hot 12hrs. BPA-free and leak-proof lid.",
+      "price": 19.99,
+      "comparePrice": 29.99,
+      "images": [
+        "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop"
+      ],
+      "category": "Sports",
+      "tags": [
+        "bottle",
+        "water",
+        "insulated",
+        "gym"
+      ],
+      "stock": 80,
+      "sold": 0,
+      "rating": 4.6,
+      "reviewCount": 342,
+      "isActive": true,
+      "isFeatured": false,
+      "shippingInfo": {
+        "weight": 0,
+        "freeShipping": false,
+        "estimatedDays": 5
+      },
+      "reviews": [],
+      "__v": 0,
+      "createdAt": "2026-03-27T07:14:02.436Z",
+      "updatedAt": "2026-03-27T07:14:02.436Z"
+    },
+    {
+      "_id": "69c62e3a9927d6117f96d628",
+      "seller": "69c227d058cdfddb1645243a",
+      "name": "Portable Phone Stand",
+      "description": "Adjustable aluminum desk phone stand. Compatible with all smartphones and tablets. Foldable and lightweight.",
+      "price": 12.99,
+      "comparePrice": 0,
+      "images": [
+        "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=400&fit=crop"
+      ],
+      "category": "Electronics",
+      "tags": [
+        "stand",
+        "phone",
+        "desk",
+        "aluminum"
+      ],
+      "stock": 99,
+      "sold": 1,
+      "rating": 4.2,
+      "reviewCount": 67,
+      "isActive": true,
+      "isFeatured": false,
+      "shippingInfo": {
+        "weight": 0,
+        "freeShipping": false,
+        "estimatedDays": 5
+      },
+      "reviews": [],
+      "__v": 0,
+      "createdAt": "2026-03-27T07:14:02.436Z",
+      "updatedAt": "2026-03-27T07:16:07.804Z"
+    },
+    {
+      "_id": "69c62e3a9927d6117f96d629",
+      "seller": "69c227d058cdfddb1645243a",
+      "name": "Scented Soy Candle Set",
+      "description": "Set of 3 hand-poured soy wax candles. Lavender, vanilla, and eucalyptus scents. 40-hour burn time each.",
+      "price": 29.99,
+      "comparePrice": 44.99,
+      "images": [
+        "https://images.unsplash.com/photo-1602874801007-bd458bb1a2b4?w=400&h=400&fit=crop"
+      ],
+      "category": "Home & Garden",
+      "tags": [
+        "candle",
+        "soy",
+        "scented",
+        "home",
+        "decor"
+      ],
+      "stock": 35,
+      "sold": 0,
+      "rating": 4.8,
+      "reviewCount": 156,
+      "isActive": true,
+      "isFeatured": false,
+      "shippingInfo": {
+        "weight": 0,
+        "freeShipping": false,
+        "estimatedDays": 5
+      },
+      "reviews": [],
+      "__v": 0,
+      "createdAt": "2026-03-27T07:14:02.437Z",
+      "updatedAt": "2026-03-27T07:14:02.437Z"
+    },
+    {
+      "_id": "69c62e3a9927d6117f96d62a",
+      "seller": "69c227d058cdfddb1645243a",
+      "name": "Yoga Mat Premium",
+      "description": "6mm thick non-slip yoga mat with alignment lines. Eco-friendly TPE material, includes carrying strap.",
+      "price": 34.99,
+      "comparePrice": 54.99,
+      "images": [
+        "https://images.unsplash.com/photo-1601925228008-f5e4c5e5e5e5?w=400&h=400&fit=crop"
+      ],
+      "category": "Sports",
+      "tags": [
+        "yoga",
+        "mat",
+        "fitness",
+        "exercise"
+      ],
+      "stock": 40,
+      "sold": 0,
+      "rating": 4.4,
+      "reviewCount": 98,
+      "isActive": true,
+      "isFeatured": false,
+      "shippingInfo": {
+        "weight": 0,
+        "freeShipping": false,
+        "estimatedDays": 5
+      },
+      "reviews": [],
+      "__v": 0,
+      "createdAt": "2026-03-27T07:14:02.438Z",
+      "updatedAt": "2026-03-27T07:14:02.438Z"
+    },
+    {
+      "_id": "69c62e3a9927d6117f96d62b",
+      "seller": "69c227d058cdfddb1645243a",
+      "name": "Wireless Charging Pad",
+      "description": "10W fast wireless charger compatible with all Qi-enabled devices. LED indicator, anti-slip surface.",
+      "price": 15.99,
+      "comparePrice": 24.99,
+      "images": [
+        "https://images.unsplash.com/photo-1591370874773-6702e8f12fd8?w=400&h=400&fit=crop"
+      ],
+      "category": "Electronics",
+      "tags": [
+        "wireless",
+        "charger",
+        "qi",
+        "fast charging"
+      ],
+      "stock": 59,
+      "sold": 1,
+      "rating": 4.1,
+      "reviewCount": 203,
+      "isActive": true,
+      "isFeatured": false,
+      "shippingInfo": {
+        "weight": 0,
+        "freeShipping": false,
+        "estimatedDays": 5
+      },
+      "reviews": [],
+      "__v": 0,
+      "createdAt": "2026-03-27T07:14:02.439Z",
+      "updatedAt": "2026-03-27T07:15:22.262Z"
+    },
+    {
+      "_id": "69c62e3a9927d6117f96d62c",
+      "seller": "69c227d058cdfddb1645243a",
+      "name": "Ceramic Coffee Mug",
+      "description": "Handcrafted 12oz ceramic mug with minimalist design. Microwave and dishwasher safe. Perfect gift.",
+      "price": 14.99,
+      "comparePrice": 0,
+      "images": [
+        "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=400&h=400&fit=crop"
+      ],
+      "category": "Home & Garden",
+      "tags": [
+        "mug",
+        "coffee",
+        "ceramic",
+        "kitchen"
+      ],
+      "stock": 75,
+      "sold": 0,
+      "rating": 4.5,
+      "reviewCount": 87,
+      "isActive": true,
+      "isFeatured": false,
+      "shippingInfo": {
+        "weight": 0,
+        "freeShipping": false,
+        "estimatedDays": 5
+      },
+      "reviews": [],
+      "__v": 0,
+      "createdAt": "2026-03-27T07:14:02.439Z",
+      "updatedAt": "2026-03-27T07:14:02.439Z"
+    },
+    {
+      "_id": "69c62e3a9927d6117f96d62d",
+      "seller": "69c227d058cdfddb1645243a",
+      "name": "Sunglasses UV400",
+      "description": "Polarized UV400 protection sunglasses with lightweight frame. Unisex design, includes hard case.",
+      "price": 22.99,
+      "comparePrice": 39.99,
+      "images": [
+        "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=400&fit=crop"
+      ],
+      "category": "Fashion",
+      "tags": [
+        "sunglasses",
+        "uv",
+        "polarized",
+        "summer"
+      ],
+      "stock": 44,
+      "sold": 1,
+      "rating": 4.3,
+      "reviewCount": 175,
+      "isActive": true,
+      "isFeatured": false,
+      "shippingInfo": {
+        "weight": 0,
+        "freeShipping": false,
+        "estimatedDays": 5
+      },
+      "reviews": [],
+      "__v": 0,
+      "createdAt": "2026-03-27T07:14:02.440Z",
+      "updatedAt": "2026-03-27T07:15:22.255Z"
+    },
+    {
+      "_id": "69c62e3a9927d6117f96d62e",
+      "seller": "69c227d058cdfddb1645243a",
+      "name": "Sketch & Drawing Set",
+      "description": "Professional 24-piece drawing set with graphite pencils, charcoal sticks, blending tools, and sketchbook.",
+      "price": 27.99,
+      "comparePrice": 39.99,
+      "images": [
+        "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400&h=400&fit=crop"
+      ],
+      "category": "Art",
+      "tags": [
+        "art",
+        "drawing",
+        "sketch",
+        "pencil"
+      ],
+      "stock": 30,
+      "sold": 0,
+      "rating": 4.6,
+      "reviewCount": 62,
+      "isActive": true,
+      "isFeatured": false,
+      "shippingInfo": {
+        "weight": 0,
+        "freeShipping": false,
+        "estimatedDays": 5
+      },
+      "reviews": [],
+      "__v": 0,
+      "createdAt": "2026-03-27T07:14:02.441Z",
+      "updatedAt": "2026-03-27T07:14:02.441Z"
+    },
+    {
+      "_id": "69c62e3a9927d6117f96d62f",
+      "seller": "69c227d058cdfddb1645243a",
+      "name": "Bluetooth Speaker Mini",
+      "description": "Compact waterproof Bluetooth 5.0 speaker. 12-hour playtime, 360° surround sound, built-in mic.",
+      "price": 39.99,
+      "comparePrice": 59.99,
+      "images": [
+        "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=400&fit=crop"
+      ],
+      "category": "Electronics",
+      "tags": [
+        "speaker",
+        "bluetooth",
+        "waterproof",
+        "portable"
+      ],
+      "stock": 20,
+      "sold": 0,
+      "rating": 4.4,
+      "reviewCount": 311,
+      "isActive": true,
+      "isFeatured": false,
+      "shippingInfo": {
+        "weight": 0,
+        "freeShipping": false,
+        "estimatedDays": 5
+      },
+      "reviews": [],
+      "__v": 0,
+      "createdAt": "2026-03-27T07:14:02.441Z",
+      "updatedAt": "2026-03-27T07:14:02.441Z"
+    }
+  ]
+}
