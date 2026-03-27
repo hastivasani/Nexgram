@@ -85,13 +85,13 @@ export default function Sidebar() {
   return (
     <>
       {/* ── Desktop sidebar (md+) ─────────────────────────────── */}
-      <div className="hidden md:flex w-16 h-screen border-r border-theme bg-theme-sidebar fixed left-0 top-0 flex-col items-center py-3 z-40 overflow-hidden">
+      <div className="hidden md:flex w-16 h-screen border-r border-theme bg-theme-sidebar fixed left-0 top-0 flex-col items-center py-3 z-40 overflow-y-auto scrollbar-hide pb-4">
         {/* Logo */}
         <a href="/" className="mb-3 w-8 h-8 bg-gradient-to-br from-purple-600 to-pink-500 rounded-xl flex items-center justify-center text-white font-bold text-base shadow-md flex-shrink-0">
           P
         </a>
 
-        <nav className="flex-1 w-full flex flex-col items-center gap-0 overflow-hidden">
+        <nav className="flex-1 w-full flex flex-col items-center gap-0 overflow-y-auto scrollbar-hide">
           {ALL_NAV.map((item, idx) => (
             <React.Fragment key={item.to}>
               {idx === ALL_NAV.length - 1 && <hr className="border-theme my-0.5 w-8" />}
