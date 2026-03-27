@@ -1,56 +1,56 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { createLobby, joinLobbyByCode, getLeaderboard, getMyGameStats, updateScore } from "../services/api";
 import { getSocket } from "../utils/socket";
 import { useAuth } from "../Context/AuthContext";
 import { FaGamepad, FaCopy, FaCheck, FaSignInAlt, FaTrophy, FaChartBar } from "react-icons/fa";
 
-import TicTacToe         from "../components/games/TicTacToe";
-import QuizGame          from "../components/games/QuizGame";
-import SnakeGame         from "../components/games/SnakeGame";
-import MemoryMatch       from "../components/games/MemoryMatch";
-import WordGuess         from "../components/games/WordGuess";
-import RockPaperScissors from "../components/games/RockPaperScissors";
-import Game2048          from "../components/games/Game2048";
-import FlappyBird        from "../components/games/FlappyBird";
-import WhackAMole        from "../components/games/WhackAMole";
-import ColorMatch        from "../components/games/ColorMatch";
-import MathSprint        from "../components/games/MathSprint";
-import ConnectFour       from "../components/games/ConnectFour";
-import BlackjackGame     from "../components/games/BlackjackGame";
-import CardMemory        from "../components/games/CardMemory";
-import SudokuGame        from "../components/games/SudokuGame";
-import Hangman           from "../components/games/Hangman";
-import TypingSpeed       from "../components/games/TypingSpeed";
-import NumberGuess       from "../components/games/NumberGuess";
-import BrickBreaker      from "../components/games/BrickBreaker";
-import SimonSays         from "../components/games/SimonSays";
-import ReactionTime      from "../components/games/ReactionTime";
-import DiceRoller        from "../components/games/DiceRoller";
-import ChessGame         from "../components/games/ChessGame";
-import CheckersGame      from "../components/games/CheckersGame";
-import LudoGame          from "../components/games/LudoGame";
-import SnakeLadder       from "../components/games/SnakeLadder";
-import PokerGame         from "../components/games/PokerGame";
-import UnoGame           from "../components/games/UnoGame";
-import SolitaireGame     from "../components/games/SolitaireGame";
-import TrumpCards        from "../components/games/TrumpCards";
-import SpeedCards        from "../components/games/SpeedCards";
-import DominoGame        from "../components/games/DominoGame";
-import BattleshipGame    from "../components/games/BattleshipGame";
-import MinesweeperGame   from "../components/games/MinesweeperGame";
-import TriviaGame        from "../components/games/TriviaGame";
-import WordScramble      from "../components/games/WordScramble";
-import WordChain         from "../components/games/WordChain";
-import PingPong          from "../components/games/PingPong";
-import BubbleShooter     from "../components/games/BubbleShooter";
-import AimTrainer        from "../components/games/AimTrainer";
-import EndlessRunner     from "../components/games/EndlessRunner";
-import CatchGame         from "../components/games/CatchGame";
-import TowerDefense      from "../components/games/TowerDefense";
-import PuzzleSlider      from "../components/games/PuzzleSlider";
-import ColorBlast        from "../components/games/ColorBlast";
-import EmojiMatch        from "../components/games/EmojiMatch";
-import SpinWheel         from "../components/games/SpinWheel";
+const TicTacToe         = lazy(() => import("../components/games/TicTacToe"));
+const QuizGame          = lazy(() => import("../components/games/QuizGame"));
+const SnakeGame         = lazy(() => import("../components/games/SnakeGame"));
+const MemoryMatch       = lazy(() => import("../components/games/MemoryMatch"));
+const WordGuess         = lazy(() => import("../components/games/WordGuess"));
+const RockPaperScissors = lazy(() => import("../components/games/RockPaperScissors"));
+const Game2048          = lazy(() => import("../components/games/Game2048"));
+const FlappyBird        = lazy(() => import("../components/games/FlappyBird"));
+const WhackAMole        = lazy(() => import("../components/games/WhackAMole"));
+const ColorMatch        = lazy(() => import("../components/games/ColorMatch"));
+const MathSprint        = lazy(() => import("../components/games/MathSprint"));
+const ConnectFour       = lazy(() => import("../components/games/ConnectFour"));
+const BlackjackGame     = lazy(() => import("../components/games/BlackjackGame"));
+const CardMemory        = lazy(() => import("../components/games/CardMemory"));
+const SudokuGame        = lazy(() => import("../components/games/SudokuGame"));
+const Hangman           = lazy(() => import("../components/games/Hangman"));
+const TypingSpeed       = lazy(() => import("../components/games/TypingSpeed"));
+const NumberGuess       = lazy(() => import("../components/games/NumberGuess"));
+const BrickBreaker      = lazy(() => import("../components/games/BrickBreaker"));
+const SimonSays         = lazy(() => import("../components/games/SimonSays"));
+const ReactionTime      = lazy(() => import("../components/games/ReactionTime"));
+const DiceRoller        = lazy(() => import("../components/games/DiceRoller"));
+const ChessGame         = lazy(() => import("../components/games/ChessGame"));
+const CheckersGame      = lazy(() => import("../components/games/CheckersGame"));
+const LudoGame          = lazy(() => import("../components/games/LudoGame"));
+const SnakeLadder       = lazy(() => import("../components/games/SnakeLadder"));
+const PokerGame         = lazy(() => import("../components/games/PokerGame"));
+const UnoGame           = lazy(() => import("../components/games/UnoGame"));
+const SolitaireGame     = lazy(() => import("../components/games/SolitaireGame"));
+const TrumpCards        = lazy(() => import("../components/games/TrumpCards"));
+const SpeedCards        = lazy(() => import("../components/games/SpeedCards"));
+const DominoGame        = lazy(() => import("../components/games/DominoGame"));
+const BattleshipGame    = lazy(() => import("../components/games/BattleshipGame"));
+const MinesweeperGame   = lazy(() => import("../components/games/MinesweeperGame"));
+const TriviaGame        = lazy(() => import("../components/games/TriviaGame"));
+const WordScramble      = lazy(() => import("../components/games/WordScramble"));
+const WordChain         = lazy(() => import("../components/games/WordChain"));
+const PingPong          = lazy(() => import("../components/games/PingPong"));
+const BubbleShooter     = lazy(() => import("../components/games/BubbleShooter"));
+const AimTrainer        = lazy(() => import("../components/games/AimTrainer"));
+const EndlessRunner     = lazy(() => import("../components/games/EndlessRunner"));
+const CatchGame         = lazy(() => import("../components/games/CatchGame"));
+const TowerDefense      = lazy(() => import("../components/games/TowerDefense"));
+const PuzzleSlider      = lazy(() => import("../components/games/PuzzleSlider"));
+const ColorBlast        = lazy(() => import("../components/games/ColorBlast"));
+const EmojiMatch        = lazy(() => import("../components/games/EmojiMatch"));
+const SpinWheel         = lazy(() => import("../components/games/SpinWheel"));
 
 const GAMES = [
   { id:"tictactoe",    name:"Tic Tac Toe",        icon:"⭕", cat:"Board",  maxPlayers:2, desc:"Classic 3×3 strategy",           color:"from-blue-600 to-purple-600",   canSolo:true },
@@ -313,7 +313,13 @@ export default function Gaming() {
     diceroller: <DiceRoller {...gameProps}/>, colorblast: <ColorBlast {...gameProps}/>, spinwheel: <SpinWheel {...gameProps}/>,
   };
 
-  if (activeGame && gameMap[activeGame.game]) return <div className="md:pl-0">{gameMap[activeGame.game]}</div>;
+  if (activeGame && gameMap[activeGame.game]) return (
+    <div className="md:pl-0">
+      <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="w-10 h-10 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" /></div>}>
+        {gameMap[activeGame.game]}
+      </Suspense>
+    </div>
+  );
 
   const filteredGames = GAMES.filter(g => {
     const matchCat    = catFilter === "All" || g.cat === catFilter;

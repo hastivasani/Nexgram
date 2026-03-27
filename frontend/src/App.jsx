@@ -14,6 +14,10 @@ import Register      from "./pages/Register";
 import Notifications from "./pages/Notifications";
 import Create        from "./pages/Create";
 import More          from "./pages/More";
+import { pingBackend } from "./services/api";
+
+// Ping backend every 10 min to prevent Render sleep
+setInterval(pingBackend, 10 * 60 * 1000);
 
 // Lazy load all other pages
 const Home          = lazy(() => import("./pages/Home"));

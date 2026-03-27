@@ -250,3 +250,6 @@ export const adminGetPosts    = (params="")  => api.get(`/admin/posts${params}`)
 export const adminDeletePost  = (id)         => api.delete(`/admin/posts/${id}`);
 export const adminGetOrders   = (params="")  => api.get(`/admin/orders${params}`);
 export const adminGetBookings = (params="")  => api.get(`/admin/bookings${params}`);
+
+// ── Keep-alive ping (prevents Render free tier sleep) ────────
+export const pingBackend = () => api.get("/").catch(() => {});
