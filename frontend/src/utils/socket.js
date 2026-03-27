@@ -1,8 +1,8 @@
 import { io } from "socket.io-client";
 
-// Always use window.location.origin so Vite proxy forwards /socket.io → backend
-// This works for both localhost AND 192.168.x.x access
-const SOCKET_URL = window.location.origin;
+const SOCKET_URL = import.meta.env.VITE_API_URL
+  ? import.meta.env.VITE_API_URL.replace("/api", "")
+  : window.location.origin;
 
 let socket = null;
 let currentUserId = null;
@@ -21,8 +21,7 @@ export const getSocket = (userId) => {
       reconnection: true,
       reconnectionAttempts: 5,
       reconnectionDelay: 1000,
-      // Force websocket — skip polling to avoid proxy issues
-      transports: ["websocket"],
+      transports: ["polling", "websocket"],
     });
     currentUserId = userId;
   }
