@@ -85,22 +85,22 @@ export default function Sidebar() {
   return (
     <>
       {/* ── Desktop sidebar (md+) ─────────────────────────────── */}
-      <div className="hidden md:flex w-16 h-screen border-r border-theme bg-theme-sidebar fixed left-0 top-0 flex-col items-center py-4 z-40 overflow-y-auto scrollbar-hide pb-6">
+      <div className="hidden md:flex w-16 h-screen border-r border-theme bg-theme-sidebar fixed left-0 top-0 flex-col items-center py-3 z-40 overflow-hidden">
         {/* Logo */}
-        <a href="/" className="mb-6 w-9 h-9 bg-gradient-to-br from-purple-600 to-pink-500 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-md flex-shrink-0">
+        <a href="/" className="mb-3 w-8 h-8 bg-gradient-to-br from-purple-600 to-pink-500 rounded-xl flex items-center justify-center text-white font-bold text-base shadow-md flex-shrink-0">
           P
         </a>
 
-        <nav className="flex-1 w-full flex flex-col items-center gap-0.5">
+        <nav className="flex-1 w-full flex flex-col items-center gap-0 overflow-hidden">
           {ALL_NAV.map((item, idx) => (
             <React.Fragment key={item.to}>
-              {idx === ALL_NAV.length - 1 && <hr className="border-theme my-1 w-8" />}
+              {idx === ALL_NAV.length - 1 && <hr className="border-theme my-0.5 w-8" />}
               <div className="relative group w-full flex justify-center">
                 <NavLink
                   to={item.to}
                   onClick={(e) => handleClick(e, item.label)}
                   className={({ isActive }) =>
-                    `relative flex items-center justify-center w-11 h-11 rounded-xl transition-all duration-200 ${
+                    `relative flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-200 ${
                       isActive
                         ? "bg-theme-secondary text-purple-500"
                         : "text-theme-secondary hover:bg-theme-hover hover:text-theme-primary"
@@ -109,27 +109,26 @@ export default function Sidebar() {
                 >
                   {({ isActive }) => (
                     <>
-                      {isActive ? <item.activeIcon size={22} /> : <item.icon size={22} />}
+                      {isActive ? <item.activeIcon size={20} /> : <item.icon size={20} />}
                       {item.label === "Notifications" && unreadCount > 0 && (
-                        <span className="absolute top-1.5 right-1.5 w-3.5 h-3.5 bg-red-500 text-white text-[9px] rounded-full flex items-center justify-center font-bold leading-none">
+                        <span className="absolute top-1.5 right-1.5 w-3 h-3 bg-red-500 text-white text-[8px] rounded-full flex items-center justify-center font-bold leading-none">
                           {unreadCount > 9 ? "9+" : unreadCount}
                         </span>
                       )}
                     </>
                   )}
                 </NavLink>
-
               </div>
             </React.Fragment>
           ))}
         </nav>
 
         {/* Avatar */}
-        <div className="relative mt-2 flex-shrink-0">
-          <div className="w-9 h-9 rounded-full ring-2 ring-purple-400 overflow-hidden cursor-pointer">
+        <div className="relative mt-1 flex-shrink-0">
+          <div className="w-8 h-8 rounded-full ring-2 ring-purple-400 overflow-hidden cursor-pointer">
             {user.avatar
               ? <img src={user.avatar} alt="me" className="w-full h-full object-cover" />
-              : <div className="w-full h-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-white text-sm font-bold">
+              : <div className="w-full h-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-white text-xs font-bold">
                   {user.username?.[0]?.toUpperCase()}
                 </div>
             }
