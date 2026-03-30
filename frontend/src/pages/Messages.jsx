@@ -7,7 +7,12 @@ import EmptyChat from "../components/EmptyChat";
 export default function Messages() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [selectedChat, setSelectedChat] = useState(null);
+  const [selectedChat, setSelectedChat] = useState(() => {
+    try {
+      const saved = localStorage.getItem("selectedChat");
+      return saved ? JSON.parse(saved) : null;
+    } catch { return null; }
+  });
   const didInit = useRef(false);
 
   useEffect(() => {
@@ -15,13 +20,25 @@ export default function Messages() {
     didInit.current = true;
     if (location.state?.chatUser) {
       setSelectedChat(location.state.chatUser);
+      localStorage.setItem("selectedChat", JSON.stringify(location.state.chatUser));
       navigate("/messages", { replace: true, state: {} });
     }
   }, []);
 
-  const handleSelectChat = (user) => setSelectedChat(user);
-  const handleBack = () => setSelectedChat(null);
-  const handleDeleteChat = () => setSelectedChat(null);
+  const handleSelectChat = (user) => {
+    setSelectedChat(user);
+    localStorage.setItem("selectedChat", JSON.stringify(user));
+  };
+
+  const handleBack = () => {
+    setSelectedChat(null);
+    localStorage.removeItem("selectedChat");
+  };
+
+  const handleDeleteChat = () => {
+    setSelectedChat(null);
+    localStorage.removeItem("selectedChat");
+  };
 
   return (
     <div className="messages-page-wrapper flex overflow-hidden bg-theme-primary h-[calc(100dvh-56px)] md:h-screen md:pl-0">
