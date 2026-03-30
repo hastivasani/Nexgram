@@ -57,12 +57,11 @@ exports.getConversation = async (req, res) => {
   try {
     const { userId } = req.params;
     const messages = await Message.find({
-      $or: [
-        { sender: req.user._id, receiver: userId },
-        { sender: userId, receiver: req.user._id },
-      ],
-      isDeleted: false,
-      deletedBy: { $ne: req.user._id },
+      $and: [
+        { $or: [{ sender: req.user._id, receiver: userId }, { sender: userId, receiver: req.user._id }] },
+        { isDeleted: false },
+        { $or: [{ deletedBy: { $exists: false } }, { deletedBy: { $size: 0 } }, { deletedBy: { $ne: req.user._id } }] },
+      ]
     })
       .sort({ createdAt: 1 })
       .populate("sender", "username avatar")
@@ -83,9 +82,11 @@ exports.getConversationList = async (req, res) => {
   try {
     const myId = req.user._id;
     const messages = await Message.find({
-      $or: [{ sender: myId }, { receiver: myId }],
-      isDeleted: false,
-      deletedBy: { $ne: myId },
+      $and: [
+        { $or: [{ sender: myId }, { receiver: myId }] },
+        { isDeleted: false },
+        { $or: [{ deletedBy: { $exists: false } }, { deletedBy: { $size: 0 } }, { deletedBy: { $ne: myId } }] },
+      ]
     })
       .sort({ createdAt: -1 })
       .populate("sender", "username avatar name")
