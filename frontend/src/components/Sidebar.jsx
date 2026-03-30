@@ -48,6 +48,7 @@ const MOBILE_NAV = [
   { to: "/",              label: "Home",          icon: HiOutlineHome,           activeIcon: HiHome },
   { to: "/search",        label: "Search",        icon: HiOutlineSearch,         activeIcon: HiSearch },
   { to: "/reels",         label: "Reels",         icon: HiOutlineVideoCamera,    activeIcon: HiVideoCamera },
+  { to: "/shop",          label: "Shop",          icon: FaShoppingBag,           activeIcon: FaShoppingBag },
   { to: "/notifications", label: "Alerts",        icon: HiOutlineBell,           activeIcon: HiBell },
   { to: "/more",          label: "More",          icon: HiOutlineDotsHorizontal, activeIcon: HiDotsHorizontal },
 ];

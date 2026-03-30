@@ -24,6 +24,7 @@ export default function Shop() {
       const params = new URLSearchParams();
       if (category) params.set("category", category);
       if (sort) params.set("sort", sort);
+      // Load products and categories in parallel, cart separately (non-blocking)
       const [prodRes, catRes] = await Promise.all([
         getProducts(`?${params}`),
         getProductCategories(),
@@ -35,13 +36,8 @@ export default function Shop() {
     } finally {
       setLoading(false);
     }
-    // Load cart separately so it doesn't block products
-    try {
-      const cartRes = await getCart();
-      setCart(cartRes.data || { items: [] });
-    } catch (err) {
-      // Cart load failed (e.g. not logged in), ignore
-    }
+    // Cart loads after - doesn't block product display
+    getCart().then(r => setCart(r.data || { items: [] })).catch(() => {});
   };
 
   const handleSearch = async (e) => {
@@ -78,7 +74,7 @@ export default function Shop() {
   );
 
   return (
-    <div className="min-h-screen bg-theme-primary text-theme-primary p-4 md:p-6">
+    <div className="min-h-screen bg-theme-primary text-theme-primary p-4 md:p-6 pb-20 md:pb-6">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>

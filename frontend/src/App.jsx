@@ -11,10 +11,15 @@ import "./App.css";
 // Eager load auth pages
 import Login         from "./pages/Login";
 import Register      from "./pages/Register";
-import Notifications from "./pages/Notifications";
+import NotificationsPanel from "./pages/Notifications";
 import Create        from "./pages/Create";
 import More          from "./pages/More";
 import { pingBackend } from "./services/api";
+
+// Notifications page wrapper (panel always open on /notifications route)
+function NotificationsPage() {
+  return <NotificationsPanel open={true} setOpen={() => window.history.back()} />;
+}
 
 // Ping backend every 10 min to prevent Render sleep
 setInterval(pingBackend, 10 * 60 * 1000);
@@ -107,7 +112,7 @@ export default function App() {
                             <Route path="/reels"                 element={<Reels />} />
                             <Route path="/camera"                element={<Camera />} />
                             <Route path="/explore"               element={<Explore />} />
-                            <Route path="/notifications"         element={<Notifications />} />
+                            <Route path="/notifications"         element={<NotificationsPage />} />
                             <Route path="/create"                element={<Create />} />
                             <Route path="/profile"               element={<Profile />} />
                             <Route path="/profile/:username"     element={<UserProfile />} />
