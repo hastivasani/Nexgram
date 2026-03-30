@@ -109,7 +109,7 @@ export default function ChatList({ onSelectChat, selectedUserId, onDeleteChat })
   });
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-full">
       <div className="flex-1 overflow-y-auto scrollbar-hide">
         {loading && (
           <div className="space-y-1 px-2 pt-2">

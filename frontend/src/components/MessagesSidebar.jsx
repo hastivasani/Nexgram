@@ -37,7 +37,7 @@ export default function MessagesSidebar({ onSelectChat, selectedUserId, onDelete
       </div>
 
       {/* Chat list — scrollable */}
-      <div className="flex-1 overflow-y-auto scrollbar-hide">
+      <div className="flex-1 min-h-0 overflow-y-auto scrollbar-hide">
         <ChatList onSelectChat={onSelectChat} selectedUserId={selectedUserId} onDeleteChat={onDeleteChat} />
       </div>
 
