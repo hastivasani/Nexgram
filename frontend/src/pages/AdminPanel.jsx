@@ -508,7 +508,7 @@ export default function AdminPanel() {
     setLoginError("");
     setLoginLoading(true);
     try {
-      const res = await loginAPI({ username: adminUsername, password: adminPassword });
+      const res = await loginAPI({ email: adminUsername, password: adminPassword });
       login(res.data.token, res.data.user);
       // isAdminUser check will trigger via useEffect
     } catch (err) {
