@@ -370,7 +370,7 @@ export default function Camera() {
 
       {/* Effects panel */}
       {activePanel === "effects" && (
-        <div className="absolute bottom-36 left-0 right-0 z-20 bg-black/50 backdrop-blur-sm py-3">
+        <div className="absolute bottom-36 left-0 right-0 z-10 bg-black/50 backdrop-blur-sm py-3">
           <p className="text-white/50 text-[10px] text-center uppercase tracking-widest mb-2">Effects</p>
           <div className="flex gap-3 overflow-x-auto px-4 scrollbar-hide pb-1">
             {EFFECTS.map((ef) => (
@@ -387,7 +387,7 @@ export default function Camera() {
 
       {/* Filters panel */}
       {activePanel === "filters" && (
-        <div className="absolute bottom-36 left-0 right-0 z-20 bg-black/50 backdrop-blur-sm py-3">
+        <div className="absolute bottom-36 left-0 right-0 z-10 bg-black/50 backdrop-blur-sm py-3">
           <p className="text-white/50 text-[10px] text-center uppercase tracking-widest mb-2">Filters</p>
           <div className="flex gap-3 overflow-x-auto px-4 scrollbar-hide pb-1">
             {FILTERS.map((f, i) => (
@@ -403,7 +403,7 @@ export default function Camera() {
       )}
 
       {/* Bottom controls */}
-      <div className="absolute bottom-0 left-0 right-0 z-20 px-6 pb-10 pt-3">
+      <div className="absolute bottom-0 left-0 right-0 z-30 px-6 pb-10 pt-3">
         <div className="flex justify-center gap-6 mb-5">
           {MODES.map((m) => (
             <button key={m} onClick={() => setMode(m)} className={`text-sm font-semibold tracking-wide drop-shadow transition-all ${mode === m ? "text-white border-b-2 border-white pb-0.5" : "text-white/60"}`}>
