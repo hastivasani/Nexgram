@@ -350,16 +350,53 @@ app.get("/api/seed-products", async (req, res) => {
   try {
     const Product = require("./models/Product");
     const User    = require("./models/User");
-    const seedFn  = require("./seedProducts");
-    // seedProducts exports nothing, so call it inline
+
     const count = await Product.countDocuments();
-    if (count > 0) return res.json({ message: `Already seeded: ${count} products` });
-    // Re-run seed logic
-    const { exec } = require("child_process");
-    exec("node seedProducts.js", { cwd: __dirname }, (err, stdout, stderr) => {
-      if (err) return res.status(500).json({ error: stderr });
-      res.json({ message: "Seeded!", output: stdout });
-    });
+    if (count > 0) {
+      // Just mark all existing as active
+      await Product.updateMany({}, { $set: { isActive: true } });
+      return res.json({ message: `Updated ${count} products to isActive:true` });
+    }
+
+    const user = await User.findOne();
+    if (!user) return res.status(400).json({ message: "No users found" });
+
+    const sampleProducts = require("./seedProducts");
+    res.json({ message: "Use POST /api/seed-products with key to seed" });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.post("/api/seed-products", async (req, res) => {
+  if (req.query.key !== "seed2026") return res.status(403).json({ message: "forbidden" });
+  try {
+    const Product = require("./models/Product");
+    const User    = require("./models/User");
+
+    // First just activate existing products
+    const existing = await Product.countDocuments();
+    if (existing > 0) {
+      await Product.updateMany({}, { $set: { isActive: true } });
+      return res.json({ message: `Activated ${existing} existing products` });
+    }
+
+    const user = await User.findOne();
+    if (!user) return res.status(400).json({ message: "No users found" });
+
+    const products = [
+      { name: "Wireless Bluetooth Headphones", description: "Premium sound quality with active noise cancellation.", price: 49.99, comparePrice: 79.99, category: "Electronics", stock: 25, images: ["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop"], rating: 4.5, reviewCount: 128, seller: user._id, isActive: true },
+      { name: "Mechanical Gaming Keyboard", description: "RGB backlit mechanical keyboard with tactile switches.", price: 69.99, comparePrice: 99.99, category: "Electronics", stock: 15, images: ["https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&h=400&fit=crop"], rating: 4.7, reviewCount: 89, seller: user._id, isActive: true },
+      { name: "Minimalist Leather Wallet", description: "Slim RFID-blocking genuine leather wallet.", price: 24.99, category: "Fashion", stock: 50, images: ["https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&h=400&fit=crop"], rating: 4.3, reviewCount: 214, seller: user._id, isActive: true },
+      { name: "Stainless Steel Water Bottle", description: "Double-wall vacuum insulated 32oz bottle.", price: 19.99, comparePrice: 29.99, category: "Sports", stock: 80, images: ["https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop"], rating: 4.6, reviewCount: 342, seller: user._id, isActive: true },
+      { name: "Wireless Charging Pad", description: "10W fast wireless charger compatible with all Qi-enabled devices.", price: 15.99, comparePrice: 24.99, category: "Electronics", stock: 60, images: ["https://images.unsplash.com/photo-1591370874773-6702e8f12fd8?w=400&h=400&fit=crop"], rating: 4.1, reviewCount: 203, seller: user._id, isActive: true },
+      { name: "Ceramic Coffee Mug", description: "Handcrafted 12oz ceramic mug with minimalist design.", price: 14.99, category: "Home & Garden", stock: 75, images: ["https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=400&h=400&fit=crop"], rating: 4.5, reviewCount: 87, seller: user._id, isActive: true },
+      { name: "Bluetooth Speaker Mini", description: "Compact waterproof Bluetooth 5.0 speaker.", price: 39.99, comparePrice: 59.99, category: "Electronics", stock: 20, images: ["https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=400&fit=crop"], rating: 4.4, reviewCount: 311, seller: user._id, isActive: true },
+      { name: "Sunglasses UV400", description: "Polarized UV400 protection sunglasses.", price: 22.99, comparePrice: 39.99, category: "Fashion", stock: 45, images: ["https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=400&fit=crop"], rating: 4.3, reviewCount: 175, seller: user._id, isActive: true },
+    ];
+
+    await Product.insertMany(products);
+    res.json({ message: `Seeded ${products.length} products!` });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }

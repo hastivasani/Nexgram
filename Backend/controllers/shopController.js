@@ -39,7 +39,8 @@ exports.createProduct = async (req, res) => {
 exports.getProducts = async (req, res) => {
   try {
     const { category, search, minPrice, maxPrice, sort = "createdAt", page = 1, limit = 20 } = req.query;
-    const filter = { isActive: true };
+    // isActive: true OR isActive field missing (backward compat)
+    const filter = { $or: [{ isActive: true }, { isActive: { $exists: false } }] };
 
     if (category) filter.category = category;
     if (search) filter.$text = { $search: search };
@@ -361,7 +362,9 @@ exports.updateOrderStatus = async (req, res) => {
 
 exports.getCategories = async (req, res) => {
   try {
-    const categories = await Product.distinct("category", { isActive: true });
+    const categories = await Product.distinct("category", {
+      $or: [{ isActive: true }, { isActive: { $exists: false } }]
+    });
     res.json(categories);
   } catch (err) {
     res.status(500).json({ error: err.message });
