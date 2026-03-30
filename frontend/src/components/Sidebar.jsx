@@ -47,7 +47,7 @@ const ALL_NAV = [
   { to: "/meta",          label: "Also from Meta", icon: HiOutlineStar,           activeIcon: HiStar },
 ];
 
-// Mobile bottom nav shows only 5 key items
+ 
 const MOBILE_NAV = [
   { to: "/",              label: "Home",          icon: HiOutlineHome,           activeIcon: HiHome },
   { to: "/search",        label: "Search",        icon: HiOutlineSearch,         activeIcon: HiSearch },
@@ -89,9 +89,7 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* ── Desktop sidebar (md+) ─────────────────────────────── */}
       <div className="hidden md:flex w-16 h-screen border-r border-theme bg-theme-sidebar fixed left-0 top-0 flex-col items-center py-3 z-40 overflow-y-auto scrollbar-hide pb-4">
-        {/* Logo */}
         <a href="/" className="mb-3 w-8 h-8 bg-gradient-to-br from-purple-600 to-pink-500 rounded-xl flex items-center justify-center text-white font-bold text-base shadow-md flex-shrink-0">
           P
         </a>
@@ -141,7 +139,6 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* ── Mobile bottom nav (< md) ──────────────────────────── */}
       <div className="fixed bottom-0 left-0 right-0 bg-theme-sidebar border-t border-theme z-40 md:hidden safe-bottom">
         <div className="flex items-center px-2 py-1">
           {MOBILE_NAV.map((item) => (
