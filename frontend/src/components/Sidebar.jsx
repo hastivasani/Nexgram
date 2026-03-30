@@ -20,7 +20,7 @@ import {
   HiOutlineStar, HiStar,
   HiCamera,
 } from "react-icons/hi";
-import { FaGamepad, FaUsers, FaHeadphones, FaTwitter, FaShoppingBag, FaCalendarAlt, FaVideo } from "react-icons/fa";
+import { FaGamepad, FaUsers, FaHeadphones, FaTwitter, FaShoppingBag, FaCalendarAlt, FaVideo, FaNewspaper } from "react-icons/fa";
 
 // Desktop sidebar shows all items
 const ALL_NAV = [
@@ -36,6 +36,7 @@ const ALL_NAV = [
   { to: "/shop",          label: "Shop",           icon: FaShoppingBag,           activeIcon: FaShoppingBag },
   { to: "/booking",       label: "Booking",        icon: FaCalendarAlt,           activeIcon: FaCalendarAlt },
   { to: "/video",         label: "Videos",         icon: FaVideo,                 activeIcon: FaVideo },
+  { to: "/news",          label: "News",           icon: FaNewspaper,             activeIcon: FaNewspaper },
   { to: "/notifications", label: "Notifications",  icon: HiOutlineBell,           activeIcon: HiBell },
   { to: "/create",        label: "Create",         icon: HiOutlinePlusCircle,     activeIcon: HiPlusCircle },
   { to: "/profile",       label: "Profile",        icon: HiOutlineUserCircle,     activeIcon: HiUserCircle },

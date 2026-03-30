@@ -62,6 +62,7 @@ const RideBooking        = lazy(() => import("./pages/booking/RideBooking"));
 const BookingCheckout    = lazy(() => import("./pages/booking/BookingCheckout"));
 const MyBookings         = lazy(() => import("./pages/booking/MyBookings"));
 const VideoHub           = lazy(() => import("./pages/VideoHub"));
+const NewsPage           = lazy(() => import("./pages/News"));
 const ForgotPassword     = lazy(() => import("./pages/ForgotPassword"));
 const AdminPanel         = lazy(() => import("./pages/AdminPanel"));
 
@@ -146,6 +147,7 @@ export default function App() {
                             <Route path="/booking/checkout"      element={<BookingCheckout />} />
                             <Route path="/booking/my-bookings"   element={<MyBookings />} />
                             <Route path="/video"                 element={<VideoHub />} />
+                            <Route path="/news"                  element={<NewsPage />} />
                             <Route path="/messages"              element={<Messages />} />
                           </Routes>
                         </Suspense>
