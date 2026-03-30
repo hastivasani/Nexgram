@@ -426,15 +426,16 @@ app.post("/api/migrate-data", async (req, res) => {
   }
 });
 
-// Make user admin by username (one-time setup)
+// Make user admin by username or email (one-time setup)
 app.post("/api/make-admin", async (req, res) => {
   if (req.query.key !== "admin2026") return res.status(403).json({ message: "forbidden" });
   try {
     const User = require("./models/User");
-    const { username } = req.body;
-    const user = await User.findOneAndUpdate({ username }, { isAdmin: true }, { new: true });
+    const { username, email } = req.body;
+    const query = username ? { username } : { email };
+    const user = await User.findOneAndUpdate(query, { isAdmin: true }, { new: true });
     if (!user) return res.status(404).json({ message: "User not found" });
-    res.json({ message: `${user.username} is now admin!` });
+    res.json({ message: `${user.username} (${user.email}) is now admin!` });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }

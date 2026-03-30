@@ -509,8 +509,13 @@ export default function AdminPanel() {
     setLoginLoading(true);
     try {
       const res = await loginAPI({ email: adminUsername, password: adminPassword });
-      login(res.data.token, res.data.user);
-      // isAdminUser check will trigger via useEffect
+      const loggedUser = res.data.user;
+      // Check admin access before setting user
+      if (!loggedUser.isAdmin && loggedUser.username !== "priyanshi_123") {
+        setLoginError("This account doesn't have admin access");
+        return;
+      }
+      login(res.data.token, loggedUser);
     } catch (err) {
       setLoginError(err?.response?.data?.message || "Invalid credentials");
     } finally {
