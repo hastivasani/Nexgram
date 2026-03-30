@@ -34,6 +34,11 @@ const EndlessRunner     = lazy(() => import("../components/games/EndlessRunner")
 const CatchGame         = lazy(() => import("../components/games/CatchGame"));
 const PuzzleSlider      = lazy(() => import("../components/games/PuzzleSlider"));
 const ColorBlast        = lazy(() => import("../components/games/ColorBlast"));
+const ColorRace         = lazy(() => import("../components/games/ColorRace"));
+const MathDuel          = lazy(() => import("../components/games/MathDuel"));
+const EmojiGuess        = lazy(() => import("../components/games/EmojiGuess"));
+const BombDefuse        = lazy(() => import("../components/games/BombDefuse"));
+const SpeedTyping       = lazy(() => import("../components/games/SpeedTyping"));
 
 const GAMES = [
   { id:"tictactoe",    name:"Tic Tac Toe",        icon:"⭕", cat:"Board",  maxPlayers:2, desc:"Classic 3×3 strategy",           color:"from-blue-600 to-purple-600",   canSolo:true },
@@ -62,6 +67,11 @@ const GAMES = [
   { id:"catchgame",    name:"Catch Game",          icon:"🧺", cat:"Arcade", maxPlayers:1, desc:"Catch fruits, avoid bombs",       color:"from-green-500 to-emerald-600", canSolo:true },
   { id:"aimtrainer",   name:"Aim Trainer",         icon:"🎯", cat:"Arcade", maxPlayers:1, desc:"Click targets as fast as you can",color:"from-red-500 to-orange-600",    canSolo:true },
   { id:"rps",          name:"Rock Paper Scissors", icon:"✊", cat:"Casual", maxPlayers:2, desc:"Beat the opponent",               color:"from-yellow-500 to-orange-600", canSolo:true },  { id:"colorblast",   name:"Color Blast",         icon:"💥", cat:"Casual", maxPlayers:1, desc:"Blast matching color groups",     color:"from-red-500 to-pink-600",      canSolo:true },
+  { id:"colorrace",    name:"Color Race",          icon:"🎨", cat:"Casual", maxPlayers:2, desc:"Tap the right color first!",      color:"from-pink-500 to-purple-600",   canSolo:true },
+  { id:"mathduel",     name:"Math Duel",           icon:"⚡", cat:"Quiz",   maxPlayers:2, desc:"Solve math faster than opponent", color:"from-yellow-500 to-red-500",    canSolo:true },
+  { id:"emojiguess",   name:"Emoji Guess",         icon:"🎭", cat:"Quiz",   maxPlayers:2, desc:"Guess movie from emojis",         color:"from-orange-500 to-pink-500",   canSolo:true },
+  { id:"bombdefuse",   name:"Bomb Defuse",         icon:"💣", cat:"Casual", maxPlayers:2, desc:"Cut the right wire in time!",     color:"from-red-600 to-gray-800",      canSolo:true },
+  { id:"speedtyping",  name:"Speed Typing",        icon:"⌨️", cat:"Word",   maxPlayers:2, desc:"Type fastest to win!",            color:"from-blue-600 to-cyan-500",     canSolo:true },
 ];
 
 const CATEGORIES = ["All", "Board", "Cards", "Puzzle", "Word", "Quiz", "Arcade", "Casual"];
