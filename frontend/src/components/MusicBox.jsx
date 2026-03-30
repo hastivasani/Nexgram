@@ -3,27 +3,16 @@ import { HiX, HiPlay, HiPause, HiSearch } from "react-icons/hi";
 import { FaMusic } from "react-icons/fa";
 
 const MUSIC_LIST = [
-  // Upbeat / Pop
-  { title: "Summer Vibes", artist: "Bensound", genre: "Pop", url: "https://www.bensound.com/bensound-music/bensound-summer.mp3", cover: "🌞" },
-  { title: "Ukulele", artist: "Bensound", genre: "Happy", url: "https://www.bensound.com/bensound-music/bensound-ukulele.mp3", cover: "🎸" },
-  { title: "Sunny", artist: "Bensound", genre: "Pop", url: "https://www.bensound.com/bensound-music/bensound-sunny.mp3", cover: "☀️" },
-  { title: "Happiness", artist: "Bensound", genre: "Upbeat", url: "https://www.bensound.com/bensound-music/bensound-happiness.mp3", cover: "😊" },
-  { title: "Cute", artist: "Bensound", genre: "Fun", url: "https://www.bensound.com/bensound-music/bensound-cute.mp3", cover: "🌸" },
-  // Chill / Lo-fi
-  { title: "Acoustic Breeze", artist: "Bensound", genre: "Chill", url: "https://www.bensound.com/bensound-music/bensound-acousticbreeze.mp3", cover: "🍃" },
-  { title: "Relaxing", artist: "Bensound", genre: "Chill", url: "https://www.bensound.com/bensound-music/bensound-relaxing.mp3", cover: "🌊" },
-  { title: "Sweet", artist: "Bensound", genre: "Lo-fi", url: "https://www.bensound.com/bensound-music/bensound-sweet.mp3", cover: "🍬" },
-  // Cinematic
-  { title: "Epic", artist: "Bensound", genre: "Cinematic", url: "https://www.bensound.com/bensound-music/bensound-epic.mp3", cover: "🎬" },
-  { title: "Inspire", artist: "Bensound", genre: "Cinematic", url: "https://www.bensound.com/bensound-music/bensound-inspire.mp3", cover: "✨" },
-  { title: "Dreams", artist: "Bensound", genre: "Cinematic", url: "https://www.bensound.com/bensound-music/bensound-dreams.mp3", cover: "💫" },
-  // Dance / Electronic
-  { title: "Dance", artist: "Bensound", genre: "Dance", url: "https://www.bensound.com/bensound-music/bensound-dance.mp3", cover: "💃" },
-  { title: "Dubstep", artist: "Bensound", genre: "Electronic", url: "https://www.bensound.com/bensound-music/bensound-dubstep.mp3", cover: "🎧" },
-  { title: "House", artist: "Bensound", genre: "Electronic", url: "https://www.bensound.com/bensound-music/bensound-house.mp3", cover: "🔊" },
-  // Romantic
-  { title: "Love", artist: "Bensound", genre: "Romantic", url: "https://www.bensound.com/bensound-music/bensound-love.mp3", cover: "❤️" },
-  { title: "Tenderness", artist: "Bensound", genre: "Romantic", url: "https://www.bensound.com/bensound-music/bensound-tenderness.mp3", cover: "🌹" },
+  { title: "Summer Vibes", artist: "Bensound", genre: "Pop", url: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3", cover: "🌞" },
+  { title: "Chill Lo-fi", artist: "Pixabay", genre: "Chill", url: "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0c6ff1bab.mp3", cover: "🍃" },
+  { title: "Happy Pop", artist: "Pixabay", genre: "Pop", url: "https://cdn.pixabay.com/download/audio/2021/11/25/audio_5bfb8a4f3e.mp3", cover: "😊" },
+  { title: "Cinematic", artist: "Pixabay", genre: "Cinematic", url: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_8cb749d577.mp3", cover: "🎬" },
+  { title: "Dance Beat", artist: "Pixabay", genre: "Dance", url: "https://cdn.pixabay.com/download/audio/2022/02/22/audio_d1718ab41b.mp3", cover: "💃" },
+  { title: "Acoustic", artist: "Pixabay", genre: "Chill", url: "https://cdn.pixabay.com/download/audio/2022/04/27/audio_67f8b9a1c8.mp3", cover: "🎸" },
+  { title: "Upbeat", artist: "Pixabay", genre: "Upbeat", url: "https://cdn.pixabay.com/download/audio/2021/08/09/audio_88447e769f.mp3", cover: "⚡" },
+  { title: "Romantic", artist: "Pixabay", genre: "Romantic", url: "https://cdn.pixabay.com/download/audio/2022/01/20/audio_6efa9a4a3e.mp3", cover: "❤️" },
+  { title: "Electronic", artist: "Pixabay", genre: "Electronic", url: "https://cdn.pixabay.com/download/audio/2022/06/07/audio_b9e5b7b1c4.mp3", cover: "🎧" },
+  { title: "Motivational", artist: "Pixabay", genre: "Cinematic", url: "https://cdn.pixabay.com/download/audio/2022/05/16/audio_1a7e8b9c3d.mp3", cover: "✨" },
 ];
 
 const GENRES = ["All", "Pop", "Chill", "Lo-fi", "Cinematic", "Dance", "Electronic", "Romantic", "Happy", "Upbeat", "Fun"];
