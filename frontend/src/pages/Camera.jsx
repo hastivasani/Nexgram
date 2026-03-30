@@ -35,6 +35,7 @@ export default function Camera() {
   const mediaRecRef = useRef(null);
   const chunksRef   = useRef([]);
   const streamRef   = useRef(null);
+  const musicAudioRef = useRef(null);
 
   const [mode,          setMode]          = useState("STORY");
   const [facingMode,    setFacingMode]    = useState("user");
@@ -53,6 +54,23 @@ export default function Camera() {
   const [countdown,     setCountdown]     = useState(null);
   const [camError,      setCamError]      = useState(null);
   const [vidSize,       setVidSize]       = useState({ w: 640, h: 480 });
+
+  // Play selected music in background
+  useEffect(() => {
+    if (!musicAudioRef.current) return;
+    if (selectedMusic) {
+      musicAudioRef.current.src = selectedMusic.url;
+      musicAudioRef.current.loop = true;
+      musicAudioRef.current.volume = 0.5;
+      musicAudioRef.current.play().catch(() => {});
+    } else {
+      musicAudioRef.current.pause();
+      musicAudioRef.current.src = "";
+    }
+    return () => {
+      if (musicAudioRef.current) musicAudioRef.current.pause();
+    };
+  }, [selectedMusic]);
 
   const startCamera = useCallback(async () => {
     if (streamRef.current) streamRef.current.getTracks().forEach((t) => t.stop());
@@ -207,7 +225,7 @@ export default function Camera() {
         </div>
         {selectedMusic && (
           <div className="absolute bottom-40 left-1/2 -translate-x-1/2 bg-black/60 text-white text-xs px-4 py-2 rounded-full flex items-center gap-2 z-10">
-            <HiMusicNote size={12} /> {selectedMusic.title}
+            <HiMusicNote size={12} className="animate-pulse text-green-400" /> {selectedMusic.title}
           </div>
         )}
         <div className="absolute bottom-0 left-0 right-0 z-10 bg-black/50 backdrop-blur-sm px-4 pb-10 pt-3">
@@ -364,9 +382,14 @@ export default function Camera() {
       {/* Music badge */}
       {selectedMusic && (
         <div className="absolute bottom-40 left-1/2 -translate-x-1/2 bg-black/60 text-white text-xs px-4 py-1.5 rounded-full flex items-center gap-2 z-20">
-          <HiMusicNote size={11} /> {selectedMusic.title}
+          <HiMusicNote size={11} className="animate-pulse text-green-400" />
+          <span>{selectedMusic.title}</span>
+          <button onClick={() => setSelectedMusic(null)} className="text-white/60 hover:text-white ml-1">✕</button>
         </div>
       )}
+
+      {/* Background music audio */}
+      <audio ref={musicAudioRef} loop />
 
       {/* Effects panel */}
       {activePanel === "effects" && (
