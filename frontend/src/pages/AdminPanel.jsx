@@ -11,7 +11,7 @@ import {
   FaChartBar, FaTachometerAlt, FaTrash, FaCheck, FaTimes,
   FaShieldAlt, FaSearch, FaChevronLeft, FaChevronRight,
   FaSignOutAlt, FaBars, FaVideo, FaStar, FaUserShield,
-  FaArrowUp, FaArrowDown, FaEye,
+  FaArrowUp, FaArrowDown, FaEye, FaNewspaper,
 } from "react-icons/fa";
 
 // ── Stat Card ─────────────────────────────────────────────────
@@ -470,6 +470,133 @@ function BookingsTab() {
   );
 }
 
+// ── News Tab ──────────────────────────────────────────────────
+function NewsTab() {
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading]   = useState(true);
+  const [cached, setCached]     = useState(false);
+  const [lastFetch, setLastFetch] = useState(null);
+  const [category, setCategory] = useState("All");
+
+  const load = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(
+        (import.meta.env.VITE_API_URL || "/api") + "/news",
+        { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+      );
+      const data = await res.json();
+      setArticles(data.articles || []);
+      setCached(data.cached || false);
+      setLastFetch(new Date());
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { load(); }, []);
+
+  const categories = ["All", ...new Set(articles.map(a => a.category).filter(Boolean))];
+  const filtered = category === "All" ? articles : articles.filter(a => a.category === category);
+
+  const timeAgo = (date) => {
+    if (!date) return "";
+    const diff = Date.now() - new Date(date).getTime();
+    const h = Math.floor(diff / 3600000);
+    if (h < 1) return `${Math.floor(diff / 60000)}m ago`;
+    if (h < 24) return `${h}h ago`;
+    return `${Math.floor(h / 24)}d ago`;
+  };
+
+  return (
+    <div className="space-y-4">
+      {/* Header */}
+      <div className="flex items-center justify-between flex-wrap gap-3">
+        <div>
+          <h2 className="font-bold text-lg">Live News</h2>
+          <p className="text-xs text-theme-secondary">
+            {cached ? "Cached" : "Live"} · {lastFetch ? `Updated ${timeAgo(lastFetch)}` : ""}
+          </p>
+        </div>
+        <button onClick={load} disabled={loading}
+          className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-sm font-semibold transition disabled:opacity-50">
+          {loading ? "Loading..." : "🔄 Refresh"}
+        </button>
+      </div>
+
+      {/* Category filter */}
+      <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+        {categories.map(c => (
+          <button key={c} onClick={() => setCategory(c)}
+            className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition ${category === c ? "bg-purple-600 text-white" : "bg-theme-secondary text-theme-secondary hover:bg-theme-primary"}`}>
+            {c}
+          </button>
+        ))}
+      </div>
+
+      {/* News grid */}
+      {loading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="bg-theme-secondary rounded-2xl overflow-hidden animate-pulse">
+              <div className="h-40 bg-gray-700" />
+              <div className="p-4 space-y-2">
+                <div className="h-4 bg-gray-700 rounded w-3/4" />
+                <div className="h-3 bg-gray-700 rounded w-full" />
+                <div className="h-3 bg-gray-700 rounded w-1/2" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : filtered.length === 0 ? (
+        <div className="text-center py-20 text-theme-secondary">No news available</div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          {filtered.map((article, i) => (
+            <a key={i} href={article.url !== "#" ? article.url : undefined}
+              target="_blank" rel="noopener noreferrer"
+              className="bg-theme-secondary rounded-2xl overflow-hidden hover:ring-2 hover:ring-purple-500/50 transition-all block group">
+              {article.image ? (
+                <img src={article.image} alt={article.title}
+                  className="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-300"
+                  onError={e => { e.target.style.display = "none"; }} />
+              ) : (
+                <div className="w-full h-44 bg-gradient-to-br from-purple-900/40 to-pink-900/40 flex items-center justify-center text-4xl">
+                  📰
+                </div>
+              )}
+              <div className="p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  {article.category && (
+                    <span className="text-[10px] bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded-full font-semibold uppercase tracking-wide">
+                      {article.category}
+                    </span>
+                  )}
+                  <span className="text-[10px] text-theme-secondary ml-auto">{timeAgo(article.publishedAt)}</span>
+                </div>
+                <h3 className="font-semibold text-sm text-theme-primary line-clamp-2 mb-2 group-hover:text-purple-400 transition-colors">
+                  {article.title}
+                </h3>
+                {article.description && (
+                  <p className="text-xs text-theme-secondary line-clamp-2 mb-3">{article.description}</p>
+                )}
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] text-theme-secondary font-medium">{article.source}</span>
+                  {article.url !== "#" && (
+                    <span className="text-[10px] text-purple-400 font-semibold">Read more →</span>
+                  )}
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ── Main AdminPanel ───────────────────────────────────────────
 const NAV = [
   { id: "overview",  label: "Overview",  icon: FaTachometerAlt },
@@ -477,6 +604,7 @@ const NAV = [
   { id: "posts",     label: "Posts",     icon: FaFileAlt       },
   { id: "orders",    label: "Orders",    icon: FaShoppingBag   },
   { id: "bookings",  label: "Bookings",  icon: FaCalendarCheck },
+  { id: "news",      label: "News",      icon: FaNewspaper     },
 ];
 
 export default function AdminPanel() {
@@ -649,6 +777,7 @@ export default function AdminPanel() {
           {tab === "posts"     && <PostsTab />}
           {tab === "orders"    && <OrdersTab />}
           {tab === "bookings"  && <BookingsTab />}
+          {tab === "news"      && <NewsTab />}
         </main>
       </div>
     </div>
