@@ -33,7 +33,7 @@ export default function LinkedIn() {
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 pb-20 md:pb-0">
       {/* Header */}
       <div className="sticky top-0 z-10 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3">
-        <div className="flex items-center gap-3 max-w-2xl mx-auto">
+        <div className="flex items-center gap-3 max-w-[90%] mx-auto">
           <FaLinkedin className="text-blue-600 text-2xl flex-shrink-0" />
           <div className="flex-1 flex items-center gap-2 bg-gray-100 dark:bg-gray-700 rounded-lg px-3 py-2">
             <HiSearch className="text-gray-400" />
@@ -42,7 +42,7 @@ export default function LinkedIn() {
           <HiBell className="text-gray-500 dark:text-gray-400" size={22} />
         </div>
         {/* Tabs */}
-        <div className="flex gap-1 mt-3 max-w-2xl mx-auto">
+        <div className="flex gap-1 mt-3 max-w-[90%] mx-auto">
           {[["feed","Feed"],["jobs","Jobs"],["network","Network"]].map(([id, label]) => (
             <button key={id} onClick={() => setTab(id)}
               className={`flex-1 py-2 text-xs font-semibold rounded-lg transition ${tab === id ? "bg-blue-600 text-white" : "text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"}`}>
@@ -52,7 +52,7 @@ export default function LinkedIn() {
         </div>
       </div>
 
-      <div className="max-w-2xl mx-auto px-4 pt-4 space-y-4">
+      <div className="max-w-[90%] mx-auto px-4 pt-4 space-y-4">
         {/* Profile card */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm">
           <div className="h-16 bg-gradient-to-r from-blue-600 to-cyan-500" />
