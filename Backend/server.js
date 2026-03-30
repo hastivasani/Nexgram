@@ -426,7 +426,19 @@ app.post("/api/migrate-data", async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => res.send("Pixagram API running 🚀"));
+// Make user admin by username (one-time setup)
+app.post("/api/make-admin", async (req, res) => {
+  if (req.query.key !== "admin2026") return res.status(403).json({ message: "forbidden" });
+  try {
+    const User = require("./models/User");
+    const { username } = req.body;
+    const user = await User.findOneAndUpdate({ username }, { isAdmin: true }, { new: true });
+    if (!user) return res.status(404).json({ message: "User not found" });
+    res.json({ message: `${user.username} is now admin!` });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
