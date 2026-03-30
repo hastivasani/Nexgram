@@ -20,7 +20,7 @@ import {
   HiOutlineStar, HiStar,
   HiCamera,
 } from "react-icons/hi";
-import { FaGamepad, FaUsers, FaHeadphones, FaTwitter, FaShoppingBag, FaCalendarAlt, FaVideo, FaNewspaper } from "react-icons/fa";
+import { FaGamepad, FaUsers, FaHeadphones, FaTwitter, FaShoppingBag, FaCalendarAlt, FaVideo, FaNewspaper, FaTelegram, FaLinkedin, FaBriefcase } from "react-icons/fa";
 
 // Desktop sidebar shows all items
 const ALL_NAV = [
@@ -30,6 +30,9 @@ const ALL_NAV = [
   { to: "/messages",      label: "Messages",       icon: HiOutlineChat,           activeIcon: HiChat },
   { to: "/groups",        label: "Groups",         icon: FaUsers,                 activeIcon: FaUsers },
   { to: "/twitter",       label: "Twitter",        icon: FaTwitter,               activeIcon: FaTwitter },
+  { to: "/telegram",      label: "Telegram",       icon: FaTelegram,              activeIcon: FaTelegram },
+  { to: "/linkedin",      label: "LinkedIn",       icon: FaLinkedin,              activeIcon: FaLinkedin },
+  { to: "/jobs",          label: "Jobs",           icon: FaBriefcase,             activeIcon: FaBriefcase },
   { to: "/search",        label: "Search",         icon: HiOutlineSearch,         activeIcon: HiSearch },
   { to: "/explore",       label: "Explore",        icon: HiOutlineGlobe,          activeIcon: HiGlobe },
   { to: "/gaming",        label: "Gaming",         icon: FaGamepad,               activeIcon: FaGamepad },
