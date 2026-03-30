@@ -13,13 +13,10 @@ const RockPaperScissors = lazy(() => import("../components/games/RockPaperScisso
 const Game2048          = lazy(() => import("../components/games/Game2048"));
 const FlappyBird        = lazy(() => import("../components/games/FlappyBird"));
 const WhackAMole        = lazy(() => import("../components/games/WhackAMole"));
-const ColorMatch        = lazy(() => import("../components/games/ColorMatch"));
-const MathSprint        = lazy(() => import("../components/games/MathSprint"));
 const CardMemory        = lazy(() => import("../components/games/CardMemory"));
 const SudokuGame        = lazy(() => import("../components/games/SudokuGame"));
 const Hangman           = lazy(() => import("../components/games/Hangman"));
 const TypingSpeed       = lazy(() => import("../components/games/TypingSpeed"));
-const NumberGuess       = lazy(() => import("../components/games/NumberGuess"));
 const BrickBreaker      = lazy(() => import("../components/games/BrickBreaker"));
 const ChessGame         = lazy(() => import("../components/games/ChessGame"));
 const CheckersGame      = lazy(() => import("../components/games/CheckersGame"));
@@ -27,9 +24,6 @@ const LudoGame          = lazy(() => import("../components/games/LudoGame"));
 const SnakeLadder       = lazy(() => import("../components/games/SnakeLadder"));
 const UnoGame           = lazy(() => import("../components/games/UnoGame"));
 const SolitaireGame     = lazy(() => import("../components/games/SolitaireGame"));
-const TrumpCards        = lazy(() => import("../components/games/TrumpCards"));
-const SpeedCards        = lazy(() => import("../components/games/SpeedCards"));
-const DominoGame        = lazy(() => import("../components/games/DominoGame"));
 const MinesweeperGame   = lazy(() => import("../components/games/MinesweeperGame"));
 const TriviaGame        = lazy(() => import("../components/games/TriviaGame"));
 const WordScramble      = lazy(() => import("../components/games/WordScramble"));
@@ -40,7 +34,6 @@ const EndlessRunner     = lazy(() => import("../components/games/EndlessRunner")
 const CatchGame         = lazy(() => import("../components/games/CatchGame"));
 const PuzzleSlider      = lazy(() => import("../components/games/PuzzleSlider"));
 const ColorBlast        = lazy(() => import("../components/games/ColorBlast"));
-const EmojiMatch        = lazy(() => import("../components/games/EmojiMatch"));
 
 const GAMES = [
   { id:"tictactoe",    name:"Tic Tac Toe",        icon:"⭕", cat:"Board",  maxPlayers:2, desc:"Classic 3×3 strategy",           color:"from-blue-600 to-purple-600",   canSolo:true },
@@ -50,26 +43,17 @@ const GAMES = [
   { id:"snakeladder",  name:"Snake & Ladder",      icon:"🐍", cat:"Board",  maxPlayers:2, desc:"Classic dice board game",         color:"from-emerald-600 to-green-700", canSolo:true },
   { id:"uno",          name:"UNO",                 icon:"🎴", cat:"Cards",  maxPlayers:2, desc:"Match colors & numbers",          color:"from-red-600 to-yellow-500",    canSolo:true },
   { id:"solitaire",    name:"Solitaire",           icon:"🂡", cat:"Cards",  maxPlayers:1, desc:"Classic card patience",           color:"from-green-600 to-teal-700",    canSolo:true },
-  { id:"cardmemory",   name:"Card Memory",         icon:"🃏", cat:"Cards",  maxPlayers:1, desc:"Flip & match card pairs",         color:"from-pink-500 to-rose-600",     canSolo:true },
-  { id:"trumpcards",   name:"Trump Cards",         icon:"🦸", cat:"Cards",  maxPlayers:2, desc:"Battle with hero stats",          color:"from-purple-600 to-indigo-700", canSolo:true },
-  { id:"speedcards",   name:"Speed Cards",         icon:"⚡", cat:"Cards",  maxPlayers:1, desc:"Play cards faster than CPU",      color:"from-yellow-500 to-orange-600", canSolo:true },
-  { id:"domino",       name:"Domino",              icon:"🁣", cat:"Cards",  maxPlayers:2, desc:"Match domino tiles",              color:"from-gray-600 to-gray-800",     canSolo:true },
-  { id:"sudoku",       name:"Sudoku",              icon:"🔢", cat:"Puzzle", maxPlayers:1, desc:"Fill the 9×9 grid",               color:"from-indigo-600 to-blue-700",   canSolo:true },
+  { id:"cardmemory",   name:"Card Memory",         icon:"🃏", cat:"Cards",  maxPlayers:1, desc:"Flip & match card pairs",         color:"from-pink-500 to-rose-600",     canSolo:true },  { id:"sudoku",       name:"Sudoku",              icon:"🔢", cat:"Puzzle", maxPlayers:1, desc:"Fill the 9×9 grid",               color:"from-indigo-600 to-blue-700",   canSolo:true },
   { id:"memory",       name:"Memory Match",        icon:"🧠", cat:"Puzzle", maxPlayers:1, desc:"Match the hidden pairs",          color:"from-pink-500 to-rose-600",     canSolo:true },
   { id:"2048",         name:"2048",                icon:"🔢", cat:"Puzzle", maxPlayers:1, desc:"Merge tiles to reach 2048",       color:"from-amber-500 to-yellow-600",  canSolo:true },
   { id:"minesweeper",  name:"Minesweeper",         icon:"💣", cat:"Puzzle", maxPlayers:1, desc:"Find all mines safely",           color:"from-gray-500 to-slate-700",    canSolo:true },
-  { id:"puzzleslider", name:"Puzzle Slider",       icon:"🧩", cat:"Puzzle", maxPlayers:1, desc:"Slide tiles to solve",            color:"from-teal-500 to-cyan-600",     canSolo:true },
-  { id:"emojimatch",   name:"Emoji Match",         icon:"😀", cat:"Puzzle", maxPlayers:1, desc:"Match emoji pairs in time",       color:"from-yellow-400 to-orange-500", canSolo:true },
-  { id:"wordguess",    name:"Word Guess",          icon:"📝", cat:"Word",   maxPlayers:1, desc:"Wordle-style word puzzle",        color:"from-teal-500 to-cyan-600",     canSolo:true },
+  { id:"puzzleslider", name:"Puzzle Slider",       icon:"🧩", cat:"Puzzle", maxPlayers:1, desc:"Slide tiles to solve",            color:"from-teal-500 to-cyan-600",     canSolo:true },  { id:"wordguess",    name:"Word Guess",          icon:"📝", cat:"Word",   maxPlayers:1, desc:"Wordle-style word puzzle",        color:"from-teal-500 to-cyan-600",     canSolo:true },
   { id:"hangman",      name:"Hangman",             icon:"🪢", cat:"Word",   maxPlayers:1, desc:"Guess the word letter by letter", color:"from-slate-600 to-gray-700",    canSolo:true },
   { id:"wordscramble", name:"Word Scramble",       icon:"🔤", cat:"Word",   maxPlayers:2, desc:"Unscramble words fast",           color:"from-violet-500 to-purple-600", canSolo:true },
   { id:"wordchain",    name:"Word Chain",          icon:"🔗", cat:"Word",   maxPlayers:2, desc:"Chain words by last letter",      color:"from-cyan-500 to-blue-600",     canSolo:true },
   { id:"typingspeed",  name:"Typing Speed",        icon:"⌨",  cat:"Word",   maxPlayers:1, desc:"Type as fast as you can",         color:"from-blue-500 to-indigo-600",   canSolo:true },
   { id:"quiz",         name:"Quiz Battle",         icon:"🧠", cat:"Quiz",   maxPlayers:2, desc:"10 questions, fastest wins",      color:"from-orange-500 to-pink-600",   canSolo:true },
-  { id:"trivia",       name:"Trivia",              icon:"❓", cat:"Quiz",   maxPlayers:2, desc:"General knowledge quiz",          color:"from-blue-500 to-purple-600",   canSolo:true },
-  { id:"mathsprint",   name:"Math Sprint",         icon:"⚡", cat:"Quiz",   maxPlayers:1, desc:"Solve math questions fast",       color:"from-red-500 to-pink-600",      canSolo:true },
-  { id:"numberguess",  name:"Number Guess",        icon:"🔢", cat:"Quiz",   maxPlayers:1, desc:"Guess the secret number",         color:"from-green-500 to-teal-600",    canSolo:true },
-  { id:"snake",        name:"Snake",               icon:"🐍", cat:"Arcade", maxPlayers:1, desc:"Eat food, don't hit walls",       color:"from-green-600 to-emerald-700", canSolo:true },
+  { id:"trivia",       name:"Trivia",              icon:"❓", cat:"Quiz",   maxPlayers:2, desc:"General knowledge quiz",          color:"from-blue-500 to-purple-600",   canSolo:true },  { id:"snake",        name:"Snake",               icon:"🐍", cat:"Arcade", maxPlayers:1, desc:"Eat food, don't hit walls",       color:"from-green-600 to-emerald-700", canSolo:true },
   { id:"flappy",       name:"Flappy Bird",         icon:"🐦", cat:"Arcade", maxPlayers:1, desc:"Tap to fly through pipes",        color:"from-sky-500 to-blue-600",      canSolo:true },
   { id:"brickbreaker", name:"Brick Breaker",       icon:"🧱", cat:"Arcade", maxPlayers:1, desc:"Break all the bricks",            color:"from-orange-500 to-red-600",    canSolo:true },
   { id:"whack",        name:"Whack-a-Mole",        icon:"🔨", cat:"Arcade", maxPlayers:1, desc:"Smash the moles in 30s",          color:"from-lime-500 to-green-600",    canSolo:true },
@@ -77,9 +61,7 @@ const GAMES = [
   { id:"endlessrunner",name:"Endless Runner",      icon:"🏃", cat:"Arcade", maxPlayers:1, desc:"Jump over obstacles",             color:"from-purple-600 to-indigo-700", canSolo:true },
   { id:"catchgame",    name:"Catch Game",          icon:"🧺", cat:"Arcade", maxPlayers:1, desc:"Catch fruits, avoid bombs",       color:"from-green-500 to-emerald-600", canSolo:true },
   { id:"aimtrainer",   name:"Aim Trainer",         icon:"🎯", cat:"Arcade", maxPlayers:1, desc:"Click targets as fast as you can",color:"from-red-500 to-orange-600",    canSolo:true },
-  { id:"rps",          name:"Rock Paper Scissors", icon:"✊", cat:"Casual", maxPlayers:2, desc:"Beat the opponent",               color:"from-yellow-500 to-orange-600", canSolo:true },
-  { id:"colormatch",   name:"Color Match",         icon:"🎨", cat:"Casual", maxPlayers:1, desc:"Match text color, not word",      color:"from-purple-500 to-violet-600", canSolo:true },
-  { id:"colorblast",   name:"Color Blast",         icon:"💥", cat:"Casual", maxPlayers:1, desc:"Blast matching color groups",     color:"from-red-500 to-pink-600",      canSolo:true },
+  { id:"rps",          name:"Rock Paper Scissors", icon:"✊", cat:"Casual", maxPlayers:2, desc:"Beat the opponent",               color:"from-yellow-500 to-orange-600", canSolo:true },  { id:"colorblast",   name:"Color Blast",         icon:"💥", cat:"Casual", maxPlayers:1, desc:"Blast matching color groups",     color:"from-red-500 to-pink-600",      canSolo:true },
 ];
 
 const CATEGORIES = ["All", "Board", "Cards", "Puzzle", "Word", "Quiz", "Arcade", "Casual"];
@@ -276,18 +258,13 @@ export default function Gaming() {
   const gameMap = {
     tictactoe: <TicTacToe {...gameProps}/>, chess: <ChessGame {...gameProps}/>, checkers: <CheckersGame {...gameProps}/>,
     ludo: <LudoGame {...gameProps}/>, snakeladder: <SnakeLadder {...gameProps}/>,
-    uno: <UnoGame {...gameProps}/>, solitaire: <SolitaireGame {...gameProps}/>, cardmemory: <CardMemory {...gameProps}/>,
-    trumpcards: <TrumpCards {...gameProps}/>, speedcards: <SpeedCards {...gameProps}/>,
-    domino: <DominoGame {...gameProps}/>, sudoku: <SudokuGame {...gameProps}/>, memory: <MemoryMatch {...gameProps}/>,
-    "2048": <Game2048 {...gameProps}/>, minesweeper: <MinesweeperGame {...gameProps}/>, puzzleslider: <PuzzleSlider {...gameProps}/>,
-    emojimatch: <EmojiMatch {...gameProps}/>, wordguess: <WordGuess {...gameProps}/>, hangman: <Hangman {...gameProps}/>,
+    uno: <UnoGame {...gameProps}/>, solitaire: <SolitaireGame {...gameProps}/>, cardmemory: <CardMemory {...gameProps}/>, sudoku: <SudokuGame {...gameProps}/>, memory: <MemoryMatch {...gameProps}/>,
+    "2048": <Game2048 {...gameProps}/>, minesweeper: <MinesweeperGame {...gameProps}/>, puzzleslider: <PuzzleSlider {...gameProps}/>, wordguess: <WordGuess {...gameProps}/>, hangman: <Hangman {...gameProps}/>,
     wordscramble: <WordScramble {...gameProps}/>, wordchain: <WordChain {...gameProps}/>, typingspeed: <TypingSpeed {...gameProps}/>,
-    quiz: <QuizGame {...gameProps}/>, trivia: <TriviaGame {...gameProps}/>, mathsprint: <MathSprint {...gameProps}/>,
-    numberguess: <NumberGuess {...gameProps}/>, snake: <SnakeGame {...gameProps}/>, flappy: <FlappyBird {...gameProps}/>,
+    quiz: <QuizGame {...gameProps}/>, trivia: <TriviaGame {...gameProps}/>, snake: <SnakeGame {...gameProps}/>, flappy: <FlappyBird {...gameProps}/>,
     brickbreaker: <BrickBreaker {...gameProps}/>, whack: <WhackAMole {...gameProps}/>, pingpong: <PingPong {...gameProps}/>,
     endlessrunner: <EndlessRunner {...gameProps}/>, catchgame: <CatchGame {...gameProps}/>,
-    aimtrainer: <AimTrainer {...gameProps}/>, rps: <RockPaperScissors {...gameProps}/>,
-    colormatch: <ColorMatch {...gameProps}/>, colorblast: <ColorBlast {...gameProps}/>,
+    aimtrainer: <AimTrainer {...gameProps}/>, rps: <RockPaperScissors {...gameProps}/>, colorblast: <ColorBlast {...gameProps}/>,
   };
 
   if (activeGame && gameMap[activeGame.game]) return (
