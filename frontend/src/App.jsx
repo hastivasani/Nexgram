@@ -146,14 +146,10 @@ export default function App() {
                             <Route path="/booking/checkout"      element={<BookingCheckout />} />
                             <Route path="/booking/my-bookings"   element={<MyBookings />} />
                             <Route path="/video"                 element={<VideoHub />} />
+                            <Route path="/messages"              element={<Messages />} />
                           </Routes>
                         </Suspense>
                       </div>
-                      <Suspense fallback={null}>
-                        <Routes>
-                          <Route path="/messages" element={<Messages />} />
-                        </Routes>
-                      </Suspense>
                     </ProtectedRoute>
                   } />
                 </Routes>
