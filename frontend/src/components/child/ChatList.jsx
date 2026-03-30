@@ -15,7 +15,7 @@ export default function ChatList({ onSelectChat, selectedUserId, onDeleteChat })
   const [menuPos, setMenuPos] = useState({ x: 0, y: 0 });
   const [pinnedIds, setPinnedIds] = useState(() => JSON.parse(localStorage.getItem("pinnedChats") || "[]"));
   const [mutedIds, setMutedIds] = useState(() => JSON.parse(localStorage.getItem("mutedChats") || "[]"));
-  const [unreadIds, setUnreadIds] = useState(() => JSON.parse(localStorage.getItem("unreadChats") || "[]"));
+  const [manualUnreadIds, setManualUnreadIds] = useState(() => JSON.parse(localStorage.getItem("unreadChats") || "[]"));
   const menuRef = useRef(null);
 
   const fetchConversations = async () => {
@@ -36,13 +36,29 @@ export default function ChatList({ onSelectChat, selectedUserId, onDeleteChat })
     const socket = getSocket(user._id);
     const handleNew = () => fetchConversations();
     socket.on("newMessage", handleNew);
-    // Also refresh when current user sends a message
     window.addEventListener("messageSent", handleNew);
+    // When other user reads our message, refresh to update unread count
+    socket.on("messageSeen", () => fetchConversations());
     return () => {
       socket.off("newMessage", handleNew);
+      socket.off("messageSeen", () => {});
       window.removeEventListener("messageSent", handleNew);
     };
   }, [user?._id]);
+
+  // When a chat is selected, clear its unread count locally
+  useEffect(() => {
+    if (!selectedUserId) return;
+    setConversations(prev =>
+      prev.map(c => c.user._id === selectedUserId ? { ...c, unread: 0 } : c)
+    );
+    // Also remove from manual unread
+    setManualUnreadIds(prev => {
+      const updated = prev.filter(id => id !== selectedUserId);
+      localStorage.setItem("unreadChats", JSON.stringify(updated));
+      return updated;
+    });
+  }, [selectedUserId]);
 
   // Close menu on outside click
   useEffect(() => {
@@ -81,14 +97,15 @@ export default function ChatList({ onSelectChat, selectedUserId, onDeleteChat })
   };
 
   const markUnread = (id) => {
-    const updated = unreadIds.includes(id) ? unreadIds.filter(x => x !== id) : [...unreadIds, id];
-    setUnreadIds(updated);
+    const updated = manualUnreadIds.includes(id)
+      ? manualUnreadIds.filter(x => x !== id)
+      : [...manualUnreadIds, id];
+    setManualUnreadIds(updated);
     localStorage.setItem("unreadChats", JSON.stringify(updated));
     setMenuOpenId(null);
   };
 
   const deleteConversation = async (id) => {
-    // Optimistically remove from UI immediately
     setConversations(prev => prev.filter(c => c.user._id !== id));
     setMenuOpenId(null);
     onDeleteChat?.();
@@ -96,12 +113,10 @@ export default function ChatList({ onSelectChat, selectedUserId, onDeleteChat })
       await deleteConvAPI(id);
     } catch (err) {
       console.error("Delete conversation failed", err);
-      // Refresh to restore if API failed
       fetchConversations();
     }
   };
 
-  // Sort: pinned first
   const sorted = [...conversations].sort((a, b) => {
     const aPin = pinnedIds.includes(a.user._id) ? 1 : 0;
     const bPin = pinnedIds.includes(b.user._id) ? 1 : 0;
@@ -136,7 +151,7 @@ export default function ChatList({ onSelectChat, selectedUserId, onDeleteChat })
           const isSelected = selectedUserId === other._id;
           const isPinned = pinnedIds.includes(other._id);
           const isMuted = mutedIds.includes(other._id);
-          const isUnread = unreadIds.includes(other._id) || conv.unread > 0;
+          const isUnread = manualUnreadIds.includes(other._id) || conv.unread > 0;
           const isMenuOpen = menuOpenId === other._id;
 
           return (
@@ -147,13 +162,11 @@ export default function ChatList({ onSelectChat, selectedUserId, onDeleteChat })
               }`}
               onClick={() => onSelectChat(other)}
             >
-              {/* Pin indicator */}
               {isPinned && (
                 <span className="absolute top-1 right-2 text-yellow-400 text-[10px]">
                   <FaThumbtack className="rotate-45" />
                 </span>
               )}
-
               <div className="relative flex-shrink-0">
                 <img
                   src={other.avatar || `https://ui-avatars.com/api/?name=${other.username}`}
@@ -161,7 +174,6 @@ export default function ChatList({ onSelectChat, selectedUserId, onDeleteChat })
                   className="w-14 h-14 rounded-full object-cover"
                 />
               </div>
-
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between gap-2">
                   <p className={`text-sm truncate ${isUnread ? "font-bold text-theme-primary" : "font-semibold text-theme-primary"}`}>
@@ -181,7 +193,8 @@ export default function ChatList({ onSelectChat, selectedUserId, onDeleteChat })
                 </p>
               </div>
 
-              {isUnread && !isMenuOpen && (
+              {/* Blue dot - only when unread and not selected */}
+              {isUnread && !isSelected && !isMenuOpen && (
                 <span className="w-2.5 h-2.5 bg-blue-500 rounded-full flex-shrink-0" />
               )}
 
@@ -191,7 +204,7 @@ export default function ChatList({ onSelectChat, selectedUserId, onDeleteChat })
                   e.stopPropagation();
                   if (isMenuOpen) { setMenuOpenId(null); return; }
                   const rect = e.currentTarget.getBoundingClientRect();
-                  const dropdownHeight = 176; // ~4 items * 44px
+                  const dropdownHeight = 176;
                   const spaceBelow = window.innerHeight - rect.bottom;
                   const top = spaceBelow < dropdownHeight
                     ? rect.top - dropdownHeight - 4
@@ -208,7 +221,7 @@ export default function ChatList({ onSelectChat, selectedUserId, onDeleteChat })
         })}
       </div>
 
-      {/* Portal dropdown - renders outside all overflow containers */}
+      {/* Portal dropdown */}
       {menuOpenId && (() => {
         const conv = conversations.find(c => c.user._id === menuOpenId);
         if (!conv) return null;
@@ -222,34 +235,19 @@ export default function ChatList({ onSelectChat, selectedUserId, onDeleteChat })
             style={{ position: "fixed", left: menuPos.x - 192, top: menuPos.y }}
             className="z-[9999] w-48 rounded-xl bg-[#1e1e1e] border border-white/10 shadow-2xl overflow-hidden"
           >
-            <button
-              onClick={() => markUnread(other._id)}
-              className="flex items-center justify-between w-full px-4 py-3 text-sm text-white hover:bg-white/10 transition-colors"
-            >
+            <button onClick={() => markUnread(other._id)} className="flex items-center justify-between w-full px-4 py-3 text-sm text-white hover:bg-white/10 transition-colors">
               <span>Mark as unread</span>
               <MdMarkChatUnread size={17} className="text-gray-300" />
             </button>
-            <button
-              onClick={() => togglePin(other._id)}
-              className="flex items-center justify-between w-full px-4 py-3 text-sm text-white hover:bg-white/10 transition-colors"
-            >
+            <button onClick={() => togglePin(other._id)} className="flex items-center justify-between w-full px-4 py-3 text-sm text-white hover:bg-white/10 transition-colors">
               <span>{isPinned ? "Unpin" : "Pin"}</span>
               <FaThumbtack size={15} className="text-gray-300" />
             </button>
-            <button
-              onClick={() => toggleMute(other._id)}
-              className="flex items-center justify-between w-full px-4 py-3 text-sm text-white hover:bg-white/10 transition-colors"
-            >
+            <button onClick={() => toggleMute(other._id)} className="flex items-center justify-between w-full px-4 py-3 text-sm text-white hover:bg-white/10 transition-colors">
               <span>{isMuted ? "Unmute" : "Mute"}</span>
-              {isMuted
-                ? <FaBell size={15} className="text-gray-300" />
-                : <FaBellSlash size={15} className="text-gray-300" />
-              }
+              {isMuted ? <FaBell size={15} className="text-gray-300" /> : <FaBellSlash size={15} className="text-gray-300" />}
             </button>
-            <button
-              onClick={() => deleteConversation(other._id)}
-              className="flex items-center justify-between w-full px-4 py-3 text-sm text-red-400 hover:bg-white/10 transition-colors"
-            >
+            <button onClick={() => deleteConversation(other._id)} className="flex items-center justify-between w-full px-4 py-3 text-sm text-red-400 hover:bg-white/10 transition-colors">
               <span>Delete</span>
               <FaTrash size={14} className="text-red-400" />
             </button>

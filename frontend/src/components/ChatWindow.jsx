@@ -39,7 +39,12 @@ export default function ChatWindow({ chat, onBack }) {
     if (!chat || !chat._id) return;
     setMessages([]);
     getConversation(chat._id)
-      .then((r) => setMessages(r.data))
+      .then((r) => {
+        setMessages(r.data);
+        // Emit seen to notify sender
+        const socket = getSocket(user._id);
+        socket.emit("seen", { to: chat._id });
+      })
       .catch(console.error);
   }, [chat && chat._id]);
 
@@ -62,15 +67,29 @@ export default function ChatWindow({ chat, onBack }) {
     const onTyping = ({ from }) => {
       if (from === chat._id) { setTypingUser(chat.username); clearTimeout(typingTimerRef.current); typingTimerRef.current = setTimeout(() => setTypingUser(null), 2000); }
     };
+    const onSeen = ({ by }) => {
+      if (by === chat._id) {
+        // Mark all my messages as read
+        setMessages(prev => prev.map(m => {
+          const sid = (m.sender && m.sender._id) || m.sender;
+          if (sid && user && sid.toString() === user._id.toString()) {
+            return { ...m, read: true };
+          }
+          return m;
+        }));
+      }
+    };
     socket.on("newMessage", onMsg);
     socket.on("messageReaction", onReaction);
     socket.on("messageDeleted", onDeleted);
     socket.on("typing", onTyping);
+    socket.on("messageSeen", onSeen);
     return () => {
       socket.off("newMessage", onMsg);
       socket.off("messageReaction", onReaction);
       socket.off("messageDeleted", onDeleted);
       socket.off("typing", onTyping);
+      socket.off("messageSeen", onSeen);
     };
   }, [user && user._id, chat && chat._id]);
 
@@ -308,8 +327,13 @@ export default function ChatWindow({ chat, onBack }) {
                     ))}
                   </div>
                 )}
-                <span className="text-[10px] text-theme-muted mt-0.5">
+                <span className="text-[10px] text-theme-muted mt-0.5 flex items-center gap-1">
                   {fmt(msg.createdAt)}
+                  {mine && !msg.isDeleted && (
+                    <span className={msg.read ? "text-blue-400" : "text-theme-muted"}>
+                      {msg.read ? "✓✓" : "✓"}
+                    </span>
+                  )}
                 </span>
               </div>
               {/* Message actions */}

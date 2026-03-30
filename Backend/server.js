@@ -293,6 +293,12 @@ io.on("connection", (socket) => {
     if (t) io.to(t).emit("stopTyping", { from: userId });
   });
 
+  // ── Seen receipts ─────────────────────────────────────────────
+  socket.on("seen", ({ to }) => {
+    const t = onlineUsers.get(to);
+    if (t) io.to(t).emit("messageSeen", { by: userId });
+  });
+
   // ── Disconnect ────────────────────────────────────────────────
   socket.on("disconnect", () => {
     onlineUsers.delete(userId);
