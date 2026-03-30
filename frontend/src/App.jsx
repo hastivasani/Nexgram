@@ -18,7 +18,11 @@ import { pingBackend } from "./services/api";
 
 // Notifications page wrapper (panel always open on /notifications route)
 function NotificationsPage() {
-  return <NotificationsPanel open={true} setOpen={() => window.history.back()} />;
+  return (
+    <div style={{ position: "relative", zIndex: 1 }}>
+      <NotificationsPanel open={true} setOpen={() => {}} />
+    </div>
+  );
 }
 
 // Ping backend every 10 min to prevent Render sleep

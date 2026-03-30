@@ -25,7 +25,8 @@ export default function NotificationsPanel({ open, setOpen }) {
   }, [user]);
 
   useEffect(() => {
-    if (open) { fetchNotifications(); markAllRead().catch(() => {}); }
+    const isPage = window.location.pathname.includes("/notifications");
+    if (open || isPage) { fetchNotifications(); markAllRead().catch(() => {}); }
   }, [open, fetchNotifications]);
 
   useEffect(() => {
@@ -151,16 +152,25 @@ export default function NotificationsPanel({ open, setOpen }) {
 
   return (
     <>
-      {open && <div onClick={() => setOpen(false)} className="fixed inset-0 bg-black/40 z-40" />}
+      {open && !window.location.pathname.includes("/notifications") && (
+        <div onClick={() => setOpen(false)} className="fixed inset-0 bg-black/40 z-40" />
+      )}
 
-      <div className={`fixed top-0 right-0 h-[100dvh] w-full sm:w-[380px] bg-theme-panel text-theme-primary shadow-xl z-50 transform transition-transform duration-300 flex flex-col ${open ? "translate-x-0" : "translate-x-full"}`}>
+      <div className={`
+        ${window.location.pathname.includes("/notifications")
+          ? "min-h-screen w-full bg-theme-panel text-theme-primary flex flex-col pb-20"
+          : `fixed top-0 right-0 h-[100dvh] w-full sm:w-[380px] bg-theme-panel text-theme-primary shadow-xl z-50 transform transition-transform duration-300 flex flex-col ${open ? "translate-x-0" : "translate-x-full"}`
+        }
+      `}>
 
         {/* Header */}
         <div className="flex items-center justify-between p-5 border-b border-theme flex-shrink-0">
           <h2 className="text-xl font-semibold">Notifications</h2>
-          <button onClick={() => setOpen(false)} className="p-2 bg-theme-hover rounded-full">
-            <HiOutlineX size={22} />
-          </button>
+          {!window.location.pathname.includes("/notifications") && (
+            <button onClick={() => setOpen(false)} className="p-2 bg-theme-hover rounded-full">
+              <HiOutlineX size={22} />
+            </button>
+          )}
         </div>
 
         {/* Filters */}
