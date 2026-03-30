@@ -410,7 +410,7 @@ export default function ChatWindow({ chat, onBack }) {
             <HiClock size={11} /> {isDisappearing ? "Disappearing ON" : "Disappearing"}
           </button>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <button onClick={() => setShowEmoji((p) => !p)} className="text-theme-secondary hover:text-blue-500 flex-shrink-0">
             <HiEmojiHappy className="text-2xl" />
           </button>
@@ -419,15 +419,15 @@ export default function ChatWindow({ chat, onBack }) {
             onChange={(e) => { setText(e.target.value); handleTyping(); }}
             onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) handleSend(); }}
             placeholder={"Message " + ((chat && chat.username) || "") + "..."}
-            className="flex-1 bg-theme-input text-theme-primary border border-theme rounded-full px-4 py-2 outline-none placeholder:text-theme-muted text-sm"
+            className="flex-1 min-w-0 bg-theme-input text-theme-primary border border-theme rounded-full px-4 py-2 outline-none placeholder:text-theme-muted text-sm"
           />
-          <button onClick={() => fileRef.current.click()} className="text-theme-secondary hover:text-blue-500 flex-shrink-0">
+          <button onClick={() => fileRef.current.click()} className="hidden sm:block text-theme-secondary hover:text-blue-500 flex-shrink-0">
             <HiPhotograph className="text-xl" />
           </button>
           <input type="file" ref={fileRef} hidden accept="image/*,video/*" onChange={pickImage} />
           <button
             onClick={handleVoiceRecord}
-            className={`flex-shrink-0 p-2 rounded-full transition ${isRecording ? "bg-red-500 text-white animate-pulse" : "text-theme-secondary hover:text-blue-500"}`}
+            className={`hidden sm:flex flex-shrink-0 p-2 rounded-full transition ${isRecording ? "bg-red-500 text-white animate-pulse" : "text-theme-secondary hover:text-blue-500"}`}
           >
             {isRecording ? <FaStop size={14} /> : <FaMicrophone size={14} />}
           </button>
