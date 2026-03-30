@@ -81,23 +81,36 @@ exports.getConversation = async (req, res) => {
 exports.getConversationList = async (req, res) => {
   try {
     const myId = req.user._id;
+    // Fetch all messages involving this user - no isDeleted filter to ensure all show
     const messages = await Message.find({
       $or: [{ sender: myId }, { receiver: myId }],
-      isDeleted: { $ne: true },
     })
       .sort({ createdAt: -1 })
       .populate("sender", "username avatar name")
-      .populate("receiver", "username avatar name");
+      .populate("receiver", "username avatar name")
+      .lean();
 
     const seen = new Set();
     const conversations = [];
 
     for (const msg of messages) {
-      const other = msg.sender._id.toString() === myId.toString() ? msg.receiver : msg.sender;
+      // Skip hard-deleted messages
+      if (msg.isDeleted === true) continue;
+      // Skip if deleted by this user
+      if (Array.isArray(msg.deletedBy) && msg.deletedBy.some(id => id.toString() === myId.toString())) continue;
+
+      const other = msg.sender?._id?.toString() === myId.toString() ? msg.receiver : msg.sender;
       if (!other || !other._id) continue;
-      if (!seen.has(other._id.toString())) {
-        seen.add(other._id.toString());
-        const unread = await Message.countDocuments({ sender: other._id, receiver: myId, read: false, isDeleted: { $ne: true } });
+
+      const otherId = other._id.toString();
+      if (!seen.has(otherId)) {
+        seen.add(otherId);
+        const unread = await Message.countDocuments({
+          sender: other._id,
+          receiver: myId,
+          read: false,
+          isDeleted: { $ne: true },
+        });
         conversations.push({ user: other, lastMessage: msg, unread });
       }
     }
