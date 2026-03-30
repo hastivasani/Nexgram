@@ -103,6 +103,7 @@ export default function ChatWindow({ chat, onBack }) {
       setImageFile(null);
       setImagePreview(null);
       setReplyTo(null);
+      window.dispatchEvent(new Event("messageSent"));
     } catch (e) {
       console.error(e);
     } finally {
@@ -132,6 +133,7 @@ export default function ChatWindow({ chat, onBack }) {
         try {
           const res = await sendMessage(fd);
           setMessages(p => [...p, res.data]);
+          window.dispatchEvent(new Event("messageSent"));
         } catch (_) {}
       };
       mr.start();

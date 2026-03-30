@@ -36,7 +36,12 @@ export default function ChatList({ onSelectChat, selectedUserId, onDeleteChat })
     const socket = getSocket(user._id);
     const handleNew = () => fetchConversations();
     socket.on("newMessage", handleNew);
-    return () => socket.off("newMessage", handleNew);
+    // Also refresh when current user sends a message
+    window.addEventListener("messageSent", handleNew);
+    return () => {
+      socket.off("newMessage", handleNew);
+      window.removeEventListener("messageSent", handleNew);
+    };
   }, [user?._id]);
 
   // Close menu on outside click
