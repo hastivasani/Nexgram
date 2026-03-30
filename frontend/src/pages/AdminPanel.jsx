@@ -486,21 +486,20 @@ export default function AdminPanel() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    if (loading) return;                          // wait for auth to resolve
+    if (loading) return;
     if (!user) { navigate("/login"); return; }
-    if (!user.isAdmin) { navigate("/"); return; }
+    // Allow access if isAdmin OR username is the owner account
+    if (!user.isAdmin && user.username !== "priyanshi_123") { navigate("/"); return; }
     adminGetStats().then(r => setStats(r.data)).catch(() => {});
   }, [user, loading, navigate]);
 
-  // Show spinner while auth is resolving
   if (loading || !user) return (
     <div className="min-h-screen bg-theme-primary flex items-center justify-center">
       <div className="w-10 h-10 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
     </div>
   );
 
-  // Show access denied only after auth resolved and user is not admin
-  if (!user.isAdmin) return (
+  if (!user.isAdmin && user.username !== "priyanshi_123") return (
     <div className="min-h-screen bg-theme-primary flex items-center justify-center">
       <div className="text-center">
         <FaShieldAlt className="text-5xl text-red-400 mx-auto mb-4" />
