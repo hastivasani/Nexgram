@@ -191,7 +191,12 @@ export default function ChatList({ onSelectChat, selectedUserId, onDeleteChat })
                   e.stopPropagation();
                   if (isMenuOpen) { setMenuOpenId(null); return; }
                   const rect = e.currentTarget.getBoundingClientRect();
-                  setMenuPos({ x: rect.right, y: rect.bottom + 4 });
+                  const dropdownHeight = 176; // ~4 items * 44px
+                  const spaceBelow = window.innerHeight - rect.bottom;
+                  const top = spaceBelow < dropdownHeight
+                    ? rect.top - dropdownHeight - 4
+                    : rect.bottom + 4;
+                  setMenuPos({ x: rect.right, y: top });
                   setMenuOpenId(other._id);
                 }}
                 className="opacity-0 group-hover:opacity-100 p-1.5 rounded-full hover:bg-white/10 text-theme-muted hover:text-theme-primary transition-all flex-shrink-0"
