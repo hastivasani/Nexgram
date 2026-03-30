@@ -490,7 +490,7 @@ export default function Settings() {
 
   /* ── Render ──────────────────────────────────────────────── */
   return (
-    <div className="bg-theme-primary min-h-screen pb-[68px] md:pb-0 overflow-x-hidden">
+    <div className="bg-theme-primary h-screen overflow-hidden pb-[68px] md:pb-0">
 
       {/* ── MOBILE: show detail page when section selected ── */}
       {activeSection && (
@@ -543,9 +543,9 @@ export default function Settings() {
       </div>
 
       {/* ── DESKTOP: two-column layout ── */}
-      <div className="hidden md:flex h-screen">
+      <div className="hidden md:flex h-screen overflow-hidden">
         {/* Left nav */}
-        <div className="w-64 xl:w-72 border-r border-theme bg-theme-card overflow-y-auto flex-shrink-0">
+        <div className="w-64 xl:w-72 border-r border-theme bg-theme-card overflow-y-auto overflow-x-hidden flex-shrink-0 scrollbar-hide">
           <div className="flex items-center gap-3 px-5 py-5 border-b border-theme">
             <button onClick={() => navigate(-1)} className="p-1.5 -ml-1 text-theme-primary hover:bg-theme-hover rounded-full transition">
               <HiArrowLeft size={20} />
