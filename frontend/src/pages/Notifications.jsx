@@ -102,8 +102,18 @@ export default function NotificationsPanel({ open, setOpen }) {
     const senderId = item.sender?._id;
     const override = localState[item._id];
     if (override === "followback_done") return <span className="text-xs text-green-500 font-semibold">Following</span>;
-    const accepted = override === "accepted" || isAlreadyFollower(senderId);
     if (item.type === "follow_request") {
+      // Use localState as source of truth
+      if (override === "accepted") {
+        if (isAlreadyFollowing(senderId)) return <span className="text-xs text-green-500 font-semibold">Following</span>;
+        return (
+          <button onClick={() => handleFollowBack(senderId, item._id)} className="px-3 py-1.5 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold">
+            Follow back
+          </button>
+        );
+      }
+      // Check DB state only if no local override
+      const accepted = isAlreadyFollower(senderId);
       if (accepted) {
         if (isAlreadyFollowing(senderId)) return <span className="text-xs text-green-500 font-semibold">Following</span>;
         return (
