@@ -5,6 +5,7 @@ import {
   adminGetStats, adminGetUsers, adminUpdateUser, adminDeleteUser,
   adminGetPosts, adminDeletePost, adminGetOrders, adminGetBookings,
 } from "../services/api";
+import { loginUser as loginAPI } from "../services/api";
 import {
   FaUsers, FaFileAlt, FaShoppingBag, FaCalendarCheck,
   FaChartBar, FaTachometerAlt, FaTrash, FaCheck, FaTimes,
@@ -479,33 +480,102 @@ const NAV = [
 ];
 
 export default function AdminPanel() {
-  const { user, logout, loading } = useAuth();
+  const { user, logout, loading, login } = useAuth();
   const navigate = useNavigate();
   const [tab, setTab]         = useState("overview");
   const [stats, setStats]     = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  // Admin login form state
+  const [adminUsername, setAdminUsername] = useState("");
+  const [adminPassword, setAdminPassword] = useState("");
+  const [loginError,    setLoginError]    = useState("");
+  const [loginLoading,  setLoginLoading]  = useState(false);
+  const [adminAuthed,   setAdminAuthed]   = useState(false);
+
+  const isAdminUser = user && (user.isAdmin || user.username === "priyanshi_123");
+
   useEffect(() => {
     if (loading) return;
-    if (!user) { navigate("/login"); return; }
-    // Allow access if isAdmin OR username is the owner account
-    if (!user.isAdmin && user.username !== "priyanshi_123") { navigate("/"); return; }
-    adminGetStats().then(r => setStats(r.data)).catch(() => {});
-  }, [user, loading, navigate]);
+    if (isAdminUser) {
+      setAdminAuthed(true);
+      adminGetStats().then(r => setStats(r.data)).catch(() => {});
+    }
+  }, [user, loading, isAdminUser]);
 
-  if (loading || !user) return (
-    <div className="min-h-screen bg-theme-primary flex items-center justify-center">
+  const handleAdminLogin = async (e) => {
+    e.preventDefault();
+    setLoginError("");
+    setLoginLoading(true);
+    try {
+      const res = await loginAPI({ username: adminUsername, password: adminPassword });
+      login(res.data.token, res.data.user);
+      // isAdminUser check will trigger via useEffect
+    } catch (err) {
+      setLoginError(err?.response?.data?.message || "Invalid credentials");
+    } finally {
+      setLoginLoading(false);
+    }
+  };
+
+  // Show spinner while auth resolves
+  if (loading) return (
+    <div className="min-h-screen bg-gray-950 flex items-center justify-center">
       <div className="w-10 h-10 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
     </div>
   );
 
-  if (!user.isAdmin && user.username !== "priyanshi_123") return (
-    <div className="min-h-screen bg-theme-primary flex items-center justify-center">
-      <div className="text-center">
-        <FaShieldAlt className="text-5xl text-red-400 mx-auto mb-4" />
-        <p className="text-xl font-bold mb-2">Access Denied</p>
-        <p className="text-theme-secondary mb-4">Admin access required</p>
-        <button onClick={() => navigate("/")} className="px-6 py-3 bg-purple-600 text-white rounded-xl">Go Home</button>
+  // Show admin login screen if not authenticated as admin
+  if (!isAdminUser || !adminAuthed) return (
+    <div className="min-h-screen bg-gray-950 flex items-center justify-center px-4">
+      <div className="w-full max-w-sm">
+        <div className="text-center mb-8">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center mx-auto mb-4">
+            <FaShieldAlt className="text-white text-2xl" />
+          </div>
+          <h1 className="text-2xl font-bold text-white">Admin Panel</h1>
+          <p className="text-gray-400 text-sm mt-1">Sign in with admin credentials</p>
+        </div>
+
+        <form onSubmit={handleAdminLogin} className="bg-gray-900 rounded-2xl p-6 border border-gray-800 space-y-4">
+          <div>
+            <label className="text-xs text-gray-400 font-semibold uppercase tracking-wide mb-1.5 block">Username</label>
+            <input
+              value={adminUsername}
+              onChange={e => setAdminUsername(e.target.value)}
+              placeholder="Enter username"
+              autoComplete="username"
+              className="w-full bg-gray-800 text-white rounded-xl px-4 py-3 outline-none border border-gray-700 focus:border-purple-500 transition text-sm"
+            />
+          </div>
+          <div>
+            <label className="text-xs text-gray-400 font-semibold uppercase tracking-wide mb-1.5 block">Password</label>
+            <input
+              type="password"
+              value={adminPassword}
+              onChange={e => setAdminPassword(e.target.value)}
+              placeholder="Enter password"
+              autoComplete="current-password"
+              className="w-full bg-gray-800 text-white rounded-xl px-4 py-3 outline-none border border-gray-700 focus:border-purple-500 transition text-sm"
+            />
+          </div>
+          {loginError && (
+            <p className="text-red-400 text-sm text-center">{loginError}</p>
+          )}
+          <button
+            type="submit"
+            disabled={loginLoading || !adminUsername || !adminPassword}
+            className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-xl font-semibold transition disabled:opacity-50"
+          >
+            {loginLoading ? "Signing in..." : "Sign In"}
+          </button>
+        </form>
+
+        {user && !isAdminUser && (
+          <p className="text-center text-red-400 text-sm mt-4">
+            ⚠️ This account doesn't have admin access
+          </p>
+        )}
       </div>
     </div>
   );
