@@ -1,28 +1,44 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import MessagesSidebar from "../components/MessagesSidebar";
 import ChatWindow from "../components/ChatWindow";
 import EmptyChat from "../components/EmptyChat";
+import { getConversationList } from "../services/api";
 
 export default function Messages() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [selectedChat, setSelectedChat] = useState(null);
 
+  // On mount: if location.state has chatUser, validate it exists in conversations
   useEffect(() => {
-    if (location.state?.chatUser) {
-      setSelectedChat(location.state.chatUser);
-    }
-  }, [location.state]);
+    if (!location.state?.chatUser) return;
+    const chatUser = location.state.chatUser;
+    // Validate this conversation still exists
+    getConversationList().then(res => {
+      const exists = res.data.some(c => c.user._id === chatUser._id);
+      if (exists) setSelectedChat(chatUser);
+      else {
+        // Clear stale location state
+        navigate("/messages", { replace: true, state: {} });
+      }
+    }).catch(() => {
+      setSelectedChat(chatUser); // fallback: just set it
+    });
+  }, []);
 
   const handleSelectChat = (user) => setSelectedChat(user);
   const handleBack       = ()     => setSelectedChat(null);
 
+  const handleDeleteChat = () => {
+    setSelectedChat(null);
+    // Clear location state so refresh doesn't restore it
+    navigate("/messages", { replace: true, state: {} });
+  };
+
   return (
     <div className="messages-page-wrapper flex overflow-hidden bg-theme-primary">
 
-      {/* ── LEFT: Conversation list ──────────────────────────────
-          Mobile  : full screen, hidden when chat is open
-          md+     : fixed 360px wide, always visible             */}
       <div
         className={`
           flex-shrink-0 flex flex-col
@@ -34,13 +50,10 @@ export default function Messages() {
         <MessagesSidebar
           onSelectChat={handleSelectChat}
           selectedUserId={selectedChat?._id}
-          onDeleteChat={() => setSelectedChat(null)}
+          onDeleteChat={handleDeleteChat}
         />
       </div>
 
-      {/* ── RIGHT: Chat window ───────────────────────────────────
-          Mobile  : full screen, shown only when chat selected
-          md+     : fills remaining space, always visible        */}
       <div
         className={`
           flex-1 min-w-0 flex flex-col
