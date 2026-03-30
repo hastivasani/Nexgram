@@ -150,20 +150,6 @@ function SwitchAccountsModal({ currentUser, onClose, onSwitch }) {
   );
 }
 
-const QUICK_LINKS = [
-  { to: "/messages",    label: "Messages",    icon: HiOutlineChat },
-  { to: "/camera",      label: "Camera",      icon: HiCamera },
-  { to: "/explore",     label: "Explore",     icon: HiOutlineGlobe },
-  { to: "/groups",      label: "Groups",      icon: FaUsers },
-  { to: "/twitter",     label: "Twitter",     icon: FaTwitter },
-  { to: "/gaming",      label: "Gaming",      icon: FaGamepad },
-  { to: "/shop",        label: "Shop",        icon: FaShoppingBag },
-  { to: "/booking",     label: "Booking",     icon: FaCalendarAlt },
-  { to: "/video",       label: "Videos",      icon: FaVideo },
-  { to: "/voice-rooms", label: "Voice Rooms", icon: FaHeadphones },
-  { to: "/profile",     label: "Profile",     icon: FaUserCircle },
-];
-
 export default function MorePopup({ openMore, onClose }) {
   const navigate = useNavigate();
   const { isDark, toggleTheme } = useTheme();
