@@ -61,7 +61,7 @@ exports.getConversation = async (req, res) => {
         { sender: req.user._id, receiver: userId },
         { sender: userId, receiver: req.user._id },
       ],
-      isDeleted: false,
+      isDeleted: { $ne: true },
     }).then(msgs => msgs.filter(m => !m.deletedBy?.some(id => id.toString() === req.user._id.toString())))
       .sort({ createdAt: 1 })
       .populate("sender", "username avatar")
@@ -83,7 +83,7 @@ exports.getConversationList = async (req, res) => {
     const myId = req.user._id;
     const messages = await Message.find({
       $or: [{ sender: myId }, { receiver: myId }],
-      isDeleted: false,
+      isDeleted: { $ne: true },
     })
       .sort({ createdAt: -1 })
       .populate("sender", "username avatar name")
@@ -94,11 +94,10 @@ exports.getConversationList = async (req, res) => {
 
     for (const msg of messages) {
       const other = msg.sender._id.toString() === myId.toString() ? msg.receiver : msg.sender;
+      if (!other || !other._id) continue;
       if (!seen.has(other._id.toString())) {
-        // Skip if this conversation was deleted by current user
-        if (msg.deletedBy && msg.deletedBy.some(id => id.toString() === myId.toString())) continue;
         seen.add(other._id.toString());
-        const unread = await Message.countDocuments({ sender: other._id, receiver: myId, read: false });
+        const unread = await Message.countDocuments({ sender: other._id, receiver: myId, read: false, isDeleted: { $ne: true } });
         conversations.push({ user: other, lastMessage: msg, unread });
       }
     }
