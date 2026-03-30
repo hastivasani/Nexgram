@@ -414,23 +414,26 @@ export default function ChatWindow({ chat, onBack }) {
           <button onClick={() => setShowEmoji((p) => !p)} className="text-theme-secondary hover:text-blue-500 flex-shrink-0">
             <HiEmojiHappy className="text-2xl" />
           </button>
-          <input
-            value={text}
-            onChange={(e) => { setText(e.target.value); handleTyping(); }}
-            onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) handleSend(); }}
-            placeholder={"Message " + ((chat && chat.username) || "") + "..."}
-            className="flex-1 min-w-0 bg-theme-input text-theme-primary border border-theme rounded-full px-4 py-2 outline-none placeholder:text-theme-muted text-sm"
-          />
-          <button onClick={() => fileRef.current.click()} className="hidden sm:block text-theme-secondary hover:text-blue-500 flex-shrink-0">
-            <HiPhotograph className="text-xl" />
-          </button>
-          <input type="file" ref={fileRef} hidden accept="image/*,video/*" onChange={pickImage} />
-          <button
-            onClick={handleVoiceRecord}
-            className={`hidden sm:flex flex-shrink-0 p-2 rounded-full transition ${isRecording ? "bg-red-500 text-white animate-pulse" : "text-theme-secondary hover:text-blue-500"}`}
-          >
-            {isRecording ? <FaStop size={14} /> : <FaMicrophone size={14} />}
-          </button>
+          {/* Input with image+mic inside */}
+          <div className="flex-1 min-w-0 flex items-center bg-theme-input border border-theme rounded-full px-3 py-1.5 gap-1">
+            <input
+              value={text}
+              onChange={(e) => { setText(e.target.value); handleTyping(); }}
+              onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) handleSend(); }}
+              placeholder={"Message " + ((chat && chat.username) || "") + "..."}
+              className="flex-1 min-w-0 bg-transparent text-theme-primary outline-none placeholder:text-theme-muted text-sm"
+            />
+            <button onClick={() => fileRef.current.click()} className="text-theme-secondary hover:text-blue-500 flex-shrink-0 p-1">
+              <HiPhotograph className="text-lg" />
+            </button>
+            <input type="file" ref={fileRef} hidden accept="image/*,video/*" onChange={pickImage} />
+            <button
+              onClick={handleVoiceRecord}
+              className={`flex-shrink-0 p-1 rounded-full transition ${isRecording ? "text-red-500 animate-pulse" : "text-theme-secondary hover:text-blue-500"}`}
+            >
+              {isRecording ? <FaStop size={13} /> : <FaMicrophone size={13} />}
+            </button>
+          </div>
           <button
             onClick={handleSend}
             disabled={sending || (!text.trim() && !imageFile)}
