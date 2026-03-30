@@ -109,6 +109,7 @@ export const sendMessage = (data) =>
   });
 export const getConversation     = (userId) => api.get(`/messages/${userId}`);
 export const getConversationList = () => api.get("/messages");
+export const deleteConversation  = (userId) => api.delete(`/messages/conversation/${userId}`);
 export const reactToMessage      = (id, emoji) => api.post(`/messages/${id}/react`, { emoji });
 export const deleteMessage       = (id) => api.delete(`/messages/${id}`);
 

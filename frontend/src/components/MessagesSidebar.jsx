@@ -4,7 +4,7 @@ import ChatList from "./child/ChatList";
 import { HiOutlinePencilAlt, HiChevronDown } from "react-icons/hi";
 import { useAuth } from "../Context/AuthContext";
 
-export default function MessagesSidebar({ onSelectChat, selectedUserId }) {
+export default function MessagesSidebar({ onSelectChat, selectedUserId, onDeleteChat }) {
   const { user } = useAuth();
   const username = user?.username || "username";
 
@@ -38,7 +38,7 @@ export default function MessagesSidebar({ onSelectChat, selectedUserId }) {
 
       {/* Chat list — scrollable */}
       <div className="flex-1 overflow-y-auto scrollbar-hide">
-        <ChatList onSelectChat={onSelectChat} selectedUserId={selectedUserId} />
+        <ChatList onSelectChat={onSelectChat} selectedUserId={selectedUserId} onDeleteChat={onDeleteChat} />
       </div>
 
     </div>

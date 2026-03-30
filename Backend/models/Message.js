@@ -16,6 +16,7 @@ const messageSchema = new mongoose.Schema({
   replyTo:   { type: mongoose.Schema.Types.ObjectId, ref: "Message" },
   read:      { type: Boolean, default: false },
   isDeleted: { type: Boolean, default: false },
+  deletedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 }, { timestamps: true });
 
 // TTL index for disappearing messages

@@ -62,6 +62,7 @@ exports.getConversation = async (req, res) => {
         { sender: userId, receiver: req.user._id },
       ],
       isDeleted: false,
+      deletedBy: { $ne: req.user._id },
     })
       .sort({ createdAt: 1 })
       .populate("sender", "username avatar")
@@ -84,6 +85,7 @@ exports.getConversationList = async (req, res) => {
     const messages = await Message.find({
       $or: [{ sender: myId }, { receiver: myId }],
       isDeleted: false,
+      deletedBy: { $ne: myId },
     })
       .sort({ createdAt: -1 })
       .populate("sender", "username avatar name")
@@ -125,6 +127,27 @@ exports.reactToMessage = async (req, res) => {
     if (sid) io.to(sid).emit("messageReaction", { msgId: msg._id, reactions: msg.reactions });
 
     res.json({ reactions: msg.reactions });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// Delete entire conversation with a user (only for current user's side)
+exports.deleteConversation = async (req, res) => {
+  try {
+    const myId = req.user._id;
+    const { userId } = req.params;
+    await Message.updateMany(
+      {
+        $or: [
+          { sender: myId, receiver: userId },
+          { sender: userId, receiver: myId },
+        ],
+        deletedBy: { $ne: myId },
+      },
+      { $push: { deletedBy: myId } }
+    );
+    res.json({ message: "Conversation deleted" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

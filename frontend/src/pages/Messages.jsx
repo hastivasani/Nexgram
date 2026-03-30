@@ -34,6 +34,7 @@ export default function Messages() {
         <MessagesSidebar
           onSelectChat={handleSelectChat}
           selectedUserId={selectedChat?._id}
+          onDeleteChat={() => setSelectedChat(null)}
         />
       </div>
 
