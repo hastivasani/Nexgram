@@ -15,53 +15,39 @@ const FlappyBird        = lazy(() => import("../components/games/FlappyBird"));
 const WhackAMole        = lazy(() => import("../components/games/WhackAMole"));
 const ColorMatch        = lazy(() => import("../components/games/ColorMatch"));
 const MathSprint        = lazy(() => import("../components/games/MathSprint"));
-const ConnectFour       = lazy(() => import("../components/games/ConnectFour"));
-const BlackjackGame     = lazy(() => import("../components/games/BlackjackGame"));
 const CardMemory        = lazy(() => import("../components/games/CardMemory"));
 const SudokuGame        = lazy(() => import("../components/games/SudokuGame"));
 const Hangman           = lazy(() => import("../components/games/Hangman"));
 const TypingSpeed       = lazy(() => import("../components/games/TypingSpeed"));
 const NumberGuess       = lazy(() => import("../components/games/NumberGuess"));
 const BrickBreaker      = lazy(() => import("../components/games/BrickBreaker"));
-const SimonSays         = lazy(() => import("../components/games/SimonSays"));
-const ReactionTime      = lazy(() => import("../components/games/ReactionTime"));
-const DiceRoller        = lazy(() => import("../components/games/DiceRoller"));
 const ChessGame         = lazy(() => import("../components/games/ChessGame"));
 const CheckersGame      = lazy(() => import("../components/games/CheckersGame"));
 const LudoGame          = lazy(() => import("../components/games/LudoGame"));
 const SnakeLadder       = lazy(() => import("../components/games/SnakeLadder"));
-const PokerGame         = lazy(() => import("../components/games/PokerGame"));
 const UnoGame           = lazy(() => import("../components/games/UnoGame"));
 const SolitaireGame     = lazy(() => import("../components/games/SolitaireGame"));
 const TrumpCards        = lazy(() => import("../components/games/TrumpCards"));
 const SpeedCards        = lazy(() => import("../components/games/SpeedCards"));
 const DominoGame        = lazy(() => import("../components/games/DominoGame"));
-const BattleshipGame    = lazy(() => import("../components/games/BattleshipGame"));
 const MinesweeperGame   = lazy(() => import("../components/games/MinesweeperGame"));
 const TriviaGame        = lazy(() => import("../components/games/TriviaGame"));
 const WordScramble      = lazy(() => import("../components/games/WordScramble"));
 const WordChain         = lazy(() => import("../components/games/WordChain"));
 const PingPong          = lazy(() => import("../components/games/PingPong"));
-const BubbleShooter     = lazy(() => import("../components/games/BubbleShooter"));
 const AimTrainer        = lazy(() => import("../components/games/AimTrainer"));
 const EndlessRunner     = lazy(() => import("../components/games/EndlessRunner"));
 const CatchGame         = lazy(() => import("../components/games/CatchGame"));
-const TowerDefense      = lazy(() => import("../components/games/TowerDefense"));
 const PuzzleSlider      = lazy(() => import("../components/games/PuzzleSlider"));
 const ColorBlast        = lazy(() => import("../components/games/ColorBlast"));
 const EmojiMatch        = lazy(() => import("../components/games/EmojiMatch"));
-const SpinWheel         = lazy(() => import("../components/games/SpinWheel"));
 
 const GAMES = [
   { id:"tictactoe",    name:"Tic Tac Toe",        icon:"⭕", cat:"Board",  maxPlayers:2, desc:"Classic 3×3 strategy",           color:"from-blue-600 to-purple-600",   canSolo:true },
   { id:"chess",        name:"Chess",               icon:"♟", cat:"Board",  maxPlayers:2, desc:"Classic chess game",              color:"from-amber-700 to-yellow-600",  canSolo:true },
   { id:"checkers",     name:"Checkers",            icon:"🔴", cat:"Board",  maxPlayers:2, desc:"Jump & capture pieces",           color:"from-red-600 to-orange-600",    canSolo:true },
-  { id:"connectfour",  name:"Connect Four",        icon:"🟡", cat:"Board",  maxPlayers:2, desc:"Drop discs, connect 4",           color:"from-blue-700 to-yellow-500",   canSolo:true },
   { id:"ludo",         name:"Ludo",                icon:"🎲", cat:"Board",  maxPlayers:2, desc:"Race your pieces home",           color:"from-green-600 to-teal-600",    canSolo:true },
   { id:"snakeladder",  name:"Snake & Ladder",      icon:"🐍", cat:"Board",  maxPlayers:2, desc:"Classic dice board game",         color:"from-emerald-600 to-green-700", canSolo:true },
-  { id:"battleship",   name:"Battleship",          icon:"🚢", cat:"Board",  maxPlayers:2, desc:"Sink the enemy fleet",            color:"from-sky-700 to-blue-800",      canSolo:true },
-  { id:"blackjack",    name:"Blackjack",           icon:"🃏", cat:"Cards",  maxPlayers:1, desc:"Beat dealer, get to 21",          color:"from-green-800 to-green-900",   canSolo:true },
-  { id:"poker",        name:"Poker",               icon:"♠",  cat:"Cards",  maxPlayers:1, desc:"Blackjack with betting",          color:"from-green-700 to-emerald-800", canSolo:true },
   { id:"uno",          name:"UNO",                 icon:"🎴", cat:"Cards",  maxPlayers:2, desc:"Match colors & numbers",          color:"from-red-600 to-yellow-500",    canSolo:true },
   { id:"solitaire",    name:"Solitaire",           icon:"🂡", cat:"Cards",  maxPlayers:1, desc:"Classic card patience",           color:"from-green-600 to-teal-700",    canSolo:true },
   { id:"cardmemory",   name:"Card Memory",         icon:"🃏", cat:"Cards",  maxPlayers:1, desc:"Flip & match card pairs",         color:"from-pink-500 to-rose-600",     canSolo:true },
@@ -90,17 +76,10 @@ const GAMES = [
   { id:"pingpong",     name:"Ping Pong",           icon:"🏓", cat:"Arcade", maxPlayers:2, desc:"Classic table tennis",            color:"from-blue-500 to-cyan-600",     canSolo:true },
   { id:"endlessrunner",name:"Endless Runner",      icon:"🏃", cat:"Arcade", maxPlayers:1, desc:"Jump over obstacles",             color:"from-purple-600 to-indigo-700", canSolo:true },
   { id:"catchgame",    name:"Catch Game",          icon:"🧺", cat:"Arcade", maxPlayers:1, desc:"Catch fruits, avoid bombs",       color:"from-green-500 to-emerald-600", canSolo:true },
-  { id:"bubbleshooter",name:"Bubble Shooter",      icon:"🫧", cat:"Arcade", maxPlayers:1, desc:"Match 3+ bubbles to pop",         color:"from-pink-500 to-purple-600",   canSolo:true },
   { id:"aimtrainer",   name:"Aim Trainer",         icon:"🎯", cat:"Arcade", maxPlayers:1, desc:"Click targets as fast as you can",color:"from-red-500 to-orange-600",    canSolo:true },
-  { id:"towerdefense", name:"Tower Defense",       icon:"🏰", cat:"Arcade", maxPlayers:1, desc:"Build towers, stop enemies",      color:"from-amber-600 to-yellow-700",  canSolo:true },
   { id:"rps",          name:"Rock Paper Scissors", icon:"✊", cat:"Casual", maxPlayers:2, desc:"Beat the opponent",               color:"from-yellow-500 to-orange-600", canSolo:true },
   { id:"colormatch",   name:"Color Match",         icon:"🎨", cat:"Casual", maxPlayers:1, desc:"Match text color, not word",      color:"from-purple-500 to-violet-600", canSolo:true },
-  { id:"simonSays",    name:"Simon Says",          icon:"🔵", cat:"Casual", maxPlayers:1, desc:"Repeat the color sequence",       color:"from-blue-500 to-indigo-600",   canSolo:true },
-  { id:"reactiontime", name:"Reaction Time",       icon:"⚡", cat:"Casual", maxPlayers:2, desc:"Test your reflexes",              color:"from-yellow-400 to-red-500",    canSolo:true },
-  { id:"diceroller",   name:"Dice Roller",         icon:"🎲", cat:"Casual", maxPlayers:2, desc:"Roll dice, highest wins",         color:"from-gray-500 to-slate-600",    canSolo:true },
   { id:"colorblast",   name:"Color Blast",         icon:"💥", cat:"Casual", maxPlayers:1, desc:"Blast matching color groups",     color:"from-red-500 to-pink-600",      canSolo:true },
-  { id:"spinwheel",    name:"Spin Wheel",          icon:"🎡", cat:"Casual", maxPlayers:1, desc:"Spin for points!",                color:"from-purple-500 to-pink-600",   canSolo:true },
-  { id:"trumpcards2",  name:"Hero Battle",         icon:"⚔️", cat:"Casual", maxPlayers:2, desc:"Trump card hero battle",          color:"from-indigo-600 to-purple-700", canSolo:true },
 ];
 
 const CATEGORIES = ["All", "Board", "Cards", "Puzzle", "Word", "Quiz", "Arcade", "Casual"];
@@ -296,10 +275,9 @@ export default function Gaming() {
   const gameProps = { onGameEnd: handleGameEnd, lobbyId: activeGame?.lobbyId, players: activeGame?.players, currentUser: user, socket };
   const gameMap = {
     tictactoe: <TicTacToe {...gameProps}/>, chess: <ChessGame {...gameProps}/>, checkers: <CheckersGame {...gameProps}/>,
-    connectfour: <ConnectFour {...gameProps}/>, ludo: <LudoGame {...gameProps}/>, snakeladder: <SnakeLadder {...gameProps}/>,
-    battleship: <BattleshipGame {...gameProps}/>, blackjack: <BlackjackGame {...gameProps}/>, poker: <PokerGame {...gameProps}/>,
+    ludo: <LudoGame {...gameProps}/>, snakeladder: <SnakeLadder {...gameProps}/>,
     uno: <UnoGame {...gameProps}/>, solitaire: <SolitaireGame {...gameProps}/>, cardmemory: <CardMemory {...gameProps}/>,
-    trumpcards: <TrumpCards {...gameProps}/>, trumpcards2: <TrumpCards {...gameProps}/>, speedcards: <SpeedCards {...gameProps}/>,
+    trumpcards: <TrumpCards {...gameProps}/>, speedcards: <SpeedCards {...gameProps}/>,
     domino: <DominoGame {...gameProps}/>, sudoku: <SudokuGame {...gameProps}/>, memory: <MemoryMatch {...gameProps}/>,
     "2048": <Game2048 {...gameProps}/>, minesweeper: <MinesweeperGame {...gameProps}/>, puzzleslider: <PuzzleSlider {...gameProps}/>,
     emojimatch: <EmojiMatch {...gameProps}/>, wordguess: <WordGuess {...gameProps}/>, hangman: <Hangman {...gameProps}/>,
@@ -307,10 +285,9 @@ export default function Gaming() {
     quiz: <QuizGame {...gameProps}/>, trivia: <TriviaGame {...gameProps}/>, mathsprint: <MathSprint {...gameProps}/>,
     numberguess: <NumberGuess {...gameProps}/>, snake: <SnakeGame {...gameProps}/>, flappy: <FlappyBird {...gameProps}/>,
     brickbreaker: <BrickBreaker {...gameProps}/>, whack: <WhackAMole {...gameProps}/>, pingpong: <PingPong {...gameProps}/>,
-    endlessrunner: <EndlessRunner {...gameProps}/>, catchgame: <CatchGame {...gameProps}/>, bubbleshooter: <BubbleShooter {...gameProps}/>,
-    aimtrainer: <AimTrainer {...gameProps}/>, towerdefense: <TowerDefense {...gameProps}/>, rps: <RockPaperScissors {...gameProps}/>,
-    colormatch: <ColorMatch {...gameProps}/>, simonSays: <SimonSays {...gameProps}/>, reactiontime: <ReactionTime {...gameProps}/>,
-    diceroller: <DiceRoller {...gameProps}/>, colorblast: <ColorBlast {...gameProps}/>, spinwheel: <SpinWheel {...gameProps}/>,
+    endlessrunner: <EndlessRunner {...gameProps}/>, catchgame: <CatchGame {...gameProps}/>,
+    aimtrainer: <AimTrainer {...gameProps}/>, rps: <RockPaperScissors {...gameProps}/>,
+    colormatch: <ColorMatch {...gameProps}/>, colorblast: <ColorBlast {...gameProps}/>,
   };
 
   if (activeGame && gameMap[activeGame.game]) return (
