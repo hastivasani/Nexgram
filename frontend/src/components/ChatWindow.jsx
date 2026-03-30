@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback, useMemo, lazy, Suspense } from "react";
+import { useNavigate } from "react-router-dom";
 const EmojiPicker = lazy(() => import("emoji-picker-react"));
 import {
   HiEmojiHappy, HiPhotograph, HiPaperAirplane,
@@ -13,6 +14,7 @@ import CallModal from "./CallModal";
 
 export default function ChatWindow({ chat, onBack }) {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
@@ -210,12 +212,13 @@ export default function ChatWindow({ chat, onBack }) {
           )}
           <img
             src={chatAvatar}
-            className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+            className="w-10 h-10 rounded-full object-cover flex-shrink-0 cursor-pointer"
             alt=""
             loading="lazy"
             decoding="async"
+            onClick={() => navigate(`/profile/${chat?.username}`)}
           />
-          <div className="min-w-0">
+          <div className="min-w-0 cursor-pointer" onClick={() => navigate(`/profile/${chat?.username}`)}>
             <p className="font-semibold text-theme-primary text-sm truncate">
               {chat && chat.username}
             </p>
