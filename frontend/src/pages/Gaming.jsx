@@ -275,6 +275,8 @@ export default function Gaming() {
     brickbreaker: <BrickBreaker {...gameProps}/>, whack: <WhackAMole {...gameProps}/>, pingpong: <PingPong {...gameProps}/>,
     endlessrunner: <EndlessRunner {...gameProps}/>, catchgame: <CatchGame {...gameProps}/>,
     aimtrainer: <AimTrainer {...gameProps}/>, rps: <RockPaperScissors {...gameProps}/>, colorblast: <ColorBlast {...gameProps}/>,
+    colorrace: <ColorRace {...gameProps}/>, mathduel: <MathDuel {...gameProps}/>,
+    emojiguess: <EmojiGuess {...gameProps}/>, bombdefuse: <BombDefuse {...gameProps}/>, speedtyping: <SpeedTyping {...gameProps}/>,
   };
 
   if (activeGame && gameMap[activeGame.game]) return (
