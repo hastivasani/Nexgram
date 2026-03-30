@@ -104,20 +104,6 @@ exports.getConversationList = async (req, res) => {
     }
 
     res.json(conversations);
-
-    const seen = new Set();
-    const conversations = [];
-
-    for (const msg of messages) {
-      const other = msg.sender._id.toString() === myId.toString() ? msg.receiver : msg.sender;
-      if (!seen.has(other._id.toString())) {
-        seen.add(other._id.toString());
-        const unread = await Message.countDocuments({ sender: other._id, receiver: myId, read: false });
-        conversations.push({ user: other, lastMessage: msg, unread });
-      }
-    }
-
-    res.json(conversations);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
