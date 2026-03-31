@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import {
   FaPlane, FaHotel, FaCar, FaBus, FaTrain, FaUmbrellaBeach,
   FaUtensils, FaGlobe, FaBolt, FaCalendarCheck, FaSearch,
-  FaMapMarkerAlt, FaFire, FaStar, FaTaxi, FaFilm
+  FaMapMarkerAlt, FaFire, FaStar, FaTaxi, FaFilm,
+  FaCalendarAlt, FaFutbol, FaCut, FaUserMd, FaHome, FaMountain
 } from "react-icons/fa";
 
 const CATEGORIES = [
@@ -13,6 +14,12 @@ const CATEGORIES = [
   { id: "cars",        label: "Car Rental",  icon: FaCar,           color: "from-green-500 to-teal-500",   path: "/booking/cars",        desc: "Rent a car anywhere" },
   { id: "buses",       label: "Buses",       icon: FaBus,           color: "from-orange-500 to-yellow-500",path: "/booking/buses",       desc: "Intercity bus travel" },
   { id: "trains",      label: "Trains",      icon: FaTrain,         color: "from-red-500 to-rose-500",     path: "/booking/trains",      desc: "Rail journeys" },
+  { id: "events",      label: "Events",      icon: FaCalendarAlt,   color: "from-violet-500 to-purple-500",path: "/booking/events",      desc: "Concerts & shows" },
+  { id: "sports",      label: "Sports",      icon: FaFutbol,        color: "from-green-600 to-teal-500",   path: "/booking/sports",      desc: "Courts & gyms" },
+  { id: "salon",       label: "Salon",       icon: FaCut,           color: "from-pink-500 to-rose-500",    path: "/booking/salon",       desc: "Beauty & wellness" },
+  { id: "doctor",      label: "Doctor",      icon: FaUserMd,        color: "from-blue-500 to-cyan-500",    path: "/booking/doctor",      desc: "Book appointments" },
+  { id: "property",    label: "Property",    icon: FaHome,          color: "from-amber-500 to-orange-500", path: "/booking/property",    desc: "Buy, rent & PG" },
+  { id: "adventure",   label: "Adventure",   icon: FaMountain,      color: "from-emerald-500 to-teal-600", path: "/booking/adventure",   desc: "Treks & extreme sports" },
   { id: "tours",       label: "Tours",       icon: FaGlobe,         color: "from-indigo-500 to-blue-500",  path: "/booking/tours",       desc: "Guided tour packages" },
   { id: "restaurants", label: "Restaurants", icon: FaUtensils,      color: "from-pink-500 to-red-500",     path: "/booking/restaurants", desc: "Reserve a table" },
   { id: "holidays",    label: "Holidays",    icon: FaUmbrellaBeach, color: "from-yellow-500 to-orange-500",path: "/booking/holidays",    desc: "Holiday packages" },

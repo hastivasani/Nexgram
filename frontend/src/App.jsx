@@ -64,6 +64,12 @@ const RideBooking        = lazy(() => import("./pages/booking/RideBooking"));
 const BookingCheckout    = lazy(() => import("./pages/booking/BookingCheckout"));
 const MyBookings         = lazy(() => import("./pages/booking/MyBookings"));
 const MovieBooking       = lazy(() => import("./pages/booking/MovieBooking"));
+const EventsBooking      = lazy(() => import("./pages/booking/EventsBooking"));
+const SportsBooking      = lazy(() => import("./pages/booking/SportsBooking"));
+const SalonBooking       = lazy(() => import("./pages/booking/SalonBooking"));
+const DoctorBooking      = lazy(() => import("./pages/booking/DoctorBooking"));
+const PropertyBooking    = lazy(() => import("./pages/booking/PropertyBooking"));
+const AdventureBooking   = lazy(() => import("./pages/booking/AdventureBooking"));
 const VideoHub           = lazy(() => import("./pages/VideoHub"));
 const NewsPage           = lazy(() => import("./pages/News"));
 const TelegramPage       = lazy(() => import("./pages/Telegram"));
@@ -170,6 +176,12 @@ export default function App() {
                             <Route path="/booking/checkout"      element={<BookingCheckout />} />
                             <Route path="/booking/my-bookings"   element={<MyBookings />} />
                             <Route path="/booking/movies"        element={<MovieBooking />} />
+                            <Route path="/booking/events"        element={<EventsBooking />} />
+                            <Route path="/booking/sports"        element={<SportsBooking />} />
+                            <Route path="/booking/salon"         element={<SalonBooking />} />
+                            <Route path="/booking/doctor"        element={<DoctorBooking />} />
+                            <Route path="/booking/property"      element={<PropertyBooking />} />
+                            <Route path="/booking/adventure"     element={<AdventureBooking />} />
                             <Route path="/video"                 element={<VideoHub />} />
                             <Route path="/news"                  element={<NewsPage />} />
                             <Route path="/telegram"              element={<TelegramPage />} />
