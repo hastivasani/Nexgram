@@ -6,7 +6,7 @@ import {
   HiOutlineSwitchHorizontal, HiOutlineLogout, HiOutlineChat,
   HiOutlineGlobe, HiCamera, HiX, HiCheck, HiPlus,
 } from "react-icons/hi";
-import { FaGamepad, FaUsers, FaTwitter, FaShoppingBag, FaCalendarAlt, FaVideo, FaHeadphones, FaUserCircle } from "react-icons/fa";
+import { FaGamepad, FaUsers, FaTwitter, FaShoppingBag, FaCalendarAlt, FaVideo, FaHeadphones, FaUserCircle, FaTelegram, FaLinkedin, FaBriefcase, FaNewspaper } from "react-icons/fa";
 import { useTheme } from "../Context/ThemeContext";
 import { useAuth } from "../Context/AuthContext";
 import { loginUser } from "../services/api";
@@ -17,11 +17,16 @@ const QUICK_LINKS = [
   { to: "/explore",     label: "Explore",     icon: HiOutlineGlobe },
   { to: "/groups",      label: "Groups",      icon: FaUsers },
   { to: "/twitter",     label: "Twitter",     icon: FaTwitter },
+  { to: "/telegram",    label: "Telegram",    icon: FaTelegram },
+  { to: "/linkedin",    label: "LinkedIn",    icon: FaLinkedin },
+  { to: "/jobs",        label: "Jobs",        icon: FaBriefcase },
   { to: "/gaming",      label: "Gaming",      icon: FaGamepad },
   { to: "/shop",        label: "Shop",        icon: FaShoppingBag },
   { to: "/booking",     label: "Booking",     icon: FaCalendarAlt },
   { to: "/video",       label: "Videos",      icon: FaVideo },
+  { to: "/news",        label: "News",        icon: FaNewspaper },
   { to: "/voice-rooms", label: "Voice Rooms", icon: FaHeadphones },
+  { to: "/live",        label: "Live",        icon: FaVideo },
   { to: "/profile",     label: "Profile",     icon: FaUserCircle },
 ];
 
