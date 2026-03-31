@@ -488,8 +488,12 @@ function GroupChat({ group, currentUser, onBack, onLeave }) {
   useEffect(() => {
     setLoadingMsgs(true);
     setMessages([]);
+    sentIdsRef.current.clear(); // Clear on group change
     getGroupMessages(group._id)
-      .then(r => setMessages(r.data || []))
+      .then(r => {
+        const msgs = Array.isArray(r.data) ? r.data : [];
+        setMessages(msgs);
+      })
       .catch(err => console.error("getGroupMessages error:", err))
       .finally(() => setLoadingMsgs(false));
 
@@ -507,8 +511,20 @@ function GroupChat({ group, currentUser, onBack, onLeave }) {
 
     const onMsg = (msg) => {
       setMessages(prev => {
-        if (sentIdsRef.current.has(msg._id)) return prev;
+        // Skip if already exists (by _id)
         if (prev.some(m => m._id === msg._id)) return prev;
+        // Replace optimistic message if sender is me
+        const myId = currentUser?._id?.toString();
+        const senderId = (msg.sender?._id || msg.sender)?.toString();
+        if (senderId === myId) {
+          // Check if there's an optimistic temp message to replace
+          const tempIdx = prev.findIndex(m => m._id?.startsWith("temp_") && m.isOptimistic);
+          if (tempIdx !== -1) {
+            const updated = [...prev];
+            updated[tempIdx] = msg;
+            return updated;
+          }
+        }
         return [...prev, msg];
       });
     };
@@ -560,7 +576,7 @@ function GroupChat({ group, currentUser, onBack, onLeave }) {
 
     try {
       const res = await sendGroupMessage(group._id, trimmed, imageFile || null);
-      sentIdsRef.current.add(res.data._id);
+      // Replace optimistic with real message
       setMessages(prev => prev.map(m => m._id === tempId ? res.data : m));
     } catch (err) {
       console.error("sendGroupMessage error:", err);
