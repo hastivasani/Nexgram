@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { searchUsers, getExplorePosts, getUserPosts } from "../services/api";
 import { HiSearch, HiX } from "react-icons/hi";
-import AOS from "aos";
 
 const CATEGORIES = ["For You", "Art", "Travel", "Food", "Music", "Style", "Nature", "Fitness", "Tech", "Pets"];
 
@@ -61,7 +60,7 @@ export default function Explore() {
 
   useEffect(() => {
     getExplorePosts()
-      .then((res) => { setExplorePosts(res.data); setTimeout(() => AOS.refresh(), 100); })
+      .then((res) => { setExplorePosts(res.data); })
       .catch(() => {});
   }, []);
 
@@ -192,9 +191,6 @@ export default function Explore() {
                 return (
                   <div
                     key={post._id}
-                    data-aos="zoom-in"
-                    data-aos-delay={Math.min((ci * 3 + pi) * 30, 300)}
-                    data-aos-duration="400"
                     onClick={() => post.user && navigate("/profile/" + post.user.username)}
                     className={"relative overflow-hidden cursor-pointer group bg-gray-100 dark:bg-gray-800 w-full " + aspect}
                   >
