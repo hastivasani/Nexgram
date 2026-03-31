@@ -45,6 +45,15 @@ exports.sendMessage = async (req, res) => {
     const socketId = onlineUsers?.get(receiverId);
     if (socketId) io.to(socketId).emit("newMessage", populated);
 
+    // Also emit conversationUpdated so receiver's ChatList refreshes
+    if (socketId) {
+      io.to(socketId).emit("conversationUpdated", {
+        user: { _id: req.user._id, username: req.user.username, avatar: req.user.avatar },
+        lastMessage: populated,
+        unread: 1,
+      });
+    }
+
     await Notification.create({ recipient: receiverId, sender: req.user._id, type: "message" });
 
     res.status(201).json(populated);
@@ -62,17 +71,32 @@ exports.getConversation = async (req, res) => {
         { sender: userId, receiver: req.user._id },
       ],
       isDeleted: { $ne: true },
-    }).then(msgs => msgs.filter(m => !m.deletedBy?.some(id => id.toString() === req.user._id.toString())))
+    })
       .sort({ createdAt: 1 })
       .populate("sender", "username avatar")
-      .populate({ path: "replyTo", populate: { path: "sender", select: "username avatar" } });
+      .populate({ path: "replyTo", populate: { path: "sender", select: "username avatar" } })
+      .lean();
 
+    // Filter messages deleted by this user
+    const filtered = messages.filter(
+      m => !m.deletedBy?.some(id => id.toString() === req.user._id.toString())
+    );
+
+    // Mark incoming messages as read
     await Message.updateMany(
       { sender: userId, receiver: req.user._id, read: false },
       { read: true }
     );
 
-    res.json(messages);
+    // Notify sender that messages were seen via socket
+    const io = req.app.get("io");
+    const onlineUsers = req.app.get("onlineUsers");
+    const senderSocketId = onlineUsers?.get(userId.toString());
+    if (senderSocketId) {
+      io.to(senderSocketId).emit("messageSeen", { by: req.user._id.toString() });
+    }
+
+    res.json(filtered);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

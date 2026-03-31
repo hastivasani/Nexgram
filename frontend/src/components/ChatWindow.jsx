@@ -43,7 +43,8 @@ export default function ChatWindow({ chat, onBack }) {
     getConversation(chat._id)
       .then((r) => {
         setMessages(r.data);
-        // Emit seen to notify sender
+        // Backend already marks as read and emits messageSeen via API
+        // Also emit from socket for real-time tick update
         const socket = getSocket(user._id);
         socket.emit("seen", { to: chat._id });
       })
@@ -333,7 +334,7 @@ export default function ChatWindow({ chat, onBack }) {
                 <span className="text-[10px] text-theme-muted mt-0.5 flex items-center gap-1">
                   {fmt(msg.createdAt)}
                   {mine && !msg.isDeleted && (
-                    <span className={msg.read ? "text-blue-400" : "text-theme-muted"}>
+                    <span className={msg.read ? "text-blue-400" : "text-gray-400"} title={msg.read ? "Seen" : "Sent"}>
                       {msg.read ? "✓✓" : "✓"}
                     </span>
                   )}

@@ -36,35 +36,48 @@ export default function ChatList({ onSelectChat, selectedUserId, onDeleteChat })
     const socket = getSocket(user._id);
 
     const handleNew = (msg) => {
-      // Immediately update conversation list without waiting for API
       if (msg && msg.sender) {
         const sender = msg.sender;
-        const senderId = sender._id || sender;
-        if (senderId.toString() !== user._id.toString()) {
+        const senderId = (sender._id || sender).toString();
+        if (senderId !== user._id.toString()) {
           setConversations(prev => {
-            const exists = prev.find(c => c.user._id?.toString() === senderId.toString());
+            const exists = prev.find(c => c.user._id?.toString() === senderId);
             if (exists) {
-              // Move to top and update last message + unread
-              const updated = prev.filter(c => c.user._id?.toString() !== senderId.toString());
+              const updated = prev.filter(c => c.user._id?.toString() !== senderId);
               return [{ ...exists, lastMessage: msg, unread: (exists.unread || 0) + 1 }, ...updated];
-            } else {
-              // New conversation - add to top
-              const newConv = { user: typeof sender === "object" ? sender : { _id: senderId, username: "User" }, lastMessage: msg, unread: 1 };
-              return [newConv, ...prev];
             }
+            // New conversation — will be filled by conversationUpdated event
+            return prev;
           });
         }
       }
-      // Also refresh from API to get accurate data
-      fetchConversations();
     };
 
+    // Handles new conversation appearing for receiver (first message case)
+    const handleConvUpdated = ({ user: sender, lastMessage, unread }) => {
+      setConversations(prev => {
+        const senderId = sender._id?.toString();
+        const exists = prev.find(c => c.user._id?.toString() === senderId);
+        if (exists) {
+          const rest = prev.filter(c => c.user._id?.toString() !== senderId);
+          return [{ ...exists, lastMessage, unread: (exists.unread || 0) + unread }, ...rest];
+        }
+        // Brand new conversation — add to top
+        return [{ user: sender, lastMessage, unread }, ...prev];
+      });
+    };
+
+    const handleSeen = () => fetchConversations();
+
     socket.on("newMessage", handleNew);
+    socket.on("conversationUpdated", handleConvUpdated);
+    socket.on("messageSeen", handleSeen);
     window.addEventListener("messageSent", fetchConversations);
-    socket.on("messageSeen", fetchConversations);
+
     return () => {
       socket.off("newMessage", handleNew);
-      socket.off("messageSeen", fetchConversations);
+      socket.off("conversationUpdated", handleConvUpdated);
+      socket.off("messageSeen", handleSeen);
       window.removeEventListener("messageSent", fetchConversations);
     };
   }, [user?._id]);
