@@ -2,11 +2,49 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   HiOutlinePhotograph, HiOutlineVideoCamera, HiOutlinePlay,
-  HiOutlinePlus, HiX, HiClock, HiExclamation,
+  HiOutlinePlus, HiX, HiClock, HiExclamation, HiSparkles,
 } from "react-icons/hi";
 import { FaPoll, FaPlus, FaTrash } from "react-icons/fa";
 import { useContent } from "../Context/ContentContext";
 import { createPost, createStory, createReel } from "../services/api";
+
+// Simple AI caption suggestions based on keywords/mood
+const AI_CAPTIONS = {
+  default: [
+    "Living my best life ✨", "Vibes only 🔥", "No caption needed 💅",
+    "Main character energy 🎬", "This is the way 🚀", "Caught in 4K 📸",
+    "Not all who wander are lost 🌍", "Soft life era 🌸", "Unbothered 😌",
+  ],
+  food: [
+    "Eat good, feel good 🍕", "Food is my love language 🍜", "Treat yourself 🧁",
+    "Good food = good mood 🍣", "Calories don't count on weekends 🍔",
+  ],
+  travel: [
+    "Wanderlust hitting different ✈️", "New city, new me 🌆", "Adventure awaits 🏔️",
+    "Collect moments not things 📍", "The world is yours 🌏",
+  ],
+  selfie: [
+    "Felt cute, might delete later 💁", "Self love era 💖", "Glowing up 🌟",
+    "Main character 🎭", "That girl era ✨", "Slay all day 💅",
+  ],
+  nature: [
+    "Earth is art 🌿", "Nature heals 🌊", "Golden hour hits different 🌅",
+    "Chasing sunsets 🌇", "Wild and free 🦋",
+  ],
+};
+
+function getAICaptions(caption = "", files = []) {
+  const text = caption.toLowerCase();
+  if (text.includes("food") || text.includes("eat") || text.includes("pizza") || text.includes("coffee"))
+    return AI_CAPTIONS.food;
+  if (text.includes("travel") || text.includes("trip") || text.includes("flight") || text.includes("city"))
+    return AI_CAPTIONS.travel;
+  if (text.includes("selfie") || text.includes("me") || text.includes("face") || text.includes("look"))
+    return AI_CAPTIONS.selfie;
+  if (text.includes("nature") || text.includes("sky") || text.includes("sunset") || text.includes("beach"))
+    return AI_CAPTIONS.nature;
+  return AI_CAPTIONS.default;
+}
 
 export default function CreatePopup({ openCreate, onClose }) {
   const navigate = useNavigate();
@@ -15,6 +53,8 @@ export default function CreatePopup({ openCreate, onClose }) {
   const [caption, setCaption] = useState("");
   const [loading, setLoading] = useState(false);
   const [previews, setPreviews] = useState([]);
+  const [showAI, setShowAI] = useState(false);
+  const [aiCaptions, setAiCaptions] = useState([]);
   const { prependPost } = useContent();
 
   // Poll state
@@ -37,6 +77,7 @@ export default function CreatePopup({ openCreate, onClose }) {
     setSelectedFiles([]); setPreviews([]); setCaption(""); setActiveBox(null);
     setIsPoll(false); setPollQuestion(""); setPollOptions(["", ""]); setPollEndsAt(""); setMultipleChoice(false);
     setScheduledAt(""); setHasContentWarning(false); setContentWarningText("");
+    setShowAI(false); setAiCaptions([]);
   };
 
   const handleFileChange = (e) => {
@@ -229,6 +270,30 @@ export default function CreatePopup({ openCreate, onClose }) {
 
                 <textarea placeholder="Write a caption..." value={caption} onChange={e => setCaption(e.target.value)}
                   className="w-full border dark:border-gray-700 p-2 rounded text-sm resize-none dark:bg-gray-800 dark:text-white" rows={3} />
+
+                {/* AI Caption Generator */}
+                <div className="mt-2">
+                  <button
+                    type="button"
+                    onClick={() => { setShowAI(s => !s); setAiCaptions(getAICaptions(caption, selectedFiles)); }}
+                    className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold hover:opacity-90 transition"
+                  >
+                    <HiSparkles size={13} /> AI Caption
+                  </button>
+                  {showAI && (
+                    <div className="mt-2 p-3 bg-purple-50 dark:bg-purple-900/20 rounded-xl border border-purple-200 dark:border-purple-700">
+                      <p className="text-xs font-semibold text-purple-600 dark:text-purple-400 mb-2">✨ Suggested Captions</p>
+                      <div className="flex flex-col gap-1.5 max-h-40 overflow-y-auto">
+                        {aiCaptions.map((c, i) => (
+                          <button key={i} onClick={() => { setCaption(c); setShowAI(false); }}
+                            className="text-left text-sm px-3 py-2 rounded-lg bg-white dark:bg-gray-800 hover:bg-purple-100 dark:hover:bg-purple-800/40 transition text-gray-700 dark:text-gray-200 border border-purple-100 dark:border-purple-700">
+                            {c}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </>
             )}
 

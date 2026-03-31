@@ -254,4 +254,11 @@ export const adminGetBookings = (params="")  => api.get(`/admin/bookings${params
 // ── Keep-alive ping (prevents Render free tier sleep) ────────
 export const pingBackend = () => api.get("/").catch(() => {});
 
+// ── Q&A (Anonymous) ──────────────────────────────────────────
+export const askQuestion      = (username, question) => api.post(`/qna/${username}/ask`, { question });
+export const getQnAInbox      = () => api.get("/qna/inbox");
+export const getAnsweredQnA   = (username) => api.get(`/qna/${username}/answered`);
+export const answerQuestion   = (id, answer) => api.put(`/qna/${id}/answer`, { answer });
+export const deleteQuestion   = (id) => api.delete(`/qna/${id}`);
+
 export default api;

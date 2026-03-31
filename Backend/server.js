@@ -345,6 +345,7 @@ app.use("/api/password",      resetLimiter, require("./routes/passwordResetRoute
 app.use("/api/news",          require("./routes/newsRoutes"));
 app.use("/api/admin",         require("./routes/adminRoutes"));
 app.use("/api/push",          require("./routes/pushRoutes"));
+app.use("/api/qna",           require("./routes/qnaRoutes"));
 
 // One-time seed endpoint — remove after use
 app.get("/api/seed-products", async (req, res) => {

@@ -7,7 +7,7 @@ import ProfileHeader from "../components/ProfileHeader";
 import EditProfileModal from "../components/EditProfileModal";
 import FollowListModal from "../components/FollowListModal";
 import { useAuth } from "../Context/AuthContext";
-import { getUserPosts, getCloseFriends } from "../services/api";
+import { getUserPosts, getCloseFriends, getQnAInbox, answerQuestion, deleteQuestion } from "../services/api";
 import { getSocket } from "../utils/socket";
 
 // ── Mini Music Player ─────────────────────────────────────────
@@ -88,6 +88,16 @@ export default function Profile() {
   const [followModal, setFollowModal] = useState(null); // null | "followers" | "following"
   const [userPosts, setUserPosts] = useState([]);
   const [loadingPosts, setLoadingPosts] = useState(true);
+  // Q&A inbox
+  const [qnaInbox,    setQnaInbox]    = useState([]);
+  const [showQnaInbox, setShowQnaInbox] = useState(false);
+  const [answerText,  setAnswerText]  = useState({});
+
+  useEffect(() => {
+    if (user?._id) {
+      getQnAInbox().then(r => setQnaInbox(r.data || [])).catch(() => {});
+    }
+  }, [user?._id]);
 
   useEffect(() => {
     if (user?._id) {
@@ -167,6 +177,57 @@ export default function Profile() {
 
         {/* Close Friends */}
         <CloseFriendsSection />
+
+        {/* Q&A Inbox */}
+        {qnaInbox.length > 0 && (
+          <div className="mt-4">
+            <button onClick={() => setShowQnaInbox(s => !s)}
+              className="flex items-center gap-2 text-sm font-semibold text-theme-primary hover:text-purple-400 transition">
+              <span className="text-lg">🎭</span>
+              Anonymous Questions
+              <span className="bg-purple-500 text-white text-xs rounded-full px-2 py-0.5">{qnaInbox.filter(q => !q.isAnswered).length}</span>
+              <span className="text-theme-muted text-xs">{showQnaInbox ? "▲" : "▼"}</span>
+            </button>
+            {showQnaInbox && (
+              <div className="mt-3 space-y-3 max-h-80 overflow-y-auto">
+                {qnaInbox.map(q => (
+                  <div key={q._id} className="bg-theme-card border border-theme rounded-2xl p-3">
+                    <p className="text-sm text-theme-primary mb-2">🎭 {q.question}</p>
+                    {q.isAnswered ? (
+                      <p className="text-sm text-green-400">✅ {q.answer}</p>
+                    ) : (
+                      <div className="flex gap-2">
+                        <input
+                          value={answerText[q._id] || ""}
+                          onChange={e => setAnswerText(p => ({ ...p, [q._id]: e.target.value }))}
+                          placeholder="Write your answer..."
+                          className="flex-1 bg-theme-input border border-theme rounded-xl px-3 py-1.5 text-sm outline-none focus:border-purple-500 transition"
+                        />
+                        <button
+                          onClick={async () => {
+                            if (!answerText[q._id]?.trim()) return;
+                            await answerQuestion(q._id, answerText[q._id]);
+                            setQnaInbox(prev => prev.map(x => x._id === q._id ? { ...x, isAnswered: true, answer: answerText[q._id] } : x));
+                          }}
+                          className="px-3 py-1.5 bg-purple-500 text-white rounded-xl text-sm font-semibold hover:bg-purple-600 transition"
+                        >
+                          Answer
+                        </button>
+                        <button
+                          onClick={async () => {
+                            await deleteQuestion(q._id);
+                            setQnaInbox(prev => prev.filter(x => x._id !== q._id));
+                          }}
+                          className="px-2 py-1.5 text-red-400 hover:bg-red-500/10 rounded-xl transition text-xs"
+                        >✕</button>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Divider */}

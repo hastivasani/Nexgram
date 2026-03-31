@@ -208,10 +208,23 @@ export default function Status() {
               const group = grouped[uid];
               const first = group[0];
               const allViewed = group.every(s => s.viewers?.includes(user?._id));
+              // Check if this user is in close friends
+              const isCloseFriend = user?.closeFriends?.some(cf => (cf._id || cf) === uid);
               return (
                 <div key={uid} className="flex flex-col items-center flex-shrink-0 cursor-pointer" onClick={() => openStory(first)}>
-                  <div className={`p-0.5 rounded-full ${allViewed ? "bg-gray-200" : "bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600"}`}>
-                    <img src={first.user?.avatar || `https://ui-avatars.com/api/?name=${first.user?.username}`} alt={first.user?.username} className="w-14 h-14 rounded-full object-cover border-2 border-white" loading="lazy" />
+                  <div className={`p-0.5 rounded-full ${
+                    isCloseFriend
+                      ? "bg-gradient-to-tr from-green-400 to-emerald-500"
+                      : allViewed
+                      ? "bg-gray-200"
+                      : "bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600"
+                  }`}>
+                    <div className="relative">
+                      <img src={first.user?.avatar || `https://ui-avatars.com/api/?name=${first.user?.username}`} alt={first.user?.username} className="w-14 h-14 rounded-full object-cover border-2 border-white" loading="lazy" />
+                      {isCloseFriend && (
+                        <span className="absolute -bottom-0.5 -right-0.5 text-[10px] bg-green-500 text-white rounded-full w-4 h-4 flex items-center justify-center border border-white">★</span>
+                      )}
+                    </div>
                   </div>
                   <span className="text-xs text-gray-600 max-w-[70px] truncate mt-1">{first.user?.username}</span>
                   <span className="text-[10px] text-gray-400">{timeAgo(first)}</span>

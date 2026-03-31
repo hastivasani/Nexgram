@@ -1,6 +1,6 @@
 ﻿import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getProfileByUsername, getUserPosts, followUser, blockUser } from "../services/api";
+import { getProfileByUsername, getUserPosts, followUser, blockUser, askQuestion, getAnsweredQnA } from "../services/api";
 import { useAuth } from "../Context/AuthContext";
 import GalleryProfile from "../components/GalleryProfile";
 import FollowListModal from "../components/FollowListModal";
@@ -74,6 +74,12 @@ export default function UserProfile() {
   const [followModal,  setFollowModal]  = useState(null);
   const [showMenu,     setShowMenu]     = useState(false);
   const [isBlocked,    setIsBlocked]    = useState(false);
+  // Q&A state
+  const [qnaQuestion,  setQnaQuestion]  = useState("");
+  const [qnaSent,      setQnaSent]      = useState(false);
+  const [qnaSending,   setQnaSending]   = useState(false);
+  const [answeredQnA,  setAnsweredQnA]  = useState([]);
+  const [showQnA,      setShowQnA]      = useState(false);
 
   useEffect(() => {
     if (!username) return;
@@ -90,6 +96,8 @@ export default function UserProfile() {
       .then((res) => setPosts(res.data))
       .catch(() => setError("User not found"))
       .finally(() => setLoading(false));
+    // Load answered Q&A
+    getAnsweredQnA(username).then(r => setAnsweredQnA(r.data || [])).catch(() => {});
   }, [username, me?._id]);
 
   const handleFollow = async () => {
@@ -118,6 +126,18 @@ export default function UserProfile() {
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);
     setShowMenu(false);
+  };
+
+  const handleAskQuestion = async () => {
+    if (!qnaQuestion.trim() || qnaSending) return;
+    setQnaSending(true);
+    try {
+      await askQuestion(profileUser.username, qnaQuestion.trim());
+      setQnaSent(true);
+      setQnaQuestion("");
+      setTimeout(() => setQnaSent(false), 3000);
+    } catch (_) {}
+    setQnaSending(false);
   };
 
   const btnLabel = followStatus === "following" ? "Following"
@@ -244,6 +264,63 @@ export default function UserProfile() {
 
       {/* Divider */}
       <div className="border-t border-theme" />
+
+      {/* Anonymous Q&A Box */}
+      {!isOwnProfile && (
+        <div className="max-w-[935px] mx-auto px-4 py-4">
+          <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-2xl p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-lg">🎭</span>
+              <p className="font-semibold text-sm text-theme-primary">Ask <span style={{ color: themeColor }}>@{profileUser.username}</span> anything</p>
+              <span className="text-xs text-theme-muted bg-theme-input px-2 py-0.5 rounded-full">Anonymous</span>
+            </div>
+            {qnaSent ? (
+              <div className="text-center py-2">
+                <p className="text-green-400 font-semibold text-sm">✅ Question sent anonymously!</p>
+              </div>
+            ) : (
+              <div className="flex gap-2">
+                <input
+                  value={qnaQuestion}
+                  onChange={e => setQnaQuestion(e.target.value)}
+                  onKeyDown={e => e.key === "Enter" && handleAskQuestion()}
+                  placeholder="Ask something... 👀"
+                  maxLength={300}
+                  className="flex-1 bg-theme-input border border-theme rounded-xl px-3 py-2 text-sm text-theme-primary outline-none focus:border-purple-500 transition placeholder:text-theme-muted"
+                />
+                <button
+                  onClick={handleAskQuestion}
+                  disabled={!qnaQuestion.trim() || qnaSending}
+                  className="px-4 py-2 rounded-xl text-sm font-semibold text-white disabled:opacity-40 transition"
+                  style={{ background: themeColor }}
+                >
+                  {qnaSending ? "..." : "Send"}
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Answered Q&A */}
+          {answeredQnA.length > 0 && (
+            <div className="mt-3">
+              <button onClick={() => setShowQnA(s => !s)}
+                className="text-sm text-theme-muted hover:text-theme-primary transition flex items-center gap-1">
+                {showQnA ? "▲" : "▼"} {answeredQnA.length} answered question{answeredQnA.length > 1 ? "s" : ""}
+              </button>
+              {showQnA && (
+                <div className="mt-2 space-y-3">
+                  {answeredQnA.map(q => (
+                    <div key={q._id} className="bg-theme-card border border-theme rounded-2xl p-4">
+                      <p className="text-sm text-theme-muted mb-2">🎭 {q.question}</p>
+                      <p className="text-sm text-theme-primary font-medium">💬 {q.answer}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Posts — full width */}
       {(isOwnProfile || followStatus === "following") ? (
