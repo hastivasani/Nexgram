@@ -78,8 +78,8 @@ export default function BookingHome() {
           </button>
         </form>
 
-        {/* Categories Grid - inside hero */}
-        <div className="grid grid-cols-3 md:grid-cols-5 gap-3">
+        {/* Categories Grid */}
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
           {CATEGORIES.map(cat => {
             const Icon = cat.icon;
             return (
