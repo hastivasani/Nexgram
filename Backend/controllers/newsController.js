@@ -4,7 +4,6 @@ let cache = { data: null, fetchedAt: 0 };
 const CACHE_TTL = 15 * 60 * 1000; // 15 minutes
 
 async function fetchFromGNews(apiKey) {
-  const { default: fetch } = await import("node-fetch");
   const url = `https://gnews.io/api/v4/top-headlines?category=general&lang=en&max=10&apikey=${apiKey}`;
   const r = await fetch(url, { signal: AbortSignal.timeout(8000) });
   if (!r.ok) throw new Error(`GNews ${r.status}`);
@@ -21,7 +20,6 @@ async function fetchFromGNews(apiKey) {
 }
 
 async function fetchFromNewsAPI(apiKey) {
-  const { default: fetch } = await import("node-fetch");
   const url = `https://newsapi.org/v2/top-headlines?language=en&pageSize=10&apiKey=${apiKey}`;
   const r = await fetch(url, { signal: AbortSignal.timeout(8000) });
   if (!r.ok) throw new Error(`NewsAPI ${r.status}`);
