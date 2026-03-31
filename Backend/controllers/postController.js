@@ -199,6 +199,9 @@ exports.likePost = async (req, res) => {
         const onlineUsers = req.app.get("onlineUsers");
         const sid = onlineUsers?.get(post.user.toString());
         if (sid) io.to(sid).emit("newNotification", { type: "like", sender: req.user, post: post._id });
+        // Browser push notification
+        const sendPush = require("../utils/sendPushNotification");
+        sendPush(post.user, { title: "New Like", body: `${req.user.username} liked your post`, icon: "/LOGO.png", url: "/" });
       }
     }
     await post.save();
@@ -231,6 +234,9 @@ exports.commentPost = async (req, res) => {
       const onlineUsers = req.app.get("onlineUsers");
       const sid = onlineUsers?.get(post.user.toString());
       if (sid) io.to(sid).emit("newNotification", { type: "comment", sender: req.user, post: post._id });
+      // Browser push notification
+      const sendPush = require("../utils/sendPushNotification");
+      sendPush(post.user, { title: "New Comment", body: `${req.user.username} commented on your post`, icon: "/LOGO.png", url: "/" });
     }
 
     const io = req.app.get("io");

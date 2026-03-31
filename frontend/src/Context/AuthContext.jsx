@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { getMe } from "../services/api";
 import { getSocket, disconnectSocket } from "../utils/socket";
+import { registerPushNotifications } from "../utils/pushNotifications";
 
 const AuthContext = createContext(null);
 
@@ -26,6 +27,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     if (user?._id) {
       getSocket(user._id);
+      registerPushNotifications(); // Ask for push permission after login
     }
   }, [user?._id]);
 

@@ -343,6 +343,7 @@ app.use("/api/search",        require("./routes/searchRoutes"));
 app.use("/api/password",      resetLimiter, require("./routes/passwordResetRoutes"));
 app.use("/api/news",          require("./routes/newsRoutes"));
 app.use("/api/admin",         require("./routes/adminRoutes"));
+app.use("/api/push",          require("./routes/pushRoutes"));
 
 // One-time seed endpoint — remove after use
 app.get("/api/seed-products", async (req, res) => {

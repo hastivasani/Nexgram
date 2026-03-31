@@ -106,6 +106,7 @@ const userSchema = new mongoose.Schema({
     hdUploads:      { type: Boolean, default: true },
   },
   theme: { type: String, enum: ["dark", "light"], default: "dark" },
+  pushSubscription: { type: Object, default: null }, // Web Push subscription object
 }, { timestamps: true });
 
 module.exports = mongoose.model("User", userSchema);
