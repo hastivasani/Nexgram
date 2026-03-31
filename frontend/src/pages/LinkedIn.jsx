@@ -199,7 +199,7 @@ export default function LinkedIn() {
 
       {/* ── Top Nav ── */}
       <header className="sticky top-0 z-30 bg-white dark:bg-[#1b1f23] border-b border-gray-200 dark:border-gray-700 shadow-sm">
-        <div className="max-w-5xl mx-auto px-4 flex items-center gap-2 h-14">
+        <div className="max-w-full mx-auto px-4 flex items-center gap-2 h-14">
           {/* Logo */}
           <FaLinkedin className="text-[#0a66c2] flex-shrink-0" size={34} />
 
@@ -248,7 +248,7 @@ export default function LinkedIn() {
       </header>
 
       {/* ── Main Content ── */}
-      <main className="max-w-5xl mx-auto px-4 pt-5 pb-8">
+      <main className="max-w-full mx-auto px-4 pt-5 pb-8">
         <div className="flex gap-5 items-start">
 
           {/* ── Left Sidebar ── */}
