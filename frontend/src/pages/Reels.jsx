@@ -194,9 +194,47 @@ function ReelItem({ reel }) {
 }
 
 export default function Reels() {
-  const { reels, fetchReels } = useContent();
+  const { reels, fetchReels, setReels } = useContent();
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const loaderRef = useRef(null);
 
   useEffect(() => { fetchReels(); }, []);
+
+  // Infinite scroll — load more reels
+  useEffect(() => {
+    if (page === 1) return; // initial load handled by fetchReels
+    const load = async () => {
+      setLoadingMore(true);
+      try {
+        const { default: axios } = await import("axios");
+        const token = localStorage.getItem("token");
+        const API = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+        const res = await axios.get(`${API}/reels?page=${page}&limit=50`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const newReels = res.data || [];
+        if (newReels.length === 0) { setHasMore(false); return; }
+        setReels(prev => {
+          const ids = new Set(prev.map(r => r._id));
+          return [...prev, ...newReels.filter(r => !ids.has(r._id))];
+        });
+      } catch (_) {}
+      setLoadingMore(false);
+    };
+    load();
+  }, [page]);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && hasMore && !loadingMore) {
+        setPage(p => p + 1);
+      }
+    }, { threshold: 0.1 });
+    if (loaderRef.current) obs.observe(loaderRef.current);
+    return () => obs.disconnect();
+  }, [hasMore, loadingMore]);
 
   if (reels.length === 0) {
     return (
@@ -214,10 +252,17 @@ export default function Reels() {
           100% { opacity: 0; transform: translateY(-120px) scale(1.5); }
         }
       `}</style>
-      <div className="h-[calc(100dvh-64px)] md:h-screen overflow-y-scroll snap-y snap-mandatory">
+      <div className="h-[calc(100dvh)] md:h-full overflow-y-scroll snap-y snap-mandatory">
         {reels.map((reel) => (
           <ReelItem key={reel._id} reel={reel} />
         ))}
+        {/* Infinite scroll sentinel */}
+        <div ref={loaderRef} className="h-4" />
+        {loadingMore && (
+          <div className="flex justify-center py-4 bg-black">
+            <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+          </div>
+        )}
       </div>
     </>
   );

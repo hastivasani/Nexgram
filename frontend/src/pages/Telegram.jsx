@@ -114,7 +114,7 @@ export default function Telegram() {
     const msgs = selected.type === "channel" ? (CHANNEL_MSGS[selected.id] || []) : (dmMessages[key] || []);
     const isChannel = selected.type === "channel";
     return (
-      <div className="flex flex-col h-[calc(100dvh-56px)] md:h-screen" style={{ background: "#0e1621" }}>
+      <div className="flex flex-col h-[calc(100dvh-56px)] md:h-full" style={{ background: "#0e1621" }}>
         <div className="flex items-center gap-3 px-4 py-3 flex-shrink-0" style={{ background: "#17212b", borderBottom: "1px solid #0d1117" }}>
           <button onClick={() => setView("list")} className="text-gray-400 hover:text-white"><HiArrowLeft size={22} /></button>
           <div className="w-10 h-10 rounded-full flex items-center justify-center text-xl flex-shrink-0 overflow-hidden" style={{ background: "linear-gradient(135deg,#2b5278,#1c3a5e)" }}>
@@ -171,7 +171,7 @@ export default function Telegram() {
   }
 
   return (
-    <div className="flex flex-col h-[calc(100dvh-56px)] md:h-screen relative" style={{ background: "#0e1621" }}>
+    <div className="flex flex-col h-[calc(100dvh-56px)] md:h-full relative" style={{ background: "#0e1621" }}>
       <div className="px-4 pt-4 pb-2 flex-shrink-0" style={{ background: "#17212b" }}>
         <div className="flex items-center gap-2 mb-3">
           <FaTelegram className="text-blue-400 text-2xl" />

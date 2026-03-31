@@ -36,7 +36,7 @@ const ALL_NAV = [
   { to: "/search",        label: "Search",         icon: HiOutlineSearch,         activeIcon: HiSearch },
   { to: "/explore",       label: "Explore",        icon: HiOutlineGlobe,          activeIcon: HiGlobe },
   { to: "/gaming",        label: "Gaming",         icon: FaGamepad,               activeIcon: FaGamepad },
-  { to: "/voice-rooms",  label: "Voice Rooms",    icon: FaDoorOpen,              activeIcon: FaDoorOpen },
+  { to: "/voice-rooms",   label: "Voice Rooms",    icon: FaDoorOpen,              activeIcon: FaDoorOpen },
   { to: "/shop",          label: "Shop",           icon: FaShoppingBag,           activeIcon: FaShoppingBag },
   { to: "/booking",       label: "Booking",        icon: FaCalendarAlt,           activeIcon: FaCalendarAlt },
   { to: "/video",         label: "Videos",         icon: FaVideo,                 activeIcon: FaVideo },

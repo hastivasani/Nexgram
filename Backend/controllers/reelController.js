@@ -24,9 +24,12 @@ exports.createReel = async (req, res) => {
 
 exports.getReels = async (req, res) => {
   try {
+    const page  = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 50;
     const reels = await Reel.find()
       .sort({ createdAt: -1 })
-      .limit(20)
+      .skip((page - 1) * limit)
+      .limit(limit)
       .populate("user", "username avatar")
       .populate({ path: "comments", populate: { path: "user", select: "username avatar" } });
     res.json(reels);

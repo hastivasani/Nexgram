@@ -42,7 +42,7 @@ const UserProfile   = lazy(() => import("./pages/UserProfile"));
 const LivePage      = lazy(() => import("./pages/Live"));
 const Gaming        = lazy(() => import("./pages/Gaming"));
 const Groups        = lazy(() => import("./pages/Groups"));
-const VoiceRooms    = lazy(() => import("./pages/VoiceRooms"));
+
 const BioLinks      = lazy(() => import("./pages/BioLinks"));
 const Twitter       = lazy(() => import("./pages/Twitter"));
 const Shop          = lazy(() => import("./pages/Shop"));
@@ -118,7 +118,7 @@ export default function App() {
                           <Route path="/groups"   element={<Groups />} />
                         </Routes>
                       </Suspense>
-                      <div className="md:pl-16 w-full">
+                      <div className="md:pl-16 w-full h-full overflow-y-auto scrollbar-hide">
                         <Suspense fallback={<PageLoader />}>
                           <Routes>
                             <Route path="/"                      element={<Home />} />
@@ -135,7 +135,7 @@ export default function App() {
                             <Route path="/meta"                  element={<Meta />} />
                             <Route path="/live"                  element={<LivePage />} />
                             <Route path="/gaming"                element={<Gaming />} />
-                            <Route path="/voice-rooms"           element={<VoiceRooms />} />
+                            <Route path="/voice-rooms"           element={<Twitter />} />
                             <Route path="/bio-links"             element={<BioLinks />} />
                             <Route path="/bio-links/:username"   element={<BioLinks />} />
                             <Route path="/twitter"               element={<Twitter />} />

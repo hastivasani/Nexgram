@@ -201,7 +201,7 @@ export default function NotificationsPanel({ open, setOpen }) {
   // ── Page mode (route /notifications) ─────────────────────────
   if (isPage) {
     return (
-      <div className="flex flex-col h-screen bg-theme-panel text-theme-primary pb-16 md:pb-0">
+      <div className="flex flex-col h-screen bg-theme-panel text-theme-primary pb-16 md:pb-0 overflow-y-auto">
         {content}
       </div>
     );
