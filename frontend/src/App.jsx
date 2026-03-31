@@ -85,11 +85,12 @@ function PageLoader() {
 export default function App() {
   useEffect(() => {
     AOS.init({
-      duration: 500,
+      duration: 450,
       easing: "ease-out-cubic",
-      once: false,
-      offset: 40,
+      once: true,
+      offset: 0,
       delay: 0,
+      anchorPlacement: "top-bottom",
     });
   }, []);
 

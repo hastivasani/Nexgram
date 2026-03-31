@@ -432,9 +432,6 @@ export default function Gaming() {
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
                 {filteredGames.map((game, idx) => (
                   <div key={game.id}
-                    data-aos="fade-up"
-                    data-aos-delay={Math.min(idx * 20, 150)}
-                    data-aos-duration="350"
                     className="bg-theme-card border border-theme rounded-2xl overflow-hidden flex flex-col hover:border-purple-500/50 transition-colors">
                     <div className={`bg-gradient-to-br ${game.color} p-3 flex flex-col items-center justify-center gap-1 min-h-[80px]`}>
                       <span className="text-3xl">{game.icon}</span>

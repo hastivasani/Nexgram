@@ -123,8 +123,8 @@ export default function Home() {
             {posts.map((post, idx) => (
               <div key={post._id}
                 data-aos="fade-up"
-                data-aos-delay={Math.min(idx * 40, 200)}
-                data-aos-duration="450">
+                data-aos-delay={Math.min(idx * 30, 120)}
+                data-aos-duration="400">
                 <PostCard post={post} />
               </div>
             ))}
