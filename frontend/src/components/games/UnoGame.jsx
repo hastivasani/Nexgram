@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const COLORS = ["red","blue","green","yellow"];
 const SPECIALS = ["Skip","Reverse","+2"];
