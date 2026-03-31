@@ -56,6 +56,17 @@ exports.sendMessage = async (req, res) => {
 
     await Notification.create({ recipient: receiverId, sender: req.user._id, type: "message" });
 
+    // Push notification for message
+    const sendPush = require("../utils/sendPushNotification");
+    const msgPreview = text ? text.slice(0, 60) : "📎 Media";
+    sendPush(receiverId, {
+      title: `💬 ${req.user.username}`,
+      body:  msgPreview,
+      icon:  req.user.avatar || "/LOGO.png",
+      url:   "/messages",
+      tag:   `msg-${req.user._id}`,
+    });
+
     res.status(201).json(populated);
   } catch (err) {
     res.status(500).json({ error: err.message });

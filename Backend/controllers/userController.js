@@ -74,7 +74,7 @@ exports.followUser = async (req, res) => {
       const socketId    = onlineUsers?.get(targetId);
       if (socketId) io.to(socketId).emit("newNotification", { type: "follow", sender: req.user });
       const sendPush = require("../utils/sendPushNotification");
-      sendPush(targetId, { title: "New Follower", body: `${req.user.username} started following you`, icon: "/LOGO.png", url: `/profile/${req.user.username}` });
+      sendPush(targetId, { title: "New Follower 👤", body: `${req.user.username} started following you`, icon: req.user.avatar || "/LOGO.png", url: `/profile/${req.user.username}`, tag: "follow" });
 
       return res.json({ status: "following" });
     }
@@ -94,7 +94,7 @@ exports.followUser = async (req, res) => {
     const socketId    = onlineUsers?.get(targetId);
     if (socketId) io.to(socketId).emit("newNotification", { type: "follow_request", sender: req.user });
     const sendPush = require("../utils/sendPushNotification");
-    sendPush(targetId, { title: "Follow Request", body: `${req.user.username} wants to follow you`, icon: "/LOGO.png", url: "/" });
+    sendPush(targetId, { title: "Follow Request 🔔", body: `${req.user.username} wants to follow you`, icon: req.user.avatar || "/LOGO.png", url: "/notifications", tag: "follow_request" });
 
     return res.json({ status: "requested" });
   } catch (err) {

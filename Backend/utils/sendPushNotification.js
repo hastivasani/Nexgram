@@ -23,22 +23,32 @@ function ensureVapid() {
 
 /**
  * Send a push notification to a user
- * @param {string} userId - recipient user ID
- * @param {object} payload - { title, body, icon, url }
+ * @param {string|object} userId - recipient user ID
+ * @param {object} payload - { title, body, icon, url, image, tag }
  */
 async function sendPushNotification(userId, payload) {
-  if (!ensureVapid()) return; // VAPID not configured, skip silently
+  if (!ensureVapid()) return;
   try {
     const user = await User.findById(userId).select("pushSubscription");
     if (!user?.pushSubscription) return;
 
+    const notification = {
+      title:   payload.title || "Nexgram",
+      body:    payload.body  || "",
+      icon:    payload.icon  || "/LOGO.png",
+      badge:   "/LOGO.png",
+      url:     payload.url   || "/",
+      tag:     payload.tag   || "nexgram",
+      image:   payload.image || undefined,
+    };
+
     await webpush.sendNotification(
       user.pushSubscription,
-      JSON.stringify(payload)
+      JSON.stringify(notification)
     );
   } catch (err) {
-    // Subscription expired — clean it up
-    if (err.statusCode === 410) {
+    if (err.statusCode === 410 || err.statusCode === 404) {
+      // Subscription expired — clean it up
       await User.findByIdAndUpdate(userId, { pushSubscription: null });
     }
   }
