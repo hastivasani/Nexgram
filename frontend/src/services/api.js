@@ -4,6 +4,7 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL
     ? import.meta.env.VITE_API_URL
     : `${window.location.origin}/api`,
+  timeout: 15000, // 15s timeout — prevents infinite hang on Render cold start
 });
 
 api.interceptors.request.use((config) => {

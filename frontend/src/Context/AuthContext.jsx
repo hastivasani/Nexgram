@@ -11,10 +11,12 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
+      // Timeout fallback: if backend takes too long (Render cold start), stop loading after 8s
+      const timeout = setTimeout(() => setLoading(false), 8000);
       getMe()
         .then((res) => setUser(res.data))
         .catch(() => { localStorage.removeItem("token"); })
-        .finally(() => setLoading(false));
+        .finally(() => { clearTimeout(timeout); setLoading(false); });
     } else {
       setLoading(false);
     }
