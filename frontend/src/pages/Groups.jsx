@@ -944,7 +944,7 @@ export default function Groups() {
   }, []);
 
   return (
-    <div className="flex bg-theme-sidebar overflow-hidden h-[calc(100dvh-56px)] md:h-screen">
+    <div className="flex bg-theme-sidebar overflow-hidden h-[calc(100dvh-56px)] md:h-screen md:pl-16">
       <div className={`flex-shrink-0 flex flex-col border-r border-theme bg-theme-sidebar w-full md:w-[320px] lg:w-[360px] ${selectedGroup ? "hidden md:flex" : "flex"}`}>
         {loadingGroups ? (
           <div className="flex-1 flex items-center justify-center">

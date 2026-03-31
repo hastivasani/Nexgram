@@ -111,6 +111,13 @@ export default function App() {
                         <ToastNotifications />
                       </Suspense>
                       <Sidebar />
+                      {/* Full-width pages — handle their own pl-16 */}
+                      <Suspense fallback={<PageLoader />}>
+                        <Routes>
+                          <Route path="/messages" element={<Messages />} />
+                          <Route path="/groups"   element={<Groups />} />
+                        </Routes>
+                      </Suspense>
                       <div className="md:pl-16 w-full">
                         <Suspense fallback={<PageLoader />}>
                           <Routes>
@@ -128,7 +135,6 @@ export default function App() {
                             <Route path="/meta"                  element={<Meta />} />
                             <Route path="/live"                  element={<LivePage />} />
                             <Route path="/gaming"                element={<Gaming />} />
-                            <Route path="/groups"                element={<Groups />} />
                             <Route path="/voice-rooms"           element={<VoiceRooms />} />
                             <Route path="/bio-links"             element={<BioLinks />} />
                             <Route path="/bio-links/:username"   element={<BioLinks />} />
@@ -154,7 +160,6 @@ export default function App() {
                             <Route path="/telegram"              element={<TelegramPage />} />
                             <Route path="/linkedin"              element={<LinkedInPage />} />
                             <Route path="/jobs"                  element={<JobsPage />} />
-                            <Route path="/messages"              element={<Messages />} />
                           </Routes>
                         </Suspense>
                       </div>

@@ -41,7 +41,7 @@ export default function Messages() {
   };
 
   return (
-    <div className="messages-page-wrapper flex overflow-hidden bg-theme-primary h-[calc(100dvh-56px)] md:h-screen">
+    <div className="messages-page-wrapper flex overflow-hidden bg-theme-primary h-[calc(100dvh-56px)] md:h-screen md:pl-16">
       <div
         className={`flex-shrink-0 flex flex-col w-full md:w-[360px] lg:w-[400px] border-r border-theme bg-theme-sidebar ${selectedChat ? "hidden md:flex" : "flex"}`}
       >
