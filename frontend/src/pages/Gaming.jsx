@@ -46,17 +46,21 @@ const GAMES = [
   { id:"snakeladder",  name:"Snake & Ladder",      icon:"🐍", cat:"Board",  maxPlayers:2, desc:"Classic dice board game",         color:"from-emerald-600 to-green-700", canSolo:true },
   { id:"uno",          name:"UNO",                 icon:"🎴", cat:"Cards",  maxPlayers:2, desc:"Match colors & numbers",          color:"from-red-600 to-yellow-500",    canSolo:true },
   { id:"solitaire",    name:"Solitaire",           icon:"🂡", cat:"Cards",  maxPlayers:1, desc:"Classic card patience",           color:"from-green-600 to-teal-700",    canSolo:true },
-  { id:"cardmemory",   name:"Card Memory",         icon:"🃏", cat:"Cards",  maxPlayers:1, desc:"Flip & match card pairs",         color:"from-pink-500 to-rose-600",     canSolo:true },  { id:"sudoku",       name:"Sudoku",              icon:"🔢", cat:"Puzzle", maxPlayers:1, desc:"Fill the 9×9 grid",               color:"from-indigo-600 to-blue-700",   canSolo:true },
+  { id:"cardmemory",   name:"Card Memory",         icon:"🃏", cat:"Cards",  maxPlayers:1, desc:"Flip & match card pairs",         color:"from-pink-500 to-rose-600",     canSolo:true },
+  { id:"sudoku",       name:"Sudoku",              icon:"🔢", cat:"Puzzle", maxPlayers:1, desc:"Fill the 9×9 grid",               color:"from-indigo-600 to-blue-700",   canSolo:true },
   { id:"memory",       name:"Memory Match",        icon:"🧠", cat:"Puzzle", maxPlayers:1, desc:"Match the hidden pairs",          color:"from-pink-500 to-rose-600",     canSolo:true },
   { id:"2048",         name:"2048",                icon:"🔢", cat:"Puzzle", maxPlayers:1, desc:"Merge tiles to reach 2048",       color:"from-amber-500 to-yellow-600",  canSolo:true },
   { id:"minesweeper",  name:"Minesweeper",         icon:"💣", cat:"Puzzle", maxPlayers:1, desc:"Find all mines safely",           color:"from-gray-500 to-slate-700",    canSolo:true },
-  { id:"puzzleslider", name:"Puzzle Slider",       icon:"🧩", cat:"Puzzle", maxPlayers:1, desc:"Slide tiles to solve",            color:"from-teal-500 to-cyan-600",     canSolo:true },  { id:"wordguess",    name:"Word Guess",          icon:"📝", cat:"Word",   maxPlayers:1, desc:"Wordle-style word puzzle",        color:"from-teal-500 to-cyan-600",     canSolo:true },
+  { id:"puzzleslider", name:"Puzzle Slider",       icon:"🧩", cat:"Puzzle", maxPlayers:1, desc:"Slide tiles to solve",            color:"from-teal-500 to-cyan-600",     canSolo:true },
+  { id:"wordguess",    name:"Word Guess",          icon:"📝", cat:"Word",   maxPlayers:1, desc:"Wordle-style word puzzle",        color:"from-teal-500 to-cyan-600",     canSolo:true },
   { id:"hangman",      name:"Hangman",             icon:"🪢", cat:"Word",   maxPlayers:1, desc:"Guess the word letter by letter", color:"from-slate-600 to-gray-700",    canSolo:true },
   { id:"wordscramble", name:"Word Scramble",       icon:"🔤", cat:"Word",   maxPlayers:2, desc:"Unscramble words fast",           color:"from-violet-500 to-purple-600", canSolo:true },
   { id:"wordchain",    name:"Word Chain",          icon:"🔗", cat:"Word",   maxPlayers:2, desc:"Chain words by last letter",      color:"from-cyan-500 to-blue-600",     canSolo:true },
   { id:"typingspeed",  name:"Typing Speed",        icon:"⌨",  cat:"Word",   maxPlayers:1, desc:"Type as fast as you can",         color:"from-blue-500 to-indigo-600",   canSolo:true },
   { id:"quiz",         name:"Quiz Battle",         icon:"🧠", cat:"Quiz",   maxPlayers:2, desc:"10 questions, fastest wins",      color:"from-orange-500 to-pink-600",   canSolo:true },
-  { id:"trivia",       name:"Trivia",              icon:"❓", cat:"Quiz",   maxPlayers:2, desc:"General knowledge quiz",          color:"from-blue-500 to-purple-600",   canSolo:true },  { id:"snake",        name:"Snake",               icon:"🐍", cat:"Arcade", maxPlayers:1, desc:"Eat food, don't hit walls",       color:"from-green-600 to-emerald-700", canSolo:true },
+  { id:"trivia",       name:"Trivia",              icon:"❓", cat:"Quiz",   maxPlayers:2, desc:"General knowledge quiz",          color:"from-blue-500 to-purple-600",   canSolo:true },
+  { id:"emojiguess",   name:"Emoji Guess",         icon:"🎭", cat:"Quiz",   maxPlayers:2, desc:"Guess movie from emojis",         color:"from-orange-500 to-pink-500",   canSolo:true },
+  { id:"snake",        name:"Snake",               icon:"🐍", cat:"Arcade", maxPlayers:1, desc:"Eat food, don't hit walls",       color:"from-green-600 to-emerald-700", canSolo:true },
   { id:"flappy",       name:"Flappy Bird",         icon:"🐦", cat:"Arcade", maxPlayers:1, desc:"Tap to fly through pipes",        color:"from-sky-500 to-blue-600",      canSolo:true },
   { id:"brickbreaker", name:"Brick Breaker",       icon:"🧱", cat:"Arcade", maxPlayers:1, desc:"Break all the bricks",            color:"from-orange-500 to-red-600",    canSolo:true },
   { id:"whack",        name:"Whack-a-Mole",        icon:"🔨", cat:"Arcade", maxPlayers:1, desc:"Smash the moles in 30s",          color:"from-lime-500 to-green-600",    canSolo:true },
@@ -64,8 +68,10 @@ const GAMES = [
   { id:"endlessrunner",name:"Endless Runner",      icon:"🏃", cat:"Arcade", maxPlayers:1, desc:"Jump over obstacles",             color:"from-purple-600 to-indigo-700", canSolo:true },
   { id:"catchgame",    name:"Catch Game",          icon:"🧺", cat:"Arcade", maxPlayers:1, desc:"Catch fruits, avoid bombs",       color:"from-green-500 to-emerald-600", canSolo:true },
   { id:"aimtrainer",   name:"Aim Trainer",         icon:"🎯", cat:"Arcade", maxPlayers:1, desc:"Click targets as fast as you can",color:"from-red-500 to-orange-600",    canSolo:true },
-  { id:"rps",          name:"Rock Paper Scissors", icon:"✊", cat:"Casual", maxPlayers:2, desc:"Beat the opponent",               color:"from-yellow-500 to-orange-600", canSolo:true },  { id:"colorblast",   name:"Color Blast",         icon:"💥", cat:"Casual", maxPlayers:1, desc:"Blast matching color groups",     color:"from-red-500 to-pink-600",      canSolo:true },
-  { id:"colorrace",    name:"Color Race",          icon:"🎨", cat:"Casual", maxPlayers:2, desc:"Tap the right color first!",      color:"from-pink-500 to-purple-600",   canSolo:true },  { id:"emojiguess",   name:"Emoji Guess",         icon:"🎭", cat:"Quiz",   maxPlayers:2, desc:"Guess movie from emojis",         color:"from-orange-500 to-pink-500",   canSolo:true },];
+  { id:"rps",          name:"Rock Paper Scissors", icon:"✊", cat:"Casual", maxPlayers:2, desc:"Beat the opponent",               color:"from-yellow-500 to-orange-600", canSolo:true },
+  { id:"colorblast",   name:"Color Blast",         icon:"💥", cat:"Casual", maxPlayers:1, desc:"Blast matching color groups",     color:"from-red-500 to-pink-600",      canSolo:true },
+  { id:"colorrace",    name:"Color Race",          icon:"🎨", cat:"Casual", maxPlayers:2, desc:"Tap the right color first!",      color:"from-pink-500 to-purple-600",   canSolo:true },
+];
 
 const CATEGORIES = ["All", "Board", "Cards", "Puzzle", "Word", "Quiz", "Arcade", "Casual"];
 const RANK_COLORS = { Bronze:"text-amber-600", Silver:"text-gray-400", Gold:"text-yellow-400", Platinum:"text-cyan-400", Diamond:"text-blue-400" };
