@@ -87,7 +87,7 @@ export default function App() {
         <SearchProvider>
           <AuthProvider>
             <ContentProvider>
-              <div className="min-h-screen bg-theme-primary text-theme-primary transition-colors duration-300">
+              <div className="h-screen bg-theme-primary text-theme-primary transition-colors duration-300 overflow-hidden">
                 <Routes>
                   <Route path="/login"           element={<Login />} />
                   <Route path="/register"        element={<Register />} />
