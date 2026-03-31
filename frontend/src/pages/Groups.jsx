@@ -614,7 +614,7 @@ function GroupChat({ group, currentUser, onBack, onLeave }) {
   };
 
   return (
-    <div className="flex flex-col h-full relative" style={{ paddingBottom: 0 }}>
+    <div className="flex flex-col h-full relative bg-theme-sidebar" style={{ paddingBottom: 0 }}>
 
       {/* Active call modal */}
       {activeCall && (
@@ -944,7 +944,7 @@ export default function Groups() {
   }, []);
 
   return (
-    <div className="flex bg-theme-sidebar overflow-hidden h-[calc(100dvh-56px)] md:h-screen md:pl-16">
+    <div className="flex bg-theme-sidebar overflow-hidden h-[calc(100dvh-56px)] md:h-full md:pl-16">
       <div className={`flex-shrink-0 flex flex-col border-r border-theme bg-theme-sidebar w-full md:w-[320px] lg:w-[360px] ${selectedGroup ? "hidden md:flex" : "flex"}`}>
         {loadingGroups ? (
           <div className="flex-1 flex items-center justify-center">
