@@ -20,7 +20,7 @@ import {
   HiOutlineStar, HiStar,
   HiCamera,
 } from "react-icons/hi";
-import { FaGamepad, FaUsers, FaHeadphones, FaTwitter, FaShoppingBag, FaCalendarAlt, FaVideo, FaNewspaper, FaTelegram, FaLinkedin, FaBriefcase } from "react-icons/fa";
+import { FaGamepad, FaUsers, FaHeadphones, FaTwitter, FaShoppingBag, FaCalendarAlt, FaVideo, FaNewspaper, FaTelegram, FaLinkedin, FaBriefcase, FaDoorOpen } from "react-icons/fa";
 
 // Desktop sidebar shows all items
 const ALL_NAV = [
@@ -36,6 +36,7 @@ const ALL_NAV = [
   { to: "/search",        label: "Search",         icon: HiOutlineSearch,         activeIcon: HiSearch },
   { to: "/explore",       label: "Explore",        icon: HiOutlineGlobe,          activeIcon: HiGlobe },
   { to: "/gaming",        label: "Gaming",         icon: FaGamepad,               activeIcon: FaGamepad },
+  { to: "/voice-rooms",  label: "Voice Rooms",    icon: FaDoorOpen,              activeIcon: FaDoorOpen },
   { to: "/shop",          label: "Shop",           icon: FaShoppingBag,           activeIcon: FaShoppingBag },
   { to: "/booking",       label: "Booking",        icon: FaCalendarAlt,           activeIcon: FaCalendarAlt },
   { to: "/video",         label: "Videos",         icon: FaVideo,                 activeIcon: FaVideo },
@@ -126,9 +127,9 @@ export default function Sidebar() {
           ))}
         </nav>
 
-        {/* Avatar */}
-        <div className="relative mt-1 flex-shrink-0">
-          <div className="w-8 h-8 rounded-full ring-2 ring-purple-400 overflow-hidden cursor-pointer">
+        {/* Avatar → Profile */}
+        <NavLink to="/profile" className="relative mt-1 flex-shrink-0 group">
+          <div className="w-8 h-8 rounded-full ring-2 ring-purple-400 overflow-hidden cursor-pointer group-hover:ring-pink-400 transition-all">
             {user.avatar
               ? <img src={user.avatar} alt="me" className="w-full h-full object-cover" />
               : <div className="w-full h-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-white text-xs font-bold">
@@ -136,7 +137,7 @@ export default function Sidebar() {
                 </div>
             }
           </div>
-        </div>
+        </NavLink>
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 bg-theme-sidebar border-t border-theme z-40 md:hidden safe-bottom">
