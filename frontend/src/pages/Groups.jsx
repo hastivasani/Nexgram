@@ -49,7 +49,7 @@ function GroupList({ groups, selectedId, onSelect, onGroupCreated }) {
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-theme-sidebar">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-theme flex-shrink-0">
         <h2 className="text-base font-bold text-theme-primary flex items-center gap-2">
@@ -944,7 +944,7 @@ export default function Groups() {
   }, []);
 
   return (
-    <div className="flex bg-theme-primary overflow-hidden" style={{ height: "calc(100dvh - 56px)" }} >
+    <div className="flex bg-theme-sidebar overflow-hidden" style={{ height: "calc(100dvh - 56px)" }}>
       <div className={`flex-shrink-0 flex flex-col border-r border-theme bg-theme-sidebar w-full md:w-[320px] lg:w-[360px] ${selectedGroup ? "hidden md:flex" : "flex"}`}>
         {loadingGroups ? (
           <div className="flex-1 flex items-center justify-center">
