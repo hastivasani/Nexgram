@@ -293,7 +293,7 @@ export default function Gaming() {
   });
 
   return (
-    <div className="min-h-screen bg-theme-primary pb-24 md:pb-6 px-4 pt-4 w-full">
+    <div className="bg-theme-primary pb-24 md:pb-6 px-4 pt-4 w-full overflow-y-auto">
 
       {/* Header */}
       <div className="flex items-center gap-2 mb-4">
@@ -433,8 +433,8 @@ export default function Gaming() {
                 {filteredGames.map((game, idx) => (
                   <div key={game.id}
                     data-aos="fade-up"
-                    data-aos-delay={Math.min(idx * 30, 400)}
-                    data-aos-duration="400"
+                    data-aos-delay={Math.min(idx * 20, 150)}
+                    data-aos-duration="350"
                     className="bg-theme-card border border-theme rounded-2xl overflow-hidden flex flex-col hover:border-purple-500/50 transition-colors">
                     <div className={`bg-gradient-to-br ${game.color} p-3 flex flex-col items-center justify-center gap-1 min-h-[80px]`}>
                       <span className="text-3xl">{game.icon}</span>

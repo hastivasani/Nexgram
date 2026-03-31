@@ -87,8 +87,8 @@ export default function App() {
     AOS.init({
       duration: 500,
       easing: "ease-out-cubic",
-      once: true,
-      offset: 60,
+      once: false,
+      offset: 40,
       delay: 0,
     });
   }, []);
