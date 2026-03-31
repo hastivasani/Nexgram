@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import {
   FaPlane, FaHotel, FaCar, FaBus, FaTrain, FaUmbrellaBeach,
   FaUtensils, FaGlobe, FaBolt, FaCalendarCheck, FaSearch,
-  FaMapMarkerAlt, FaFire, FaStar, FaTaxi
+  FaMapMarkerAlt, FaFire, FaStar, FaTaxi, FaFilm
 } from "react-icons/fa";
 
 const CATEGORIES = [
   { id: "flights",     label: "Flights",     icon: FaPlane,         color: "from-blue-500 to-cyan-500",    path: "/booking/flights",     desc: "Search & book flights" },
   { id: "hotels",      label: "Hotels",      icon: FaHotel,         color: "from-purple-500 to-pink-500",  path: "/booking/hotels",      desc: "Find perfect stays" },
+  { id: "movies",      label: "Movies",      icon: FaFilm,          color: "from-red-500 to-pink-500",     path: "/booking/movies",      desc: "Book cinema tickets" },
   { id: "cars",        label: "Car Rental",  icon: FaCar,           color: "from-green-500 to-teal-500",   path: "/booking/cars",        desc: "Rent a car anywhere" },
   { id: "buses",       label: "Buses",       icon: FaBus,           color: "from-orange-500 to-yellow-500",path: "/booking/buses",       desc: "Intercity bus travel" },
   { id: "trains",      label: "Trains",      icon: FaTrain,         color: "from-red-500 to-rose-500",     path: "/booking/trains",      desc: "Rail journeys" },
