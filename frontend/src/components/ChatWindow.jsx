@@ -401,7 +401,7 @@ export default function ChatWindow({ chat, onBack }) {
       )}
 
       {/* Input bar */}
-      <div className="px-3 pt-1 pb-3 border-t border-theme bg-theme-card flex-shrink-0 safe-bottom" style={{marginBottom: 0}}>
+      <div className="px-3 pt-1 pb-2 border-t border-theme bg-transparent flex-shrink-0 safe-bottom" style={{marginBottom: 0}}>
         {/* Disappearing toggle */}
         <div className="flex items-center gap-2 mb-1">
           <button
