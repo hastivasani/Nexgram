@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaArrowLeft, FaSearch, FaMapMarkerAlt, FaCalendarAlt, FaStar, FaFutbol, FaCricketBall } from "react-icons/fa";
+import { FaArrowLeft, FaSearch, FaMapMarkerAlt, FaCalendarAlt, FaStar, FaFutbol } from "react-icons/fa";
 import { HiX } from "react-icons/hi";
 
 const SPORTS = ["All", "Cricket", "Football", "Badminton", "Tennis", "Swimming", "Gym", "Yoga"];
