@@ -10,6 +10,10 @@ function urlBase64ToUint8Array(base64String) {
 export async function registerPushNotifications() {
   if (!("serviceWorker" in navigator) || !("PushManager" in window)) return;
 
+  // Skip on localhost — SSL certificate error in dev
+  const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+  if (isLocalhost) return;
+
   try {
     // Register service worker
     const reg = await navigator.serviceWorker.register("/sw.js");
