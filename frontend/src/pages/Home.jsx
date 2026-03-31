@@ -57,7 +57,7 @@ export default function Home() {
   useEffect(() => {
     fetchFeed();
     fetchStories();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="min-h-screen bg-theme-primary pb-[68px] md:pb-0">

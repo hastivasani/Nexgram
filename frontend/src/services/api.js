@@ -160,8 +160,6 @@ export const getNotes   = ()     => api.get("/notes");
 export const upsertNote = (data) => api.post("/notes", data);
 export const deleteNote = ()     => api.delete("/notes");
 
-export default api;
-
 // ── Shop ──────────────────────────────────────────────────────
 export const getProducts       = (params = "") => api.get(`/shop/products${params}`);
 export const getProduct        = (id) => api.get(`/shop/products/${id}`);
@@ -255,3 +253,5 @@ export const adminGetBookings = (params="")  => api.get(`/admin/bookings${params
 
 // ── Keep-alive ping (prevents Render free tier sleep) ────────
 export const pingBackend = () => api.get("/").catch(() => {});
+
+export default api;

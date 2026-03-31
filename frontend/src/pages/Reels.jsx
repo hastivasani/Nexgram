@@ -238,7 +238,7 @@ export default function Reels() {
 
   if (reels.length === 0) {
     return (
-      <div className="h-[calc(100dvh-64px)] md:h-screen flex items-center justify-center bg-black text-white">
+      <div className="h-full flex items-center justify-center bg-black text-white min-h-screen">
         <p className="text-gray-400 text-sm">No reels yet. Be the first to upload one!</p>
       </div>
     );
