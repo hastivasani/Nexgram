@@ -908,14 +908,21 @@ export default function Groups() {
   const [groups,        setGroups]        = useState([]);
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [loadingGroups, setLoadingGroups] = useState(true);
+  const [fetchError,    setFetchError]    = useState(false);
 
-  useEffect(() => {
+  const loadGroups = useCallback(() => {
     setLoadingGroups(true);
+    setFetchError(false);
     getMyGroups()
       .then(r => setGroups(r.data || []))
-      .catch(err => console.error("getMyGroups error:", err))
+      .catch(err => {
+        console.error("getMyGroups error:", err);
+        setFetchError(true);
+      })
       .finally(() => setLoadingGroups(false));
   }, []);
+
+  useEffect(() => { loadGroups(); }, []);
 
   const handleGroupCreated = useCallback((group) => {
     if (!group?._id) return;
@@ -942,6 +949,16 @@ export default function Groups() {
         {loadingGroups ? (
           <div className="flex-1 flex items-center justify-center">
             <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+          </div>
+        ) : fetchError ? (
+          <div className="flex-1 flex flex-col items-center justify-center gap-3 text-theme-muted px-4 text-center">
+            <p className="text-sm">Failed to load groups</p>
+            <button
+              onClick={loadGroups}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition"
+            >
+              Retry
+            </button>
           </div>
         ) : (
           <GroupList
