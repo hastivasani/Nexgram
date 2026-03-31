@@ -4,13 +4,14 @@ import { useAuth } from "../Context/AuthContext";
 import { useTheme } from "../Context/ThemeContext";
 import { getSocket } from "../utils/socket";
 import {
-  getFeed, likePost, commentPost, createPost,
+  getFeed, likePost, commentPost, createPost, repostPost, savePost,
   getSuggestedUsers, followUser, getTrendingHashtags, getExplorePosts,
 } from "../services/api";
 import {
   HiOutlineHeart, HiHeart, HiOutlineChat, HiOutlineUpload,
   HiOutlineDotsHorizontal, HiOutlinePhotograph, HiOutlineEmojiHappy,
   HiOutlineChartBar, HiSearch, HiHome, HiSun, HiMoon,
+  HiOutlineBookmark, HiBookmark, HiCheckCircle,
 } from "react-icons/hi";
 import { FaTwitter, FaRetweet, FaFeatherAlt } from "react-icons/fa";
 
@@ -92,19 +93,37 @@ function TweetCard({ post, currentUser, onProfileClick, onReply }) {
   const [replyText,  setReplyText]  = useState("");
   const [liked,      setLiked]      = useState(post.likes?.some(id => (id?._id || id)?.toString() === currentUser?._id?.toString()));
   const [likeCount,  setLikeCount]  = useState(post.likes?.length || 0);
-  const [retweeted,  setRetweeted]  = useState(false);
+  const [retweeted,  setRetweeted]  = useState(post.reposts?.some(id => (id?._id || id)?.toString() === currentUser?._id?.toString()));
   const [rtCount,    setRtCount]    = useState(post.reposts?.length || 0);
   const [replyCount, setReplyCount] = useState(post.comments?.length || 0);
+  const [bookmarked, setBookmarked] = useState(post.saves?.some(id => (id?._id || id)?.toString() === currentUser?._id?.toString()));
+  const [copied,     setCopied]     = useState(false);
 
   const handleLike = async (e) => {
     e.stopPropagation();
     setLiked(l => !l); setLikeCount(n => liked ? n - 1 : n + 1);
     try { await likePost(post._id); } catch (_) {}
   };
-  const handleRt = (e) => {
+
+  const handleRt = async (e) => {
     e.stopPropagation();
     setRetweeted(r => !r); setRtCount(n => retweeted ? n - 1 : n + 1);
+    try { await repostPost(post._id); } catch (_) {}
   };
+
+  const handleBookmark = async (e) => {
+    e.stopPropagation();
+    setBookmarked(b => !b);
+    try { await savePost(post._id); } catch (_) {}
+  };
+
+  const handleShare = (e) => {
+    e.stopPropagation();
+    navigator.clipboard.writeText(`${window.location.origin}/profile/${post.user?.username}`);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   const submitReply = async () => {
     if (!replyText.trim()) return;
     try {
@@ -126,6 +145,10 @@ function TweetCard({ post, currentUser, onProfileClick, onReply }) {
             <button onClick={() => onProfileClick?.(u?.username)} className={`font-bold text-[15px] ${c.text} hover:underline truncate max-w-[120px]`}>
               {u?.name || u?.username}
             </button>
+            {/* Verified blue tick */}
+            {u?.isVerified && (
+              <HiCheckCircle size={16} className="text-[#1d9bf0] flex-shrink-0" title="Verified" />
+            )}
             <span className={`${c.textMuted} text-[15px] truncate`}>@{u?.username}</span>
             <span className={`${c.textMuted} text-[15px] flex-shrink-0`}>·</span>
             <span className={`${c.textMuted} text-[13px] flex-shrink-0`}>{timeAgo(post.createdAt)}</span>
@@ -143,29 +166,44 @@ function TweetCard({ post, currentUser, onProfileClick, onReply }) {
                 : <img src={post.mediaUrl} alt="" className="w-full max-h-[400px] object-cover" />}
             </div>
           )}
-          <div className="flex items-center justify-between mt-3 max-w-[400px] -ml-1.5">
+          {/* Action bar */}
+          <div className="flex items-center justify-between mt-3 max-w-[425px] -ml-1.5">
+            {/* Reply */}
             <button onClick={e => { e.stopPropagation(); setShowReply(s => !s); }}
               className={`flex items-center gap-1 ${c.textMuted} hover:text-[#1d9bf0] group`}>
               <span className="p-1.5 rounded-full group-hover:bg-[#1d9bf0]/10 transition"><HiOutlineChat size={18} /></span>
               <span className="text-[13px]">{fmt(replyCount)}</span>
             </button>
+            {/* Retweet */}
             <button onClick={handleRt} className={`flex items-center gap-1 group ${retweeted ? "text-[#00ba7c]" : `${c.textMuted} hover:text-[#00ba7c]`}`}>
               <span className="p-1.5 rounded-full group-hover:bg-[#00ba7c]/10 transition"><FaRetweet size={17} /></span>
               <span className="text-[13px]">{fmt(rtCount)}</span>
             </button>
+            {/* Like */}
             <button onClick={handleLike} className={`flex items-center gap-1 group ${liked ? "text-[#f91880]" : `${c.textMuted} hover:text-[#f91880]`}`}>
               <span className="p-1.5 rounded-full group-hover:bg-[#f91880]/10 transition">
                 {liked ? <HiHeart size={18} /> : <HiOutlineHeart size={18} />}
               </span>
               <span className="text-[13px]">{fmt(likeCount)}</span>
             </button>
+            {/* Views */}
             <button className={`flex items-center gap-1 ${c.textMuted} hover:text-[#1d9bf0] group`}>
               <span className="p-1.5 rounded-full group-hover:bg-[#1d9bf0]/10 transition"><HiOutlineChartBar size={18} /></span>
-              <span className="text-[13px]">{fmt(Math.floor(Math.random() * 9000) + 500)}</span>
+              <span className="text-[13px]">{fmt((likeCount + replyCount + rtCount) * 12 + 500)}</span>
             </button>
-            <button className={`flex items-center gap-1 ${c.textMuted} hover:text-[#1d9bf0] group`}>
-              <span className="p-1.5 rounded-full group-hover:bg-[#1d9bf0]/10 transition"><HiOutlineUpload size={18} /></span>
-            </button>
+            {/* Bookmark + Share */}
+            <div className="flex items-center gap-0.5">
+              <button onClick={handleBookmark} className={`flex items-center gap-1 group ${bookmarked ? "text-[#1d9bf0]" : `${c.textMuted} hover:text-[#1d9bf0]`}`}>
+                <span className="p-1.5 rounded-full group-hover:bg-[#1d9bf0]/10 transition">
+                  {bookmarked ? <HiBookmark size={18} /> : <HiOutlineBookmark size={18} />}
+                </span>
+              </button>
+              <button onClick={handleShare} className={`flex items-center gap-1 ${copied ? "text-green-400" : `${c.textMuted} hover:text-[#1d9bf0]`} group`}>
+                <span className="p-1.5 rounded-full group-hover:bg-[#1d9bf0]/10 transition">
+                  <HiOutlineUpload size={18} />
+                </span>
+              </button>
+            </div>
           </div>
           {showReply && (
             <div className="mt-3 flex gap-2 items-start">
@@ -454,11 +492,13 @@ export default function Twitter() {
               <p className={`${c.textMuted} text-[15px]`}>This is the best place to see what's happening. Follow some people to get started.</p>
             </div>
           ) : (
-            posts.map(post => (
-              <TweetCard key={post._id} post={post} currentUser={user}
-                onProfileClick={username => navigate(`/profile/${username}`)}
-                onReply={() => loadFeed(true)} />
-            ))
+            posts
+              .filter(p => !search.trim() || p.caption?.toLowerCase().includes(search.toLowerCase()) || p.user?.username?.toLowerCase().includes(search.toLowerCase()))
+              .map(post => (
+                <TweetCard key={post._id} post={post} currentUser={user}
+                  onProfileClick={username => navigate(`/profile/${username}`)}
+                  onReply={() => loadFeed(true)} />
+              ))
           )}
 
           <div ref={loaderRef} className="py-6 flex justify-center">
