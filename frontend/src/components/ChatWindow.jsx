@@ -401,9 +401,9 @@ export default function ChatWindow({ chat, onBack }) {
       )}
 
       {/* Input bar */}
-      <div className="p-3 pb-3 border-t border-theme bg-theme-card flex-shrink-0 safe-bottom">
+      <div className="px-3 pt-1 pb-3 border-t border-theme bg-theme-card flex-shrink-0 safe-bottom" style={{marginBottom: 0}}>
         {/* Disappearing toggle */}
-        <div className="flex items-center gap-2 mb-2">
+        <div className="flex items-center gap-2 mb-1">
           <button
             onClick={() => setIsDisappearing(p => !p)}
             className={`flex items-center gap-1 text-xs px-2 py-0.5 rounded-full transition ${isDisappearing ? "bg-orange-500/20 text-orange-400" : "text-theme-muted"}`}

@@ -74,7 +74,7 @@ const ToastNotifications   = lazy(() => import("./components/ToastNotifications"
 
 function PageLoader() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-theme-primary">
+    <div className="flex items-center justify-center min-h-screen">
       <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
     </div>
   );
