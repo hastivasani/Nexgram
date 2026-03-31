@@ -1,4 +1,4 @@
-﻿import { lazy, Suspense } from "react";
+﻿import { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SearchProvider } from "./Context/SearchContext";
 import { ContentProvider } from "./Context/ContentContext";
@@ -7,6 +7,8 @@ import { ThemeProvider } from "./Context/ThemeContext";
 import Sidebar from "./components/Sidebar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 // Eager load auth pages
 import Login         from "./pages/Login";
@@ -81,6 +83,16 @@ function PageLoader() {
 }
 
 export default function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 500,
+      easing: "ease-out-cubic",
+      once: true,
+      offset: 60,
+      delay: 0,
+    });
+  }, []);
+
   return (
     <BrowserRouter>
       <ThemeProvider>

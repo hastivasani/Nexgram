@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { FaNewspaper, FaExternalLinkAlt, FaFire, FaGlobe, FaFootballBall, FaMicrochip, FaHeartbeat, FaFilm, FaChartLine } from "react-icons/fa";
 import { HiRefresh, HiClock, HiBookmark, HiOutlineBookmark } from "react-icons/hi";
 import { getNews } from "../services/api";
+import AOS from "aos";
 
 const CATEGORIES = [
   { id: "All",           label: "All",           icon: FaFire },
@@ -35,6 +36,7 @@ export default function News() {
       const res = await getNews();
       setArticles(res.data.articles || []);
       setLastFetch(new Date());
+      setTimeout(() => AOS.refresh(), 100);
     } catch (_) {}
     finally { setLoading(false); }
   };
@@ -140,6 +142,7 @@ export default function News() {
             {filtered[0] && (
               <a href={filtered[0].url !== "#" ? filtered[0].url : undefined}
                 target="_blank" rel="noopener noreferrer"
+                data-aos="fade-up" data-aos-duration="500"
                 className="block rounded-2xl overflow-hidden border border-theme hover:border-purple-500/40 transition-all group shadow-sm">
                 <div className="relative">
                   {filtered[0].image ? (
@@ -190,7 +193,7 @@ export default function News() {
 
             {/* ── 2-column grid for articles 2-3 ── */}
             {filtered.length > 1 && (
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3" data-aos="fade-up" data-aos-delay="100">
                 {filtered.slice(1, 3).map((article, i) => (
                   <a key={i} href={article.url !== "#" ? article.url : undefined}
                     target="_blank" rel="noopener noreferrer"
@@ -266,6 +269,7 @@ export default function News() {
                   {filtered.slice(8).map((article, i) => (
                     <a key={i} href={article.url !== "#" ? article.url : undefined}
                       target="_blank" rel="noopener noreferrer"
+                      data-aos="fade-up" data-aos-delay={Math.min(i * 50, 300)}
                       className="flex gap-3 p-3 rounded-2xl border border-theme hover:border-purple-500/40 bg-theme-card transition-all group">
                       {article.image ? (
                         <img src={article.image} alt={article.title}

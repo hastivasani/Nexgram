@@ -3,6 +3,7 @@ import { createLobby, joinLobbyByCode, getLeaderboard, getMyGameStats, updateSco
 import { getSocket } from "../utils/socket";
 import { useAuth } from "../Context/AuthContext";
 import { FaGamepad, FaCopy, FaCheck, FaSignInAlt, FaTrophy, FaChartBar } from "react-icons/fa";
+import AOS from "aos";
 
 const TicTacToe         = lazy(() => import("../components/games/TicTacToe"));
 const QuizGame          = lazy(() => import("../components/games/QuizGame"));
@@ -423,8 +424,12 @@ export default function Gaming() {
               </div>
               <p className="text-xs font-semibold text-theme-muted uppercase tracking-wide">{filteredGames.length} Games</p>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
-                {filteredGames.map(game => (
-                  <div key={game.id} className="bg-theme-card border border-theme rounded-2xl overflow-hidden flex flex-col hover:border-purple-500/50 transition-colors">
+                {filteredGames.map((game, idx) => (
+                  <div key={game.id}
+                    data-aos="fade-up"
+                    data-aos-delay={Math.min(idx * 30, 400)}
+                    data-aos-duration="400"
+                    className="bg-theme-card border border-theme rounded-2xl overflow-hidden flex flex-col hover:border-purple-500/50 transition-colors">
                     <div className={`bg-gradient-to-br ${game.color} p-3 flex flex-col items-center justify-center gap-1 min-h-[80px]`}>
                       <span className="text-3xl">{game.icon}</span>
                       <p className="font-bold text-white text-xs text-center leading-tight">{game.name}</p>
