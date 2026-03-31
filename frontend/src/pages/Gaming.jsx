@@ -429,7 +429,7 @@ export default function Gaming() {
                 </div>
               </div>
               <p className="text-xs font-semibold text-theme-muted uppercase tracking-wide">{filteredGames.length} Games</p>
-              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 gap-3 w-full">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
                 {filteredGames.map((game, idx) => (
                   <div key={game.id}
                     className="bg-theme-card border border-theme rounded-2xl overflow-hidden flex flex-col hover:border-purple-500/50 transition-colors">
