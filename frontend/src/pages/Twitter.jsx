@@ -259,8 +259,8 @@ function ComposeTweet({ currentUser, onPost }) {
       const fd = new FormData();
       fd.append("caption", text.trim());
       fd.append("source", "twitter");
-      if (imageFile) { fd.append("media", imageFile); fd.append("mediaType", "image"); }
-      else fd.append("mediaType", "text");
+      if (imageFile) { fd.append("media", imageFile); fd.append("mediaType", "image"); fd.append("type", "image"); }
+      else { fd.append("mediaType", "text"); fd.append("type", "text"); }
       const res = await createPost(fd);
       setText(""); setImageFile(null); setImagePreview(null);
       if (onPost) onPost(res.data);
