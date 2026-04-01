@@ -138,7 +138,7 @@ export default function App() {
                           <Route path="/groups"   element={<Groups />} />
                         </Routes>
                       </Suspense>
-                      <div className="md:pl-16 w-full h-full overflow-y-auto scrollbar-hide">
+                      <div className="md:pl-16 w-full overflow-y-auto scrollbar-hide" style={{height: "100dvh"}}>
                         <Suspense fallback={<PageLoader />}>
                           <Routes>
                             <Route path="/"                      element={<Home />} />
