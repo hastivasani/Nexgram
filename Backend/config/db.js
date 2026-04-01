@@ -1,16 +1,24 @@
 const mongoose = require("mongoose");
+const dns = require("dns");
+
+// Force IPv4 DNS resolution - fixes Render's SRV lookup issues
+dns.setDefaultResultOrder("ipv4first");
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URI, {
-      serverSelectionTimeoutMS: 10000,
+    const uri = process.env.MONGO_URI;
+    console.log("[DB] Connecting to MongoDB...");
+
+    await mongoose.connect(uri, {
+      serverSelectionTimeoutMS: 30000,
       socketTimeoutMS: 45000,
-      family: 4, // Force IPv4 — fixes DNS issues on some hosts
+      connectTimeoutMS: 30000,
     });
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
+
+    console.log(`[DB] MongoDB Connected: ${mongoose.connection.host}`);
   } catch (error) {
-    console.error("MongoDB connection error:", error.message);
-    // Don't crash — retry after 5s
+    console.error("[DB] MongoDB connection error:", error.message);
+    console.log("[DB] Retrying in 5 seconds...");
     setTimeout(connectDB, 5000);
   }
 };
