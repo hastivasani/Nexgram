@@ -919,13 +919,20 @@ export default function Groups() {
   const loadGroups = useCallback(() => {
     setLoadingGroups(true);
     setFetchError(false);
-    getMyGroups()
-      .then(r => setGroups(r.data || []))
-      .catch(err => {
-        console.error("getMyGroups error:", err);
-        setFetchError(true);
-      })
-      .finally(() => setLoadingGroups(false));
+    const attempt = (retries = 3) => {
+      getMyGroups()
+        .then(r => { setGroups(r.data || []); setLoadingGroups(false); })
+        .catch(err => {
+          if (retries > 0) {
+            setTimeout(() => attempt(retries - 1), 2000);
+          } else {
+            console.error("getMyGroups error:", err);
+            setFetchError(true);
+            setLoadingGroups(false);
+          }
+        });
+    };
+    attempt();
   }, []);
 
   useEffect(() => { loadGroups(); }, []);
