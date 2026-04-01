@@ -316,6 +316,9 @@ io.on("connection", (socket) => {
 app.set("io", io);
 app.set("onlineUsers", onlineUsers);
 
+// Trust Render/Vercel proxy
+app.set("trust proxy", 1);
+
 // Middleware
 app.use(cors(corsOptions));
 app.use(express.json({ limit: "10mb" }));
