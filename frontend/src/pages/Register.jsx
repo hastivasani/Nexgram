@@ -45,7 +45,8 @@ export default function Register() {
   const selectClass = "bg-theme-input text-theme-primary border border-theme rounded-lg px-3 py-2.5 outline-none focus:border-blue-500 transition";
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-theme-primary text-theme-primary px-4 py-8">
+    <div className="h-screen overflow-y-auto bg-theme-primary">
+    <div className="min-h-screen flex items-center justify-center text-theme-primary px-4 py-8">
       <div className="w-full max-w-md bg-theme-card rounded-2xl shadow-theme border border-theme p-6">
         <button onClick={() => navigate("/login")} className="mb-3 text-theme-secondary hover:text-theme-primary transition-colors">
           <HiArrowLeft size={20} />
@@ -126,6 +127,7 @@ export default function Register() {
           </button>
         </form>
       </div>
+    </div>
     </div>
   );
 }

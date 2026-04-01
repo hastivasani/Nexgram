@@ -27,7 +27,8 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex bg-theme-primary text-theme-primary">
+    <div className="h-screen overflow-y-auto bg-theme-primary">
+    <div className="min-h-screen flex text-theme-primary">
       {/* Left */}
       <div className="hidden lg:flex w-1/2 items-center justify-center">
         <div className="max-w-md text-center">
@@ -81,6 +82,7 @@ export default function Login() {
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 }
