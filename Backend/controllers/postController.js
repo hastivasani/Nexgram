@@ -154,8 +154,8 @@ exports.getExplorePosts = async (req, res) => {
     const twitterOnly = req.query.twitter === "1";
 
     const query = {
-      // For You: exclude only blocked users, show everyone including self and following
-      user: { $nin: blocked },
+      // For You: exclude self, following, and blocked - show only strangers
+      user: { $nin: [...me.following, me._id, ...blocked] },
       visibility: "public",
     };
     if (twitterOnly) query.source = "twitter";
