@@ -129,10 +129,7 @@ exports.sendGroupMessage = async (req, res) => {
     if (!group) return res.status(404).json({ message: "Group not found" });
     
     const userId = req.user._id.toString();
-    const memberIds = group.members.map(id => id.toString());
-    const isMember = memberIds.includes(userId);
-    
-    console.log("[sendGroupMessage] userId:", userId, "members:", memberIds, "isMember:", isMember);
+    const isMember = group.members.some(m => (m._id || m).toString() === userId);
     
     if (!isMember) return res.status(403).json({ message: "Not a member" });
 
@@ -174,10 +171,10 @@ exports.getGroupMessages = async (req, res) => {
     if (!group) return res.status(404).json({ message: "Group not found" });
     
     const userId = req.user._id.toString();
-    const memberIds = group.members.map(id => id.toString());
-    const isMember = memberIds.includes(userId);
-    
-    console.log("[getGroupMessages] userId:", userId, "members:", memberIds, "isMember:", isMember);
+    // Handle both populated objects and plain ObjectIds
+    const isMember = group.members.some(m => 
+      (m._id || m).toString() === userId
+    );
     
     if (!isMember) return res.status(403).json({ message: "Not a member" });
 
