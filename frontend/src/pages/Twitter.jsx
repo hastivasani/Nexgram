@@ -5,7 +5,7 @@ import { useTheme } from "../Context/ThemeContext";
 import { getSocket } from "../utils/socket";
 import {
   getFeed, likePost, commentPost, createPost, repostPost, savePost,
-  getSuggestedUsers, followUser, getTrendingHashtags, getExplorePosts,
+  getSuggestedUsers, followUser, getTrendingHashtags, getExplorePosts, getComments,
 } from "../services/api";
 import {
   HiOutlineHeart, HiHeart, HiOutlineChat, HiOutlineUpload,
@@ -91,7 +91,8 @@ function TweetCard({ post, currentUser, onProfileClick, onReply }) {
   const c = T(isDark);
   const [showReply,    setShowReply]    = useState(false);
   const [showComments, setShowComments] = useState(false);
-  const [comments,     setComments]     = useState(post.comments || []);
+  const [comments,     setComments]     = useState([]);
+  const [loadingCmts,  setLoadingCmts]  = useState(false);
   const [replyText,    setReplyText]    = useState("");
   const [liked,        setLiked]        = useState(post.likes?.some(id => (id?._id || id)?.toString() === currentUser?._id?.toString()));
   const [likeCount,    setLikeCount]    = useState(post.likes?.length || 0);
@@ -100,6 +101,20 @@ function TweetCard({ post, currentUser, onProfileClick, onReply }) {
   const [replyCount,   setReplyCount]   = useState(post.comments?.length || 0);
   const [bookmarked,   setBookmarked]   = useState(post.saves?.some(id => (id?._id || id)?.toString() === currentUser?._id?.toString()));
   const [copied,       setCopied]       = useState(false);
+
+  const toggleComments = async (e) => {
+    e.stopPropagation();
+    if (!showComments && comments.length === 0) {
+      setLoadingCmts(true);
+      try {
+        const res = await getComments(post._id);
+        setComments(res.data || []);
+      } catch (_) {}
+      finally { setLoadingCmts(false); }
+    }
+    setShowComments(s => !s);
+    setShowReply(s => !s);
+  };
 
   const handleLike = async (e) => {
     e.stopPropagation();
@@ -174,7 +189,7 @@ function TweetCard({ post, currentUser, onProfileClick, onReply }) {
           {/* Action bar */}
           <div className="flex items-center justify-between mt-3 max-w-[425px] -ml-1.5">
             {/* Reply */}
-            <button onClick={e => { e.stopPropagation(); setShowComments(s => !s); setShowReply(s => !s); }}
+            <button onClick={toggleComments}
               className={`flex items-center gap-1 ${c.textMuted} hover:text-[#1d9bf0] group`}>
               <span className="p-1.5 rounded-full group-hover:bg-[#1d9bf0]/10 transition"><HiOutlineChat size={18} /></span>
               <span className="text-[13px]">{fmt(replyCount)}</span>
@@ -211,13 +226,19 @@ function TweetCard({ post, currentUser, onProfileClick, onReply }) {
             </div>
           </div>
           {/* Comments list */}
-          {showComments && comments.length > 0 && (
+          {showComments && (
             <div className={`mt-2 border-t ${c.border} pt-2 space-y-2`}>
-              {comments.map((cm, i) => (
+              {loadingCmts ? (
+                <div className="flex justify-center py-2">
+                  <div className="w-4 h-4 border-2 border-[#1d9bf0] border-t-transparent rounded-full animate-spin" />
+                </div>
+              ) : comments.length === 0 ? (
+                <p className={`text-[13px] ${c.textMuted} text-center py-1`}>No replies yet</p>
+              ) : comments.map((cm, i) => (
                 <div key={cm._id || i} className="flex gap-2 items-start">
                   <img src={av(cm.user)} className="w-7 h-7 rounded-full flex-shrink-0 mt-0.5" alt="" />
                   <div className={`flex-1 ${c.bgCard} rounded-2xl px-3 py-2`}>
-                    <span className={`font-bold text-[13px] ${c.text} mr-1`}>{cm.user?.username || "user"}</span>
+                    <span className={`font-bold text-[13px] ${c.text} mr-1`}>@{cm.user?.username || "user"}</span>
                     <span className={`text-[13px] ${c.text}`}>{cm.text}</span>
                   </div>
                 </div>
