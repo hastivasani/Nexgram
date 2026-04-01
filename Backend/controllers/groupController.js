@@ -127,7 +127,13 @@ exports.sendGroupMessage = async (req, res) => {
   try {
     const group = await Group.findById(req.params.id);
     if (!group) return res.status(404).json({ message: "Group not found" });
-    const isMember = group.members.map(id => id.toString()).includes(req.user._id.toString());
+    
+    const userId = req.user._id.toString();
+    const memberIds = group.members.map(id => id.toString());
+    const isMember = memberIds.includes(userId);
+    
+    console.log("[sendGroupMessage] userId:", userId, "members:", memberIds, "isMember:", isMember);
+    
     if (!isMember) return res.status(403).json({ message: "Not a member" });
 
     const { text, replyTo, type } = req.body;
@@ -166,7 +172,13 @@ exports.getGroupMessages = async (req, res) => {
   try {
     const group = await Group.findById(req.params.id);
     if (!group) return res.status(404).json({ message: "Group not found" });
-    const isMember = group.members.map(id => id.toString()).includes(req.user._id.toString());
+    
+    const userId = req.user._id.toString();
+    const memberIds = group.members.map(id => id.toString());
+    const isMember = memberIds.includes(userId);
+    
+    console.log("[getGroupMessages] userId:", userId, "members:", memberIds, "isMember:", isMember);
+    
     if (!isMember) return res.status(403).json({ message: "Not a member" });
 
     const page = parseInt(req.query.page) || 1;
