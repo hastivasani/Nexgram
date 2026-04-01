@@ -38,18 +38,20 @@
   --shadow:        0 1px 3px rgba(0,0,0,0.4);
 }
 
-/* ─── Messages page — no gap, handles sidebar offset itself ─── */
+/* ─── Full-screen chat pages (Messages, Groups) ─── */
 .messages-page-wrapper {
   position: fixed;
-  inset: 0;
+  top: 0;
   left: 0;
-  bottom: 68px; /* mobile bottom nav */
+  right: 0;
+  bottom: 68px; /* mobile: above bottom nav */
   overflow: hidden;
+  display: flex;
 }
 
 @media (min-width: 768px) {
   .messages-page-wrapper {
-    left: 64px; /* sidebar width */
+    left: 64px; /* desktop: sidebar width */
     bottom: 0;
   }
 }
