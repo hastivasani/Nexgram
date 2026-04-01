@@ -243,7 +243,7 @@ export default function ChatWindow({ chat, onBack }) {
           >
             <HiVideoCamera />
           </button>
-          <HiInformationCircle className="cursor-pointer hover:text-theme-primary transition" />
+          <HiInformationCircle className="cursor-pointer hover:text-theme-primary transition" onClick={() => navigate(`/profile/${chat?.username}`)} />
         </div>
       </div>
 

@@ -42,7 +42,7 @@ export default function MessagesSidebar({ onSelectChat, selectedUserId, onDelete
           <h2 className="font-bold text-lg text-theme-primary">{username}</h2>
           <HiChevronDown size={18} className="text-theme-secondary" />
         </div>
-        <button className="p-2 hover:bg-theme-hover rounded-full transition">
+        <button className="p-2 hover:bg-theme-hover rounded-full transition" onClick={() => document.querySelector('input[placeholder="Search"]')?.focus()}>
           <HiOutlinePencilAlt size={22} className="text-theme-primary" />
         </button>
       </div>

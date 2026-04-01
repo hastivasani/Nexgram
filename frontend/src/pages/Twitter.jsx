@@ -363,14 +363,16 @@ function XRightSidebar({ currentUser }) {
   const navigate = useNavigate();
   const { isDark } = useTheme();
   const c = T(isDark);
-  const [search,    setSearch]    = useState("");
-  const [trends,    setTrends]    = useState([]);
-  const [suggested, setSuggested] = useState([]);
-  const [following, setFollowing] = useState(new Set());
+  const [search,       setSearch]       = useState("");
+  const [trends,       setTrends]       = useState([]);
+  const [suggested,    setSuggested]    = useState([]);
+  const [following,    setFollowing]    = useState(new Set());
+  const [showAllTrends, setShowAllTrends] = useState(false);
+  const [showAllUsers,  setShowAllUsers]  = useState(false);
 
   useEffect(() => {
     getTrendingHashtags().then(r => setTrends(r.data?.slice(0, 5) || [])).catch(() => {});
-    getSuggestedUsers().then(r => setSuggested(r.data?.slice(0, 3) || [])).catch(() => {});
+    getSuggestedUsers().then(r => setSuggested(r.data || [])).catch(() => {});
   }, []);
 
   const handleFollow = async (id) => {
@@ -380,7 +382,9 @@ function XRightSidebar({ currentUser }) {
   const defaultTrends = ["React", "JavaScript", "WebDev", "OpenAI", "Tech"].map((t, i) => ({
     tag: t, count: (i + 1) * 10000 + Math.floor(Math.random() * 5000),
   }));
-  const displayTrends = trends.length > 0 ? trends : defaultTrends;
+  const allTrends = trends.length > 0 ? trends : defaultTrends;
+  const displayTrends = showAllTrends ? allTrends : allTrends.slice(0, 5);
+  const displaySuggested = showAllUsers ? suggested : suggested.slice(0, 3);
 
   return (
     <div className="pt-2 space-y-4 px-4">
@@ -408,13 +412,15 @@ function XRightSidebar({ currentUser }) {
             </button>
           </div>
         ))}
-        <button className={`px-4 py-3 text-[#1d9bf0] text-[15px] ${c.bgHover} transition w-full text-left border-t ${c.border}`}>Show more</button>
+        <button onClick={() => setShowAllTrends(s => !s)} className={`px-4 py-3 text-[#1d9bf0] text-[15px] ${c.bgHover} transition w-full text-left border-t ${c.border}`}>
+          {showAllTrends ? "Show less" : "Show more"}
+        </button>
       </div>
       <div className={`${c.bgCard} rounded-2xl overflow-hidden`}>
         <h2 className={`text-[19px] font-extrabold ${c.text} px-4 pt-3 pb-1`}>Who to follow</h2>
-        {suggested.length === 0 ? (
+        {displaySuggested.length === 0 ? (
           <p className={`px-4 py-3 ${c.textMuted} text-sm border-t ${c.border}`}>No suggestions yet</p>
-        ) : suggested.map(u => (
+        ) : displaySuggested.map(u => (
           <div key={u._id} className={`flex items-center gap-3 px-4 py-3 ${c.bgHover} transition border-t ${c.border}`}>
             <img src={av(u)} className="w-10 h-10 rounded-full object-cover cursor-pointer flex-shrink-0"
               onClick={() => navigate(`/profile/${u.username}`)} alt="" />
@@ -432,7 +438,11 @@ function XRightSidebar({ currentUser }) {
             </button>
           </div>
         ))}
-        <button className={`px-4 py-3 text-[#1d9bf0] text-[15px] ${c.bgHover} transition w-full text-left border-t ${c.border}`}>Show more</button>
+        {suggested.length > 3 && (
+          <button onClick={() => setShowAllUsers(s => !s)} className={`px-4 py-3 text-[#1d9bf0] text-[15px] ${c.bgHover} transition w-full text-left border-t ${c.border}`}>
+            {showAllUsers ? "Show less" : "Show more"}
+          </button>
+        )}
       </div>
       <div className="flex flex-wrap gap-x-3 gap-y-1 px-1 pb-4">
         {["Terms", "Privacy", "Cookie Policy", "Accessibility", "Ads info", "More"].map(l => (
