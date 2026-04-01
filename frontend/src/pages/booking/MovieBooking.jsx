@@ -193,7 +193,7 @@ export default function MovieBooking() {
   };
 
   return (
-    <div className="min-h-screen bg-theme-primary text-theme-primary pb-24 md:pb-8">
+    <div className="min-h-screen bg-theme-primary text-theme-primary pb-[68px] md:pb-8">
 
       {/* Header */}
       <div className="sticky top-0 z-20 bg-gradient-to-r from-red-600 to-pink-600 px-4 py-4 flex items-center gap-3">

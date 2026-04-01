@@ -62,7 +62,7 @@ export default function News() {
   const filtered = category === "All" ? articles : articles.filter(a => a.category === category);
 
   return (
-    <div className="min-h-screen bg-theme-primary pb-20 md:pb-6">
+    <div className="min-h-screen bg-theme-primary pb-[68px] md:pb-6">
 
       {/* Header */}
       <div className="sticky top-0 z-10 bg-theme-primary/95 backdrop-blur-md border-b border-theme px-4 py-3">

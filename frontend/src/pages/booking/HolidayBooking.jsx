@@ -38,7 +38,7 @@ export default function HolidayBooking() {
   };
 
   return (
-    <div className="min-h-screen bg-theme-primary text-theme-primary pb-24 md:pb-8">
+    <div className="min-h-screen bg-theme-primary text-theme-primary pb-[68px] md:pb-8">
       <div className="sticky top-0 z-20 bg-gradient-to-r from-yellow-500 to-orange-500 px-4 py-4 flex items-center gap-3">
         <button onClick={() => navigate("/booking")} className="p-2 rounded-xl bg-white/20 text-white"><FaArrowLeft /></button>
         <div>

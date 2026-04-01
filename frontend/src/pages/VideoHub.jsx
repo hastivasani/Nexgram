@@ -345,7 +345,7 @@ export default function VideoHub() {
         </div>
       )}
 
-      <div className="px-4 py-5 pb-24 md:pb-6 space-y-8">
+      <div className="px-4 py-5 pb-[68px] md:pb-6 space-y-8">
 
         {/* ── Shorts Row (only on All tab) ── */}
         {cat === "All" && !query && (
@@ -535,7 +535,7 @@ function VideoPlayer({ video: v, related, onBack, liked, setLiked, saved, setSav
   };
 
   return (
-    <div className="min-h-screen bg-theme-primary text-theme-primary pb-24 md:pb-6">
+    <div className="min-h-screen bg-theme-primary text-theme-primary pb-[68px] md:pb-6">
       {/* Mini topbar */}
       <div className="sticky top-0 z-20 bg-theme-primary/95 backdrop-blur border-b border-theme flex items-center gap-2 px-3 py-2 h-13">
         <div className="flex items-center gap-1.5 flex-shrink-0">

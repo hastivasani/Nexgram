@@ -195,7 +195,7 @@ export default function LinkedIn() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#f3f2ef] dark:bg-[#1a1a1a] pb-20 md:pb-0">
+    <div className="min-h-screen bg-[#f3f2ef] dark:bg-[#1a1a1a] pb-[68px] md:pb-0">
 
       {/* ── Top Nav ── */}
       <header className="sticky top-0 z-30 bg-white dark:bg-[#1b1f23] border-b border-gray-200 dark:border-gray-700 shadow-sm">

@@ -292,7 +292,7 @@ export default function Gaming() {
   });
 
   return (
-    <div className="bg-theme-primary pb-24 md:pb-6 px-4 pt-4 w-full min-h-screen">
+    <div className="bg-theme-primary pb-[68px] md:pb-0 px-4 pt-4 w-full min-h-screen">
 
       {/* Header */}
       <div className="flex items-center gap-2 mb-4">

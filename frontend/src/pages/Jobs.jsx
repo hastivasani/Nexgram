@@ -31,7 +31,7 @@ export default function Jobs() {
   });
 
   return (
-    <div className="min-h-screen bg-theme-primary pb-20 md:pb-0">
+    <div className="min-h-screen bg-theme-primary pb-[68px] md:pb-0">
       {/* Header */}
       <div className="sticky top-0 z-10 bg-theme-primary/90 backdrop-blur border-b border-theme px-4 py-3">
         <div className="flex items-center gap-2 mb-3">

@@ -52,7 +52,7 @@ export default function BookingHome() {
   };
 
   return (
-    <div className="min-h-screen bg-theme-primary text-theme-primary pb-24 md:pb-8">
+    <div className="min-h-screen bg-theme-primary text-theme-primary pb-[68px] md:pb-8">
       {/* Hero */}
       <div className="bg-gradient-to-br from-purple-600 via-blue-600 to-cyan-500 px-4 pt-8 pb-8 md:px-8">
         <div className="flex items-center justify-between mb-6">

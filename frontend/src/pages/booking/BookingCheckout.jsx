@@ -105,7 +105,7 @@ export default function BookingCheckout() {
   }
 
   return (
-    <div className="min-h-screen bg-theme-primary text-theme-primary pb-24 md:pb-8">
+    <div className="min-h-screen bg-theme-primary text-theme-primary pb-[68px] md:pb-8">
       {/* Header */}
       <div className="sticky top-0 z-20 bg-theme-primary/90 backdrop-blur border-b border-theme px-4 py-3 flex items-center gap-3">
         <button onClick={() => step === 1 ? navigate(-1) : setStep(1)} className="p-2 rounded-xl hover:bg-theme-secondary"><FaArrowLeft /></button>
