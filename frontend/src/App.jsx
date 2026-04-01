@@ -18,13 +18,37 @@ import { pingBackend } from "./services/api";
 
 // Auto-reload on chunk load failure (stale Vercel deployment)
 class ChunkErrorBoundary extends Component {
+  state = { hasError: false };
+  static getDerivedStateFromError(error) {
+    if (
+      error?.message?.includes("Failed to fetch dynamically imported module") ||
+      error?.message?.includes("Importing a module script failed") ||
+      error?.name === "ChunkLoadError"
+    ) {
+      // Clear cache and reload once
+      if (!sessionStorage.getItem("chunk_reload")) {
+        sessionStorage.setItem("chunk_reload", "1");
+        window.location.reload();
+      }
+    }
+    return { hasError: true };
+  }
   componentDidCatch(error) {
-    if (error?.message?.includes("Failed to fetch dynamically imported module") ||
-        error?.message?.includes("Importing a module script failed")) {
-      window.location.reload();
+    if (
+      error?.message?.includes("Failed to fetch dynamically imported module") ||
+      error?.message?.includes("Importing a module script failed") ||
+      error?.name === "ChunkLoadError"
+    ) {
+      if (!sessionStorage.getItem("chunk_reload")) {
+        sessionStorage.setItem("chunk_reload", "1");
+        window.location.reload();
+      }
     }
   }
-  render() { return this.props.children; }
+  render() {
+    if (this.state.hasError) return null;
+    return this.props.children;
+  }
 }
 
 // Notifications page wrapper (panel always open on /notifications route)
@@ -38,6 +62,20 @@ function NotificationsPage() {
 
 // Ping backend every 10 min to prevent Render sleep
 setInterval(pingBackend, 10 * 60 * 1000);
+
+// Global chunk load error handler (catches unhandled lazy import failures)
+window.addEventListener("unhandledrejection", (e) => {
+  const msg = e?.reason?.message || "";
+  if (
+    msg.includes("Failed to fetch dynamically imported module") ||
+    msg.includes("Importing a module script failed")
+  ) {
+    if (!sessionStorage.getItem("chunk_reload")) {
+      sessionStorage.setItem("chunk_reload", "1");
+      window.location.reload();
+    }
+  }
+});
 
 // Lazy load all other pages
 const Home          = lazy(() => import("./pages/Home"));
