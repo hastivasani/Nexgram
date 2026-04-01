@@ -1,4 +1,4 @@
-﻿import { lazy, Suspense } from "react";
+﻿import { lazy, Suspense, Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SearchProvider } from "./Context/SearchContext";
 import { ContentProvider } from "./Context/ContentContext";
@@ -15,6 +15,17 @@ import NotificationsPanel from "./pages/Notifications";
 import Create        from "./pages/Create";
 import More          from "./pages/More";
 import { pingBackend } from "./services/api";
+
+// Auto-reload on chunk load failure (stale Vercel deployment)
+class ChunkErrorBoundary extends Component {
+  componentDidCatch(error) {
+    if (error?.message?.includes("Failed to fetch dynamically imported module") ||
+        error?.message?.includes("Importing a module script failed")) {
+      window.location.reload();
+    }
+  }
+  render() { return this.props.children; }
+}
 
 // Notifications page wrapper (panel always open on /notifications route)
 function NotificationsPage() {
@@ -89,6 +100,7 @@ function PageLoader() {
 
 export default function App() {
   return (
+    <ChunkErrorBoundary>
     <BrowserRouter>
       <ThemeProvider>
         <SearchProvider>
@@ -186,5 +198,6 @@ export default function App() {
         </SearchProvider>
       </ThemeProvider>
     </BrowserRouter>
+    </ChunkErrorBoundary>
   );
 }
