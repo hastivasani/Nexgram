@@ -89,15 +89,17 @@ function XTopBar({ currentUser, search, setSearch, onHome, tab, setTab }) {
 function TweetCard({ post, currentUser, onProfileClick, onReply }) {
   const { isDark } = useTheme();
   const c = T(isDark);
-  const [showReply,  setShowReply]  = useState(false);
-  const [replyText,  setReplyText]  = useState("");
-  const [liked,      setLiked]      = useState(post.likes?.some(id => (id?._id || id)?.toString() === currentUser?._id?.toString()));
-  const [likeCount,  setLikeCount]  = useState(post.likes?.length || 0);
-  const [retweeted,  setRetweeted]  = useState(post.reposts?.some(id => (id?._id || id)?.toString() === currentUser?._id?.toString()));
-  const [rtCount,    setRtCount]    = useState(post.reposts?.length || 0);
-  const [replyCount, setReplyCount] = useState(post.comments?.length || 0);
-  const [bookmarked, setBookmarked] = useState(post.saves?.some(id => (id?._id || id)?.toString() === currentUser?._id?.toString()));
-  const [copied,     setCopied]     = useState(false);
+  const [showReply,    setShowReply]    = useState(false);
+  const [showComments, setShowComments] = useState(false);
+  const [comments,     setComments]     = useState(post.comments || []);
+  const [replyText,    setReplyText]    = useState("");
+  const [liked,        setLiked]        = useState(post.likes?.some(id => (id?._id || id)?.toString() === currentUser?._id?.toString()));
+  const [likeCount,    setLikeCount]    = useState(post.likes?.length || 0);
+  const [retweeted,    setRetweeted]    = useState(post.reposts?.some(id => (id?._id || id)?.toString() === currentUser?._id?.toString()));
+  const [rtCount,      setRtCount]      = useState(post.reposts?.length || 0);
+  const [replyCount,   setReplyCount]   = useState(post.comments?.length || 0);
+  const [bookmarked,   setBookmarked]   = useState(post.saves?.some(id => (id?._id || id)?.toString() === currentUser?._id?.toString()));
+  const [copied,       setCopied]       = useState(false);
 
   const handleLike = async (e) => {
     e.stopPropagation();
@@ -127,8 +129,11 @@ function TweetCard({ post, currentUser, onProfileClick, onReply }) {
   const submitReply = async () => {
     if (!replyText.trim()) return;
     try {
-      await commentPost(post._id, replyText);
-      setReplyText(""); setShowReply(false); setReplyCount(n => n + 1);
+      const res = await commentPost(post._id, replyText);
+      const newComment = res?.data || { user: currentUser, text: replyText, createdAt: new Date().toISOString() };
+      setComments(prev => [...prev, newComment]);
+      setReplyText(""); setShowReply(false); setShowComments(true);
+      setReplyCount(n => n + 1);
       if (onReply) onReply();
     } catch (_) {}
   };
@@ -169,7 +174,7 @@ function TweetCard({ post, currentUser, onProfileClick, onReply }) {
           {/* Action bar */}
           <div className="flex items-center justify-between mt-3 max-w-[425px] -ml-1.5">
             {/* Reply */}
-            <button onClick={e => { e.stopPropagation(); setShowReply(s => !s); }}
+            <button onClick={e => { e.stopPropagation(); setShowComments(s => !s); setShowReply(s => !s); }}
               className={`flex items-center gap-1 ${c.textMuted} hover:text-[#1d9bf0] group`}>
               <span className="p-1.5 rounded-full group-hover:bg-[#1d9bf0]/10 transition"><HiOutlineChat size={18} /></span>
               <span className="text-[13px]">{fmt(replyCount)}</span>
@@ -205,6 +210,20 @@ function TweetCard({ post, currentUser, onProfileClick, onReply }) {
               </button>
             </div>
           </div>
+          {/* Comments list */}
+          {showComments && comments.length > 0 && (
+            <div className={`mt-2 border-t ${c.border} pt-2 space-y-2`}>
+              {comments.map((cm, i) => (
+                <div key={cm._id || i} className="flex gap-2 items-start">
+                  <img src={av(cm.user)} className="w-7 h-7 rounded-full flex-shrink-0 mt-0.5" alt="" />
+                  <div className={`flex-1 ${c.bgCard} rounded-2xl px-3 py-2`}>
+                    <span className={`font-bold text-[13px] ${c.text} mr-1`}>{cm.user?.username || "user"}</span>
+                    <span className={`text-[13px] ${c.text}`}>{cm.text}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
           {showReply && (
             <div className="mt-3 flex gap-2 items-start">
               <img src={av(currentUser)} className="w-8 h-8 rounded-full flex-shrink-0" alt="" />
