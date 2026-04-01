@@ -513,17 +513,19 @@ function GroupChat({ group, currentUser, onBack, onLeave }) {
       setMessages(prev => {
         // Skip if already exists (by _id)
         if (prev.some(m => m._id === msg._id)) return prev;
-        // Replace optimistic message if sender is me
+        // If it's my own message, replace the optimistic temp message
         const myId = currentUser?._id?.toString();
         const senderId = (msg.sender?._id || msg.sender)?.toString();
         if (senderId === myId) {
-          // Check if there's an optimistic temp message to replace
           const tempIdx = prev.findIndex(m => m._id?.startsWith("temp_") && m.isOptimistic);
           if (tempIdx !== -1) {
             const updated = [...prev];
             updated[tempIdx] = msg;
             return updated;
           }
+          // No temp message found - this is a duplicate from socket after API already replaced it
+          // Check if a non-temp version already exists with same text+time proximity
+          return prev;
         }
         return [...prev, msg];
       });
@@ -560,12 +562,16 @@ function GroupChat({ group, currentUser, onBack, onLeave }) {
     if (!trimmed && !imageFile) return;
     setSending(true);
 
+    // Capture before clearing state
+    const capturedFile = imageFile;
+    const capturedPreview = imagePreview;
+
     const tempId = "temp_" + Date.now();
     const optimistic = {
       _id: tempId,
       sender: { _id: currentUser._id, username: currentUser.username, avatar: currentUser.avatar },
       text: trimmed,
-      mediaUrl: imagePreview || "",
+      mediaUrl: capturedPreview || "",
       createdAt: new Date().toISOString(),
       isOptimistic: true,
     };
@@ -575,7 +581,7 @@ function GroupChat({ group, currentUser, onBack, onLeave }) {
     setImagePreview(null);
 
     try {
-      const res = await sendGroupMessage(group._id, trimmed, imageFile || null);
+      const res = await sendGroupMessage(group._id, trimmed, capturedFile || null);
       // Replace optimistic with real message
       setMessages(prev => prev.map(m => m._id === tempId ? res.data : m));
     } catch (err) {
@@ -928,6 +934,10 @@ export default function Groups() {
     if (!group?._id) return;
     setGroups(prev => [group, ...prev.filter(g => g._id !== group._id)]);
     setSelectedGroup(group);
+    // Also refresh from server in background
+    getMyGroups().then(r => {
+      setGroups(r.data || []);
+    }).catch(() => {});
   }, []);
 
   const handleSelectGroup = useCallback(async (g) => {
