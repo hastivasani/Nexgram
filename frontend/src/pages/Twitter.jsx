@@ -261,10 +261,13 @@ function ComposeTweet({ currentUser, onPost }) {
       fd.append("source", "twitter");
       if (imageFile) { fd.append("media", imageFile); fd.append("mediaType", "image"); }
       else fd.append("mediaType", "text");
-      await createPost(fd);
+      const res = await createPost(fd);
       setText(""); setImageFile(null); setImagePreview(null);
-      if (onPost) onPost();
-    } catch (_) {} finally { setPosting(false); }
+      if (onPost) onPost(res.data);
+    } catch (err) {
+      console.error("Post failed:", err?.response?.data || err.message);
+      alert(err?.response?.data?.message || "Post failed. Please try again.");
+    } finally { setPosting(false); }
   };
 
   return (
