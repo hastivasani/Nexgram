@@ -23,10 +23,13 @@ const updateHashtags = async (tags, postId) => {
 exports.createPost = async (req, res) => {
   try {
     const files = req.files?.length ? req.files : req.file ? [req.file] : [];
-    if (!files.length && req.body.type !== "text")
+    // Support both 'type' and 'mediaType' field names
+    const postType = req.body.type || req.body.mediaType;
+    if (!files.length && postType !== "text")
       return res.status(400).json({ message: "Media required" });
 
-    const { caption, visibility, type } = req.body;
+    const { caption, visibility } = req.body;
+    const type = postType;
     const hashtags = extractHashtags(caption);
     const source = req.body.source || "post";
     // Twitter posts expire after 24 hours
