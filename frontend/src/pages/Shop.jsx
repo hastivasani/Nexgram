@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { getProducts, addToCart, getCart, getProductCategories, updateCartItem, removeFromCart } from "../services/api";
 import { FaShoppingCart, FaStar, FaSearch, FaPlus, FaMinus, FaCheck } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import AOS from "aos";
 
 export default function Shop() {
   const [products, setProducts]     = useState([]);
@@ -164,10 +163,7 @@ export default function Shop() {
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {filtered.map((product, idx) => (
-            <div key={product._id}
-              data-aos="fade-up"
-              data-aos-delay={Math.min(idx * 40, 300)}
-              data-aos-duration="400">
+            <div key={product._id}>
             <ProductCard
               key={product._id}
               product={product}

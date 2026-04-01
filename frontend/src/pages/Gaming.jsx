@@ -3,7 +3,6 @@ import { createLobby, joinLobbyByCode, getLeaderboard, getMyGameStats, updateSco
 import { getSocket } from "../utils/socket";
 import { useAuth } from "../Context/AuthContext";
 import { FaGamepad, FaCopy, FaCheck, FaSignInAlt, FaTrophy, FaChartBar } from "react-icons/fa";
-import AOS from "aos";
 
 const TicTacToe         = lazy(() => import("../components/games/TicTacToe"));
 const QuizGame          = lazy(() => import("../components/games/QuizGame"));

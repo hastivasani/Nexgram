@@ -1,4 +1,4 @@
-﻿import { lazy, Suspense, useEffect } from "react";
+﻿import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SearchProvider } from "./Context/SearchContext";
 import { ContentProvider } from "./Context/ContentContext";
@@ -7,8 +7,6 @@ import { ThemeProvider } from "./Context/ThemeContext";
 import Sidebar from "./components/Sidebar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
-import AOS from "aos";
-import "aos/dist/aos.css";
 
 // Eager load auth pages
 import Login         from "./pages/Login";
@@ -90,24 +88,13 @@ function PageLoader() {
 }
 
 export default function App() {
-  useEffect(() => {
-    AOS.init({
-      duration: 450,
-      easing: "ease-out-cubic",
-      once: true,
-      offset: 0,
-      delay: 0,
-      anchorPlacement: "top-bottom",
-    });
-  }, []);
-
   return (
     <BrowserRouter>
       <ThemeProvider>
         <SearchProvider>
           <AuthProvider>
             <ContentProvider>
-              <div className="h-screen bg-theme-primary text-theme-primary transition-colors duration-300 overflow-hidden">
+              <div className="bg-theme-primary text-theme-primary transition-colors duration-300">
                 <Routes>
                   <Route path="/login"           element={<Login />} />
                   <Route path="/register"        element={<Register />} />
@@ -138,7 +125,7 @@ export default function App() {
                           <Route path="/groups"   element={<Groups />} />
                         </Routes>
                       </Suspense>
-                      <div className="md:pl-16 w-full overflow-y-auto scrollbar-hide" style={{height: "100dvh"}}>
+                      <div className="md:pl-16 min-h-screen pb-[68px] md:pb-0">
                         <Suspense fallback={<PageLoader />}>
                           <Routes>
                             <Route path="/"                      element={<Home />} />
